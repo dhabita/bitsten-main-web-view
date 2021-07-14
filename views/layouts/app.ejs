@@ -14,19 +14,7 @@
 
 <body>
     <div id="app">
-        <div class="toast toast-custom hide" data-autohide="false">
-            <div class="toast-header">
-              <svg class=" rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-                            <rect fill="#007aff" width="100%" height="100%" /></svg>
-              <strong id="toast-content-header" class="mr-auto">Bootstrap</strong>
-              <button onclick="$('.toast').toast('hide');" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div id="toast-content-body" class="toast-body" id="toast-content-time">
-              Hello, world! This is a toast message.
-            </div>
-          </div>
+        
 
         <div class="main-wrapper">
             <% include ../partials/navbar -%>
@@ -34,21 +22,7 @@
              <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
-                    <div class="section-header">
-                        <div class="text-left text-center mr-3" style='font-size:35px' >
-                            <% if (data.back) { %>
-                                <a href="<%= data.back %>">
-                                    <i class="bi bi-arrow-left-square-fill cursor"></i>
-                                </a>
-                                <% } %>
-                          </div>
-                        <h1><%= data.title %></h1>
-                        <div class="section-header-breadcrumb">
-                          <div class="breadcrumb-item active"><a href="/">Dashboard</a></div>
-                         
-                          <div class="breadcrumb-item"><%= data.url %></div>
-                        </div>
-                      </div>
+                    
 
                       <div class="section-body">
                         <%- body -%>
@@ -58,10 +32,10 @@
 
             <footer class="main-footer">
                 <div class="footer-left">
-                Kindcow.finance
+                bitsten
                 </div>
                 <div class="footer-right">
-                Best BSC Yield farm
+                bitsten
                 </div>
             </footer>
         </div>

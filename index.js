@@ -45,18 +45,19 @@ app.set('view engine', 'ejs');
  
 
 app.get('/',function(req,res){
-   var data = Array();
-     data['setting']=Array();
-      
-     data['t']=new Date();
-     data["title"] = "Farm Liquidity";
-     data["url"] = "Farms";
-     
-     console.log(data['farm']);
- 
-     
+   var data = {};
     res.render('pages/index',{'data' :   data });
  });
+
+ app.get('/markets',function(req,res){
+  var data = {};
+  res.render('pages/markets',{'data' :   data });
+});
+
+app.get('/exchange',function(req,res){
+  var data = {};
+  res.render('pages/exchange',{'data' :   data });
+});
 
  
  
