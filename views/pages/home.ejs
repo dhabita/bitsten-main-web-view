@@ -1,0 +1,273 @@
+<% layout('../layouts/app') -%>
+<link rel="stylesheet" href="stisla/assets/css/customs/home.css">
+
+<div class="row mt-5" >
+    <div class="col-12 mb-4">
+        <div class="hero  ">
+          <div class="hero-inner text-center">
+            <h5 class='text-center'>Welcome </h5>
+            
+            <span class='mywallet-address logedin'></span> <button class="  btn btn-sm btn-success connect-to-wallet">CONNECT WALLET</button><br><br>
+            <h5 class='text-center'>Your ID</h5> 
+            <p class='text-center'><span id='aff-id'>0</span></p><br> 
+            <h5 class='text-center'>Estimation all Assets</h5> 
+            <p class='text-center'><span id='asset-estimation'>0</span> BUSD</p>
+            
+            
+          </div>
+        </div>
+      </div>
+
+    <style>
+      .card-body{padding:20px 0px !important}
+    </style>
+
+    <!-- <div class="col-12 mb-4">
+        <div class="hero text-white hero-bg-image hero-bg-parallax" data-background="https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-green-blockchain-bitcoin-fintech-banner-image_196943.jpg">
+          <div class="hero-inner">
+            <h2>Welcome, Ujang!</h2>
+            <p class="lead">You almost arrived, complete the information about your account to complete registration.</p>
+            <div class="mt-4">
+              <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i> Setup Account</a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+ <!--
+      <div class="col-md-6">
+        <div class="card card-hero">
+          <div class="card-header">
+            <div class="card-icon">
+              <img src="stisla/assets/img/logo/bep20.png" alt="" class="image-card">
+            </div>
+            
+            <div class="card-description">
+                <h4>Farm and Staking</h4>
+            </div>
+          </div>
+          <div class="card-body p-2 text-center">
+              <img src="stisla/assets/img/logo/bep20.png" alt="" class="img-card-body">
+            <div class="tickets-list">
+                <div class="mt-3">
+                    <div>
+                        <h3 class="text-muted">0.00000</h3>
+                    </div>
+                    <div>
+                        <h4>Cake To Harvest</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h4 class="text-success">0.00000</h4>
+                    </div>
+                    <div>
+                        <h5>Cake In Wallet</h5>
+                    </div>
+                </div>
+              <a href="#!" class="btn btn-primary ticket-item ticket-more">
+                  Unlock Wallet
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card card-hero">
+          <div class="card-header">
+            <div class="card-icon">
+              <img src="stisla/assets/img/logo/bep20.png" alt="" class="image-card">
+            </div>
+             
+            <div class="card-description">
+                <h4>Farm and Staking</h4>
+            </div>
+          </div>
+          <div class="card-body p-2 text-center">
+              <img src="stisla/assets/img/logo/bep20.png" alt="" class="img-card-body">
+            <div class="tickets-list">
+                <div class="mt-3">
+                    <div>
+                        <h3 class="text-muted">0.00000</h3>
+                    </div>
+                    <div>
+                        <h4>Cake To Harvest</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h4 class="text-success">0.00000</h4>
+                    </div>
+                    <div>
+                        <h5>Cake In Wallet</h5>
+                    </div>
+                </div>
+              <a href="#!" class="btn btn-primary ticket-item ticket-more">
+                  Unlock Wallet
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    -->
+    
+    <div class="col-12 col-12"  >
+      <div class="card card-primary">
+        <div class="card-body text-center">
+          
+          Kind Smart Contract Address<br>
+           <a target='_blank' href='https://bscscan.com/token/0x7805e593faaf00ae6870bc8e810c68d76f311b8e'>https://bscscan.com/token/0x7805e593faaf00ae6870bc8e810c68d76f311b8e</a><br><br>
+           Chart<br>
+           <a target='_blank' href='https://goswapp-bsc.web.app/0x7805e593faaf00ae6870bc8e810c68d76f311b8e'>https://goswapp-bsc.web.app/0x7805e593faaf00ae6870bc8e810c68d76f311b8e</a>
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-12"  >
+      <div class="card card-primary">
+        <div class="card-body text-center">
+          
+        
+           Join telegram group to Update information <br><a target='_blank' href='https://t.me/kindcowfinance'>https://t.me/kindcowfinance</a><br><br>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-12"  >
+      <div class="card card-primary">
+        <div class="card-body text-center">
+          
+        
+          Invite your friend to farming / staking and earn when your refferal harvest <br>4% from reff Level 1  + 1% from reff  level 2 
+          
+        </div>
+      </div>
+    </div>
+    
+    <!--
+    <div class="col-12 col-12"  >
+      <div class="card card-primary">
+        <div class="card-body text-center">
+          
+          Claim free first KIND for your new wallet <br>
+           Everyone new Address with 0 KIND able to claim One Time FREE 0.5 KIND <br>
+           You only need to pay fee network transaction<br>
+           Join telegram group to Update <a target='_blank' href='https://t.me/kindcowfinance'>https://t.me/kindcowfinance</a><br><br>
+          <button class='text-center btn btn-warning btn-sm claim-airdrop'>Claim Free KIND</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="card">
+       
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped" id="assets-table">
+              <thead>
+                <tr>
+                  <th>PID</th>
+                  <th>Name</th>
+                  <th>LP</th>
+                  <th>Pending Reward</th>
+                  
+                  <th class='text-center'>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   -->
+      
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4 class='text-center col-12'>KIND on Your wallet</h4>
+          </div>
+          <div class="card-body">
+            <h5 class='text-center col-12 your-wallet-lp-pid-0'>  KIND</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4 class='text-center  col-12'>Total Supply</h4>
+          </div>
+          <div class="card-body">
+            <h5 class='text-center col-12'> 5,000,000  KIND</h5>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6 ">
+       
+ 
+
+
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h4 class='text-center  col-12'>Total Value Locked </h4>
+          </div>
+          <div class="card-body">
+            <h5 class='text-center col-12  '>$  <span class='tvl'>0</span>  </h5>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      
+
+      <div class="col-12 col-md-6">
+
+      <a class="twitter-timeline" data-tweet-limit='1' href="https://twitter.com/kindcow_finance?ref_src=twsrc%5Etfw">Tweets by kindcow_finance</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+
+      </div>
+
+      
+
+
+</div>
+
+<div id='box-aff' style='position:fixed;top:0;left:0;right:0;bottom:0;background: rgba(37, 36, 36, 0.897);padding-top:100px;z-index: 100;display:none'>
+  
+  <div style='background: #fff;width:300px;margin:20px auto;padding:30px 10px' class='text-center'>
+    <h5>Affiliate</h5><br>
+  <div class="input-group mb-3" >
+
+    <input id="upline" type="text" class="form-control text-center" placeholder="Uppline ID" aria-label="" aria-describedby="basic-addon1" style="width:100px"><br>
+    
+    </div>
+    <div class="input-group mb-3 text-center d-flex justify-content-center"  >
+
+      <button class="btn btn-outline-danger " style=" margin-right:10px" onclick='$("#box-aff").hide()' type="button">Close</button> 
+      <button class="btn btn-outline-primary " onclick='save_upline()' type="button">Confirm</button>
+      
+      </div>
+    
+    Ask UPPLINE ID to your friend!<br>
+    <span class='text-danger' id='err'></span>
+  </div>
+
+
+</div>
+
+
+
+
+<script>
+  $(document).ready(function(){
+ $("#myModal").modal("show");
+  });
+</script>

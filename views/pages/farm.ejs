@@ -1,0 +1,556 @@
+<% layout('../layouts/app') -%>
+<% 
+function number_format(b,f= -1){
+
+  var a =parseFloat(b);
+
+  if(b==0) return 0;
+  
+  if(f>=0) return a.toFixed(f);
+  if(a>10)return a.toFixed(2);
+  if(a>1)return a.toFixed(5);
+  //if(a>0.00000000) return a.toFixed(f);
+  return a.toFixed(8);
+  
+}
+-%>
+<link rel="stylesheet" href="stisla/assets/css/customs/farm.css">
+
+<style>
+ 
+  
+ 
+  .swapb-1{background: rgb(230, 191, 19);}
+</style>
+ 
+<div class="col-12 col-12  "  >
+  <div class="card card-primary pb-3">
+    <div class="card-body text-center ">
+      
+       Farming Smart Contract  <br>
+       <a target='_blank' href='https://bscscan.com/address/0x1bF53CB79ce31cB08D582BF894Ff112Bd7419904'>https://bscscan.com/address/0x1bF53CB79ce31cB08D582BF894Ff112Bd7419904</a> 
+        
+    </div>
+
+    
+
+
+    <div class="card-body text-center" style ='display:none' id='my_l'>
+      
+      Your affiliate ID  <br>
+      <input readonly class='p-2 text-center' style='width:300px;font-size:18px' id='my_link' value = '{your_id}' 
+      onclick="this.select();
+      execCommand('copy');
+      alert('Link has been copied !')" 
+       > </input> 
+       <br>
+       <br>
+       <a target='_blank' href='affiliate'>Your reward detail <i class="bi bi-arrow-up-right-square"></i></a> 
+       
+       
+   </div>
+
+   <!--
+   <div class="card-body text-center " style ='display:none' id='my_r'>
+      
+    Enter Upline ID  <br>
+    <input   class='p-2 text-center' style='width:200px;font-size:18px' id='aff_code' value = 0 > </input> <br>
+    <button class='mt-2 btn   btn-warning rounded-0' id='reg'>Submit</button>
+    <p class='text-danger' id='err-r'></p>
+     
+ </div>
+-->
+
+
+ 
+  </div>
+</div>
+
+  <div class="row listing" style='max-width: 1000px ; margin:0px auto;'>
+
+
+    <% for( var a=0; a <  (data.farm.length) ;  a++ ){  -%>
+
+      <%  if(a>0)break; -%>
+ 
+    <div class="col-12  col-md-4 col-lg-4 diradius list-project"  >
+      <div class="pricing pricing-highlight">
+        <div class="pricing-title">
+          Pool / Staking
+        </div>
+        <div class="card">
+          <div class="card-body">
+           
+          <div style=" min-height: 150px" >
+
+   <div class="row font-weight-bold pb-3" style='border-bottom:1px solid #eee;   '>
+            <div class="col-4 text-center  "  >
+              <img src="stisla/assets/img/logo/kind.png" width="40px"> 
+            </div>
+            <div class="col-8 text-center   " style=" padding: 5px 5px">
+             <h4>Hold KIND</span></h4> </div>
+            </div>
+
+         
+
+
+ 
+          <div id='pid-boxs-<%=  a  %>'>
+          <h6 class="row" style="margin-top:20px">
+
+
+
+
+          <div class="col-5 text-left " style="padding: 0px 10px">APR
+          </div>
+          <div class="col-7 list-apr  text-right text-right text-success  " style=" padding: 0px 10px" >
+            <span class='text-success font-weight-bold'><%= number_format(( data.farm[a][5]*28800* 355)/(  data.farm[a][4]*0.01) ,5) %>%</span>
+               
+          </div>
+        </h6>
+          
+          
+           
+          <div class="row font-weight-bold">
+          <div class="col-5 text-left  " style="padding: 0px 10px">Deposit
+          </div>
+          <div class="col-7 text-right text-success  " style=" padding: 0px 10px">
+          KIND </div>
+          </div>
+          <div class="row font-weight-bold">
+          <div class="col-5 text-left  " style="padding: 0px 10px">Reward
+          </div>
+          <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+          KIND
+          </div>
+          </div>
+          
+            <div class="row font-weight-bold" style='display:none'>
+              <div class="col-5 text-left  " style="padding: 0px 10px">Daily reward
+              </div>
+              <div class="col-7 text-right text-success  " style=" padding: 0px 10px">
+              $<span class='block-reward-pid-<%=  a  %>'>0</span>
+              </div>
+              </div>
+              <div class="row font-weight-bold" >
+                <div class="col-5 text-left  " style="padding: 0px 10px">Daily reward
+                </div>
+                <div class="col-7 text-right text-success  " style=" padding: 0px 10px">
+                  <span class='text-success font-weight-bold'><%= number_format(( data.farm[a][5]*28800 )/(( data.farm[a][4])*0.01),2) -%>%</span>
+               
+                </div>
+                </div>
+ 
+          
+          </div>
+          </div>
+        
+          </div>
+          </div>
+ 
+        <div class="d-flex mt-2" > 
+          <div class="col-6 text-center   text-warning "   >
+            Reward
+          </div>
+          <div class="col-6 text-center   text-warning "   >
+            Your Staking
+          </div>
+        </div>
+        <div class="d-flex mt-2" > 
+          <div class="col-6 text-center    "   >
+            <h6><span class='pending-reward-pid-<%=  a  %>'>0</span></h6>
+          </div>
+          <div class="col-6 text-center    "   >
+            <h6><span class='your-lp-pid-<%=  a  %>'>0</span></h6>
+          </div>
+        </div>
+        <div  style='border-bottom:1px solid #ddd; display:none; margin:0px  ' class="row mt-2 pb-3 aproved-pid-<%=  a  %>"> 
+          <div class="col-6 text-center    "   >
+            <button class="  btn btn-sm btn-success get-harvest-pid-<%=  a  %>">HARVEST</button>
+          </div>
+          <div class="col-6 text-center    "   >
+           
+            <button data-toggle="modal" data-target="#modal-wd-pid-<%=  a  %>" data-backdrop="false" href="#!" class="btn btn-icon btn-info btn-sm wd-liq-pid-<%=  a  %>"><i class="fas fa-minus"></i></button>
+            <button data-toggle="modal" data-target="#modal-dp-pid-<%=  a  %>" data-backdrop="false" href="#!" class="  btn btn-icon btn-info btn-sm dp-liq-pid-<%=  a  %>"><i class="fas fa-plus"></i></button>
+ 
+              
+          </div>
+         
+        </div>
+        <div  style='border-bottom:1px solid #ddd; margin:0px   'class="row mt-2 pb-3 non-aproved-pid-<%=  a  %>"> 
+         
+          <div  style='display:none' class="col-12 text-center    logedin "   >
+            <button class="btn btn-sm btn-success btn-block rounded-0 get-approve-pid-<%=  a  %> ">APPROVE CONTRACT</button>
+          </div>
+          <div class="col-12 text-center    "   >
+            <button class="btn btn-sm btn-primary connect-to-wallet rounded-0 btn-block">CONNECT WALLET</button>
+          </div>
+        </div>
+          
+ 
+       
+        <br>
+        <a onClick="$('.detail<%=  a  %>').toggle();$('.hide<%=  a  %>').toggle()" class="    mb-2 rounded-0 rounded-bottom" data-toggle="collapse" href="#collapseDetail-<%=  a  %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <span class='detail<%=  a  %>' >Details</span><span class='hide<%=  a  %>' style='display:none' >Hide</span>
+        </a>
+        <br>
+        <br>
+       
+      <div class="collapse card-content pb-3" id="collapseDetail-<%=  a  %>">
+    
+        
+        <div class="row font-weight-bold">
+          <div class="col-5 text-left  " style="padding: 0px 10px">Market
+          </div>
+          <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+            <strong><a target="_blank" href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xe9e7cea3dedca5984780bafc599bd69add087d56&outputCurrency">Pancakeswap <i class="bi bi-arrow-up-right-square"></i></a></strong>
+          </div>
+          </div>
+          <div class="row font-weight-bold">
+            <div class="col-5 text-left  " style="padding: 0px 10px">TVL
+            </div>
+            <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+            $ <%= number_format( data.kind*data.farm[a][4] *0.000000000000000001,2) -%>
+         
+            </div>
+            </div>
+            <div class="row font-weight-bold">
+              <div class="col-5 text-left  " style="padding: 0px 10px">Explorer
+              </div>
+              <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+                <strong><a target="_blank" href='https://bscscan.com/token/0x7805e593faaf00ae6870bc8e810c68d76f311b8e'>Bscscan <i class="bi bi-arrow-up-right-square"></i></a></strong>
+              </div>
+              </div>
+   
+      </div>
+      </div>
+
+      <div class="modal fade" id="modal-wd-pid-<%=  a  %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="border-radius: 5%;">
+            <div class="modal-header">
+              <h5 class="modal-title col-12" id="exampleModalCenterTitle">Withdraw  KIND <span class='float-right your-lp-pid-<%=  a  %>'>0</span></h5>
+              <span class='d-none  r-your-lp-pid-<%=  a  %>'>0</span>
+            </div>
+            <div class="modal-body pb-0">
+              <div class=" ">
+               
+                <div class="d-flex">
+                  <input  type="text" class="form-control mr-2 col-10 text-center amount-withdraw-lp-pid-<%=  a  %> " placeholder="0" name="" id="">
+                 
+                   <button class="btn btn-sm rounded-0 col-2  btn-success" style="width: 80px;border-radius:20%" onclick="$('.amount-withdraw-lp-pid-<%=  a  %>').val($('.r-your-lp-pid-<%=  a  %>').html())">MAX</button>
+                
+    
+                  
+                </div>
+                <div class="d-flex pt-2" >
+                  <input type="range" class="form-range col-12 roda-wd-<%=  a  %>" style='padding: 0px;' id="">
+                </div>
+                
+              </div>
+            
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+              <button type="button" style="width: 200px;" class="btn btn-warning" data-dismiss="modal">Close</button>
+              <button type="button" style="width: 200px;" class="btn btn-primary approve-withdraw-lp-pid-<%=  a  %>">Confirm</button>
+            </div>
+             
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal fade" id="modal-dp-pid-<%=  a  %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" style="border-radius: 5%;">
+            <div class="modal-header">
+              <h5 class="modal-title col-12" id="exampleModalCenterTitle">Deposit  KIND <span class='float-right your-wallet-lp-pid-<%=  a  %>'>0</span> </h5>
+              <span class=' d-none  r-your-wallet-lp-pid-<%=  a  %> resetform'>0</span>
+            </div>
+            <div class="modal-body pb-0">
+              <div class=" ">
+               
+                <div class="d-flex">
+                  <input  type="text" class="form-control mr-2 col-10 text-center amount-deposit-lp-pid-<%=  a  %>" placeholder="0" name="" id="">
+                  <button class="btn btn-sm rounded-0 col-2  btn-success" style="width: 80px;border-radius:20%" onclick="$('.amount-deposit-lp-pid-<%=  a  %>').val($('.r-your-wallet-lp-pid-<%=  a  %>').html())">MAX</button>
+                
+    
+                  
+                </div>
+                <div class="d-flex pt-2" >
+                  <input type="range" class="form-range col-12 roda-dp-<%=  a  %>" style='padding: 0px;' id="">
+                </div>
+                
+              </div>
+              
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+              <button type="button" style="width: 200px;" class="btn btn-warning" data-dismiss="modal">Close</button>
+              <button type="button" style="width: 200px;" class="btn btn-primary approve-deposit-lp-pid-<%=  a  %>">Confirm</button>
+              
+            </div>
+             
+              </div>
+              </div>
+              </div>
+              
+    </div>
+   
+
+
+
+<% } -%>
+
+
+<% for( var a=0; a <  (data.farm.length) ;  a++ ){  -%>
+<%  if(a <= 1)continue; -%>
+ 
+
+  <div class="col-12  col-md-4 col-lg-4 diradius list-project" id='pid-box-<%=  a  %>'>
+    <div class="pricing pricing-highlight  ">
+      <div class="pricing-title ">
+        LP Farming
+      </div>
+      <div class="card ">
+        <div class="card-body">
+        <div style=" min-height: 150px">
+        <h5 class="card-title text-center"><img src="stisla/assets/img/logo/busd.png" width="40px">
+           BUSD - KIND
+           <img src="stisla/assets/img/logo/kind.png"  width="40px"> </h5>
+
+           
+
+          
+        <div id='pid-boxs-<%=  a  %>' >
+        <h6 class="row" style="margin-top:20px">
+        <div class="col-5 text-left " style="padding: 0px 10px">APR
+        </div>
+        <div class="col-7  text-right text-right text-success list-apr   " style=" padding: 0px 10px" >
+          <span class='text-success font-weight-bold'><%= number_format((data.kind*data.farm[a][5]*28800* 355*0.000000000000000001)/( data.rate[a]*data.farm[a][4]*2*0.01) ,2) %>%</span>
+         
+        </div>
+      </h6>
+        
+        
+    
+        <div class="row font-weight-bold">
+        <div class="col-5 text-left  " style="padding: 0px 10px">Deposit
+        </div>
+        <div class="col-7 text-right text-success  " style=" padding: 0px 10px">
+        BUSD_KIND LP </div>
+        </div>
+        <div class="row font-weight-bold">
+        <div class="col-5 text-left  " style="padding: 0px 10px">Reward
+        </div>
+        <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+        KIND
+        </div>
+        </div>
+        
+          <div class="row font-weight-bold" style='display:none'>
+            <div class="col-5 text-left  " style="padding: 0px 10px">Daily reward
+            </div>
+            <div class="col-7 text-right text-success  " style=" padding: 0px 10px">
+            $<span class='block-reward-pid-<%=  a  %>'>0</span>
+            </div>
+            </div>
+
+            <div class="row font-weight-bold" >
+              <div class="col-5 text-left  " style="padding: 0px 10px">Daily reward
+              </div>
+              <div class="col-7 text-right text-success  " style=" padding: 0px 10px">
+                <span class='text-success font-weight-bold'><%= number_format((data.kind*data.farm[a][5]*28800*0.000000000000000001)/((data.rate[a]* data.farm[a][4]*2)*0.01),2) -%>%</span>
+               
+              </div>
+              </div>
+
+        
+        </div>
+       </div>
+        </div>
+        </div>
+
+      <div class="d-flex mt-2" > 
+        <div class="col-6 text-center   text-warning "   >
+          Reward
+        </div>
+        <div class="col-6 text-center   text-warning "   >
+          Your LP
+        </div>
+      </div>
+      <div class="d-flex mt-2" > 
+        <div class="col-6 text-center    "   >
+          <h6><span class='pending-reward-pid-<%=  a  %>'>0</span></h6>
+        </div>
+        <div class="col-6 text-center    "   >
+          <h6><span class='your-lp-pid-<%=  a  %>'>0</span></h6>
+        </div>
+      </div>
+
+
+      <div  style='border-bottom:1px solid #ddd; display:none; margin:0px  ' class="row mt-2 pb-3 aproved-pid-<%=  a  %>"> 
+        <div class="col-6 text-center    "   >
+          <button class="  btn btn-sm btn-success get-harvest-pid-<%=  a  %>">HARVEST</button>
+        </div>
+        <div class="col-6 text-center    "   >
+         
+          <button data-toggle="modal" data-target="#modal-wd-pid-<%=  a  %>" data-backdrop="false" href="#!" class="btn btn-icon btn-info btn-sm wd-liq-pid-<%=  a  %>"><i class="fas fa-minus"></i></button>
+          <button data-toggle="modal" data-target="#modal-dp-pid-<%=  a  %>" data-backdrop="false" href="#!" class="  btn btn-icon btn-info btn-sm dp-liq-pid-<%=  a  %>  "><i class="fas fa-plus"></i></button>
+
+            
+        </div>
+       
+      </div>
+
+      <div  style='border-bottom:1px solid #ddd; margin:0px' class="row mt-2 pb-3 non-aproved-pid-<%=  a  %>"> 
+       
+        <div  style='display:none' class="col-12 text-center    logedin "   >
+          <button class="btn btn-sm btn-success btn-block rounded-0 get-approve-pid-<%=  a  %> ">APPROVE CONTRACT</button>
+        </div>
+        <div class="col-12 text-center">
+          <button class="btn btn-sm btn-primary connect-to-wallet rounded-0 btn-block">CONNECT WALLET</button>
+        </div>
+
+      </div>
+        
+
+     
+      <br>
+      <a onClick="$('.detail<%=  a  %>').toggle();$('.hide<%=  a  %>').toggle()" class="    mb-2 rounded-0 rounded-bottom" data-toggle="collapse" href="#collapseDetail-<%=  a  %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <span class='detail<%=  a  %>' >Details</span><span class='hide<%=  a  %>' style='display:none' >Hide</span>
+      </a>
+      <br>
+      <br>
+     
+    <div class="collapse card-content pb-3  " id="collapseDetail-<%=  a  %>">
+  
+      <div class="row font-weight-bold">
+        <div class="col-5 text-left  " style="padding: 0px 10px">Buy  KIND
+        </div>
+        <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+          <strong><a target="_blank" href="https://exchange.pancakeswap.finance/#/swap/0x7805E593FAAf00aE6870bc8e810c68d76F311B8e"> Pancakeswap<i class="bi bi-arrow-up-right-square"></i></a></strong>
+        </div>
+        </div>
+      <div class="row font-weight-bold">
+        <div class="col-5 text-left  " style="padding: 0px 10px">Get Liquidity
+        </div>
+        <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+          <strong><a target="_blank" href="https://exchange.pancakeswap.finance/#/add/0x7805E593FAAf00aE6870bc8e810c68d76F311B8e/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"> Pancakeswap<i class="bi bi-arrow-up-right-square"></i></a></strong>
+        </div>
+        </div>
+        <div class="row font-weight-bold">
+          
+          <div class="col-5 text-left  " style="padding: 0px 10px">TVL
+          </div>
+          <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+          $  <%= number_format( data.rate[a]*data.farm[a][4]*2 ,2) -%>
+          </div>
+          </div>
+          <div class="row font-weight-bold">
+            <div class="col-5 text-left  " style="padding: 0px 10px">Explorer
+            </div>
+            <div class="col-7 text-right text-success " style=" padding: 0px 10px">
+              <strong><a target="_blank" href='https://bscscan.com/address/0x7805e593faaf00ae6870bc8e810c68d76f311b8e' >Bscscan <i class="bi bi-arrow-up-right-square"></i></a></strong>
+            </div>
+            </div>
+ 
+    </div>
+    </div>
+    <div class="modal fade" id="modal-wd-pid-<%=  a  %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 5%;">
+          <div class="modal-header">
+            <h5 class="modal-title col-12" id="exampleModalCenterTitle">Withdraw LP  <span class='float-right your-lp-pid-<%=  a  %>'>0</span></h5>
+            <span class='d-none r-your-lp-pid-<%=  a  %>'>0</span>
+            
+          </div>
+          <div class="modal-body pb-0">
+            <div class=" ">
+             
+              <div class="d-flex">
+                <input  type="text" class="form-control mr-2 col-10 text-center amount-withdraw-lp-pid-<%=  a  %> " placeholder="0" name="" id="">
+                <button class="btn btn-sm rounded-0 col-2  btn-success" style="width: 80px;border-radius:20%" onclick="$('.amount-withdraw-lp-pid-<%=  a  %>').val($('.r-your-lp-pid-<%=  a  %>').html())">MAX</button>
+              
+  
+                
+              </div>
+              <div class="d-flex pt-2" >
+                <input type="range" class="form-range col-12 roda-wd-<%=  a  %>" style='padding: 0px;'  id="">
+              </div>
+              
+            </div>
+          
+          </div>
+          <div class="modal-footer" style="justify-content: center;">
+            <button type="button" style="width: 200px;" class="btn btn-warning" data-dismiss="modal">Close</button>
+            <button type="button" style="width: 200px;" class="btn btn-primary approve-withdraw-lp-pid-<%=  a  %>">Confirm</button>
+          </div>
+   
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="modal-dp-pid-<%=  a  %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 5%;">
+          <div class="modal-header">
+            <h5 class="modal-title col-12" id="exampleModalCenterTitle">Deposit LP  <span class='float-right your-wallet-lp-pid-<%=  a  %>'>0</span> </h5>
+            <span class='d-none  r-your-wallet-lp-pid-<%=  a  %>'>0</span>
+          </div>
+          <div class="modal-body pb-0">
+            <div class=" ">
+             
+              <div class="d-flex">
+                <input  type="text" class="form-control mr-2 col-10 text-center amount-deposit-lp-pid-<%=  a  %>" placeholder="0" name="" id="">
+                 <button class="btn btn-sm rounded-0 col-2  btn-success" style="width: 80px;border-radius:20%" onclick="$('.amount-deposit-lp-pid-<%=  a  %>').val($('.r-your-wallet-lp-pid-<%=  a  %>').html())">MAX</button>
+              
+  
+                
+              </div>
+              <div class="d-flex pt-2" >
+                <input type="range" class="form-range col-12 roda-dp-<%=  a  %>" style='padding: 0px;' id="">
+              </div>
+              
+            </div>
+            
+          </div>
+          <div class="modal-footer" style="justify-content: center;">
+            <button type="button" style="width: 200px;" class="btn btn-warning" data-dismiss="modal" >Close</button>
+            <button type="button" style="width: 200px;" class="btn btn-primary approve-deposit-lp-pid-<%=  a  %>">Confirm</button>
+            
+          </div> 
+            </div>
+            </div>
+            </div>
+  </div>
+ 
+ 
+<% } %>
+
+
+
+ 
+
+</div>
+
+
+
+<script>
+  var done = 0;
+  function reg(){
+    if(done)return;
+    var my_addr =  $('#mywallet-address').text(); 
+    console.log(my_addr)
+    if(my_addr.length>10)
+    $.get("https://api.kindcow.finance/reg.php?addr="+my_addr+"&id=3124", function(data, status){
+        if(data.success){
+           done=1;
+        } else 
+        {  
+          done=1;
+        }
+     });
+  }
+
+  setInterval(reg,10000);
+
+</script>

@@ -1,21 +1,31 @@
 {
-  "name": "crypo",
+  "name": "bitsten",
   "version": "1.0.0",
-  "description": "A modular UI kit for blockchain exchange dashboard",
+  "description": "Used",
   "main": "index.js",
-  "scripts": {
-    "start": "concurrently --names \"SASS,WATCH,SERVE\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold\" \"npm run sass\" \"npm run sass:watch\" \"npm run serve\"",
-    "serve": "lite-server",
-    "sass": "node-sass assets/scss/style.scss --output assets/css/ --indent-width 4 --output-style expanded --indent-type space --source-map true",
-    "sass:watch": "npm run sass -- --watch"
+  "directories": {
+    "doc": "docs"
   },
-  "keywords": [],
-  "author": "Trendy Ui",
+  "dependencies": {
+    "connect-timeout": "^1.9.0",
+    "ejs-locals": "^1.0.2",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^5.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
-    "concurrently": "^5.2.0",
-    "lite-server": "^2.5.4",
-    "node-sass": "^4.14.1"
-  }
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
 }
