@@ -8,8 +8,8 @@
           <div class="markets-container">
             <div class="markets-content">
               <h2>BTC Index</h2>
-              <p>7340.65</p>
-              <span class="green"> + 0.45%</span>
+              <p class='price-btc_usdt'>0</p>
+              <span class="green"> + 0%</span>
             </div>
             <div class="markets-chart">
               <div id="marketsChartBtcLight"></div>
@@ -20,8 +20,8 @@
           <div class="markets-container">
             <div class="markets-content">
               <h2>ETH Index</h2>
-              <p>146.58</p>
-              <span class="red"> - 5.09%</span>
+              <p class='price-eth_usdt'>0</p>
+              <span class="red"> - 0%</span>
             </div>
             <div class="markets-chart">
               <div id="marketsChartEthLight"></div>
@@ -32,8 +32,8 @@
           <div class="markets-container">
             <div class="markets-content">
               <h2>LTC Index</h2>
-              <p>44.49</p>
-              <span class="green"> + 2.14%</span>
+              <p class='price-ltc_usdt'>0</p>
+              <span class="green"> + 0%</span>
             </div>
             <div class="markets-chart">
               <div id="marketsChartLtcLight"></div>
@@ -76,6 +76,12 @@
                     </tr>
                   </thead>
                   <tbody id='all_market'>
+
+
+                    <tr id = 'load-markets'>
+                    <td style='height: 100px !important;' class='text-center' colspan="6"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:100px !important"></td>
+                    </tr>
+
                     <!--
                     <tr data-href="exchange-light.html">
                       <td><i class="icon ion-md-star"></i> ETH/BTC</td>

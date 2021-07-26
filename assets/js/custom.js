@@ -954,7 +954,11 @@
 
 
 
-
+function numberWithCommas(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
 
 function number_format(b,f= -1){
 
@@ -962,9 +966,10 @@ function number_format(b,f= -1){
 
   if(b==0) return 0;
   
-  if(f>=0) return a.toFixed(f);
-  if(a>10)return a.toFixed(2);
-  if(a>1)return a.toFixed(5);
+  if(f>=0) return numberWithCommas(a.toFixed(f));
+  if(a>1000)return numberWithCommas(a.toFixed(0)); 
+  if(a>10)return numberWithCommas(a.toFixed(2));
+  if(a>1)return numberWithCommas(a.toFixed(5));
   //if(a>0.00000000) return a.toFixed(f);
   return a.toFixed(8);
   

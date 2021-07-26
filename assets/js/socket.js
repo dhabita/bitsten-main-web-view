@@ -12,16 +12,17 @@ var sock = {
         i++;
         return s;
     },
-    timeout: 5000,
+    
     open: function (s, f) {
         s.onopen = function (evt) {
-            $("#info_socket").html("<i class='fa fa-wifi'></i> Connected");
+            console.log("conected");
+            $("#info_socket").html('<i class="bi bi-wifi"></i> Connected');
             if (typeof f !== "undefined") {
                 f(evt);
             }
         };
 
-      // openc();
+       openc();
 
     },
     close: function (s, c) {
@@ -32,6 +33,7 @@ var sock = {
     },
     msg: function (s, msg) {
         s.onmessage = function (evt) {
+            $("#info_socket").html('<i class="bi bi-wifi"></i> Connected');
             msg(evt);
         };
     },
@@ -56,6 +58,11 @@ sock.msg(soket,function(a){
     //console.log(a.data);
     router(a.data);
 });
+
+setInterval(function(){
+sock.open(soket,function(e){});
+sock.close(soket,function(e){});
+},2000);
 
  
  
@@ -128,8 +135,10 @@ function openc(){
 function all_market(d){
  
 d.data.forEach(e => {
-    
-console.log(e);
+
+
+
+//console.log(e);
 var change = ( e.bid - e.open ) / (e.open*0.01);
 var col = 'green';
 if(change<0)col='red';
@@ -142,14 +151,17 @@ if(e.volume<500&&market=="usdt")market = "alt";
 else
 if(market=='usdt')dnone = "";
 
+
+update_global_price(e.market_show,e.bid);
+
 var tddata = '\
 <td><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
-<td><img src="http://f1.bitsten.com/assets/images/logo/'+coin+'.png" alt="'+coin+'">'+coin.toUpperCase()+'</td>\
+<td><img src="https://f1.bitsten.com/assets/images/logo/'+coin+'.png" alt="'+coin+'">'+coin.toUpperCase()+'</td>\
 <td>'+number_format(e.bid)+'</td>\
 <td class="'+col+'">'+number_format(change,2)+'%</td>\
 <td>'+number_format(e.high)+'</td>\
 <td>'+number_format(e.low)+'</td>\
-<td>'+number_format(e.volume,2)+'</td>';
+<td>'+number_format(e.volume)+'</td>';
 
 var trdata = '\
 <tr id="market-id-'+e.id+'" class="  '+market+' all-coin " style="'+dnone+'" data-href="exchange-light.html">\
@@ -164,13 +176,21 @@ $('#all_markets_table tbody').append(trdata);
 
 });
 
+
+$("#load-markets").hide();
+
 }
 
 function show(a){
-    console.log(a);
+  //  console.log(a);
    
     $(".all-coin").hide();
     $("."+a).show();
 }
 
+function update_global_price(pair,p){
+var price =document.querySelectorAll('.price-'+pair);
+//console.log(price);
+for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(p);
+}
  
