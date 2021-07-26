@@ -1,98 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Crypo</title>
-  <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-
-<body>
-  <header class="light-bb">
-    <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="exchange-light.html"><img src="assets/img/logo-dark.svg" alt="logo"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
-        aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="icon ion-md-menu"></i>
-      </button>
-
-      <div class="collapse navbar-collapse" id="headerMenu">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Landing Page
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="landing-page-light.html">Landing One</a>
-              <a class="dropdown-item" href="landing-page-light-two.html">Landing Two</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Exchange
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="exchange-light.html">Exchange</a>
-              <a class="dropdown-item" href="exchange-light-live-price.html">Exchange Live Price</a>
-              <a class="dropdown-item" href="exchange-light-ticker.html">Exchange Ticker</a>
-              <a class="dropdown-item" href="exchange-light-fluid.html">Exchange Fluid</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Markets
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="markets-light.html">Markets</a>
-              <a class="dropdown-item" href="market-capital-light.html">Markets Line</a>
-              <a class="dropdown-item" href="market-capital-bar-light.html">Markets Bar</a>
-              <a class="dropdown-item" href="market-overview-light.html">Market Overview</a>
-              <a class="dropdown-item" href="market-screener-light.html">Market Screener</a>
-              <a class="dropdown-item" href="market-crypto-light.html">Market Crypto</a>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Dashboard
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="settings-profile-light.html">Profile</a>
-              <a class="dropdown-item" href="settings-wallet-light.html">Wallet</a>
-              <a class="dropdown-item" href="settings-light.html">Settings</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Others
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="technical-analysis-light.html">Technical Analysis</a>
-              <a class="dropdown-item" href="cross-rates-light.html">Cross Rates</a>
-              <a class="dropdown-item" href="symbol-info-light.html">Symbol Info</a>
-              <a class="dropdown-item" href="heat-map-light.html">Heat Map</a>
-              <a class="dropdown-item" href="signin-light.html">Sign in</a>
-              <a class="dropdown-item" href="signup-light.html">Sign up</a>
-              <a class="dropdown-item" href="404-light.html">404</a>
-            </div>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <a href="signin-light.html" class="btn-1">Sign In</a>
-          <a href="signup-light.html" class="btn-2">Get Started</a>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
+ 
+<% layout('../layouts/app') -%>
+  
   <div class="landing-hero">
     <div class="container">
       <div class="row">
@@ -112,7 +20,7 @@
     </div>
   </div>
 
-  <div class="container-fluid no-fluid">
+  <div class="container-fluid no-fluid d-none">
     <div class="row sm-gutters">
       <div class="col-md-12 mb15">
         <!-- TradingView Widget BEGIN -->
@@ -166,7 +74,7 @@
     </div>
   </div>
 
-  <div class="landing-info-one landing-info-one-bg mtb100">
+  <div class="landing-info-one landing-info-one-bg mtb100 d-none">
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -191,7 +99,7 @@
       </div>
     </div>
   </div>
-  <div class="landing-info-one mtb100">
+  <div class="landing-info-one mtb100 d-none">
     <div class="container">
       <div class="row">
         <div class="col-md-5">
@@ -240,7 +148,7 @@
     </div>
   </div>
 
-  <div class="landing-feature">
+  <div class="landing-feature d-none">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -274,7 +182,7 @@
     </div>
   </div>
 
-  <div class="landing-number">
+  <div class="landing-number d-none">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
@@ -342,7 +250,7 @@
     </div>
   </div>
 
-  <footer class="landing-footer">
+  <footer class="landing-footer d-none">
     <div class="container">
       <div class="row">
         <div class="col-md-2">

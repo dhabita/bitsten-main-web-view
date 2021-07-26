@@ -46,7 +46,7 @@ app.set('view engine', 'ejs');
 
 app.get('/',function(req,res){
    var data = {};
-    res.render('pages/index',{'data' :   data });
+    res.render('pages/landing',{'data' :   data });
  });
 
  app.get('/markets',function(req,res){
