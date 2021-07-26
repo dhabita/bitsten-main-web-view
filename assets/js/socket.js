@@ -172,7 +172,7 @@ var tddata = '\
 <td>'+number_format(e.volume)+'</td>';
 
 var tddatam = '\
-<td   class="col-5 pl-3"><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
+<td   class="col-5 pl-4"><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
 <td   class="col-4 text-right">'+number_format(e.bid)+'</td>\
 <td   class="col-3 text-center '+col+'">'+number_format(change,2)+'%</td>';
 
@@ -182,7 +182,7 @@ if(SOCKET_URL=='exchange'){tddata = tddatam; row="row";}
 
 
 var trdata = '\
-<tr id="market-id-'+e.id+'" class="'+row+' '+market+' all-coin " style="width:100%; '+dnone+'" data-href="exchange-light.html">\
+<tr id="market-id-'+e.id+'" class="'+row+' '+market+' all-coin " style="width:100%; '+dnone+'" onCLick="goto(\''+e.market_show+'\')">\
 '+tddata+'\
 </tr>';
 
@@ -212,3 +212,13 @@ var price =document.querySelectorAll('.price-'+pair);
 for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(p);
 }
  
+function goto(a){
+    var u = window.location.href;
+    if(u.indexOf("exchange") != -1){
+     window.location.hash = a;
+    }
+    else
+    window.location.href = "exchange#"+a;
+   
+
+}
