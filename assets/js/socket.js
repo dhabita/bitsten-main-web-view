@@ -219,6 +219,30 @@ function goto(a){
     }
     else
     window.location.href = "exchange#"+a;
-   
 
+    gethash();
+   
 }
+
+var hash = "";
+
+function gethash(){
+  var h = window.location.hash;
+  if(hash==h)return;
+  //update data
+
+  var coin = h.split("_")[0].replace("#","");
+  var market = h.split("_")[1];
+
+var m =document.querySelectorAll('.coin-name');
+for(var i=0;i<m.length;i++) m[i].innerHTML=coin;
+
+var m =document.querySelectorAll('.market-name');
+for(var i=0;i<m.length;i++) m[i].innerHTML=market;
+
+
+  
+  
+}
+
+gethash();
