@@ -1,6 +1,8 @@
  
 
-var url = "wss://socket.bitsten.com:8443/"+SOCKET_URL; 
+ 
+var urlm = "wss://socket.bitsten.com:8443/market"; 
+
 
 var i = 0;
 var sock = {
@@ -17,12 +19,13 @@ var sock = {
         s.onopen = function (evt) {
             console.log("conected");
             $("#info_socket").html('<i class="bi bi-wifi"></i> Connected');
+            openc();
             if (typeof f !== "undefined") {
                 f(evt);
             }
         };
 
-       openc();
+      
 
     },
     close: function (s, c) {
@@ -33,7 +36,7 @@ var sock = {
     },
     msg: function (s, msg) {
         s.onmessage = function (evt) {
-            $("#info_socket").html('<i class="bi bi-wifi"></i> Connected');
+           // $("#info_socket").html('<i class="bi bi-wifi"></i> Connected');
             msg(evt);
         };
     },
@@ -53,16 +56,19 @@ var sse = {
     },
 };
 
-var soket = sock.ws(url);
+
+
+var soket = sock.ws(urlm);
+
+
 sock.msg(soket,function(a){
     //console.log(a.data);
     router(a.data);
 });
 
-setInterval(function(){
 sock.open(soket,function(e){});
 sock.close(soket,function(e){});
-},2000);
+ 
 
  
  
@@ -119,12 +125,14 @@ if(triger[0]=="market_list"){
 function getallmarket(){
     sock.send(soket,'market');
 }
-if(SOCKET_URL=='market'){
-    setInterval(getallmarket,5000);
+if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
+    setInterval(getallmarket,30000);
 }
 
 function openc(){
-    if(SOCKET_URL=='market'){
+   
+    if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
+        console.log("load data");
         getallmarket();
    }
 }
@@ -151,7 +159,7 @@ if(e.volume<500&&market=="usdt")market = "alt";
 else
 if(market=='usdt')dnone = "";
 
-
+ 
 update_global_price(e.market_show,e.bid);
 
 var tddata = '\
@@ -163,8 +171,18 @@ var tddata = '\
 <td>'+number_format(e.low)+'</td>\
 <td>'+number_format(e.volume)+'</td>';
 
+var tddatam = '\
+<td   class="col-5 pl-3"><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
+<td   class="col-4 text-right">'+number_format(e.bid)+'</td>\
+<td   class="col-3 text-center '+col+'">'+number_format(change,2)+'%</td>';
+
+var row="";
+if(SOCKET_URL=='exchange'){tddata = tddatam; row="row";}
+
+
+
 var trdata = '\
-<tr id="market-id-'+e.id+'" class="  '+market+' all-coin " style="'+dnone+'" data-href="exchange-light.html">\
+<tr id="market-id-'+e.id+'" class="'+row+' '+market+' all-coin " style="width:100%; '+dnone+'" data-href="exchange-light.html">\
 '+tddata+'\
 </tr>';
 
