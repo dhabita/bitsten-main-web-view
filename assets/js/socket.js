@@ -206,7 +206,12 @@ function orderbook(d){
              
 
         })
-     
+        $("#book_sell").animate({
+            scrollTop: $(document).height()
+        }, 1000);  
+
+
+        $('.book-loading').hide();
 }
 
 
@@ -230,7 +235,18 @@ if(e.volume<500&&market=="usdt")market = "alt";
 else
 if(market=='usdt')dnone = "";
 
- 
+var h = window.location.hash.replace("#","");
+if(h==e.market_show)
+{
+    var price =document.querySelectorAll('.last_price_usd');
+    if(market == "usdt")
+    for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.bid);
+
+    var price =document.querySelectorAll('.last_price');
+    for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.bid);
+    var price =document.querySelectorAll('.last_change');
+    for(var i=0;i<price.length;i++) price[i].innerHTML="<span class=' ob-heading-big "+col+"' >"+number_format(change,2)+"%</span>";
+}
 update_global_price(e.market_show,e.bid);
 
 var tddata = '\
@@ -305,9 +321,17 @@ var inter = [];
 function gethash(){
   var h = window.location.hash;
   if(hash==h)return;
+  hash=h;
   //update data
+
+  
   
   $('.old-content').remove();
+  $('.book-loading').show();
+
+  $("#book_sell").animate({
+    scrollTop: $(document).height(1000)
+}, 1000); 
 
   var coin = h.split("_")[0].replace("#","");
   var market = h.split("_")[1];
@@ -321,7 +345,11 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=market;
   has = coin+"_"+market;
   clearInterval(inter);
   inter = setInterval(getorderbook,10000);
+  getorderbook();
+  getallmarket();
   
 }
 
 gethash();
+
+ 

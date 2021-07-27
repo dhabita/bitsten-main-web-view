@@ -978,10 +978,17 @@ footer.landing-footer-two ul li a:hover {
 }
 
 .ob-heading span {
-    color: #4a4a4a;
+     
     display: block;
     font-size: 12px;
     font-weight: 400;
+}
+
+.ob-heading-big   {
+     
+  
+    font-size: 15px !important;
+    font-weight: 700 !important;
 }
 
 .ob-heading td {
