@@ -169,7 +169,7 @@ var tddata = '\
 <td class="'+col+'">'+number_format(change,2)+'%</td>\
 <td class="  hide-xs">'+number_format(e.high)+'</td>\
 <td class=" hide-xs ">'+number_format(e.low)+'</td>\
-<td class="   " >'+number_format(e.volume)+'</td>';
+<td class="  hide-xs " >'+number_format(e.volume)+'</td>';
 
 var tddatam = '\
 <td   class="col-5 pl-4"><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
