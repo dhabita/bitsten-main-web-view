@@ -2442,3 +2442,8 @@ tbody.ob-heading {
        display: none;
     }
  }
+
+ .table td {
+    font-size: 14px;
+    padding: 13px 5px ;
+}
