@@ -107,6 +107,7 @@ if(triger[0]=="market"&&triger.length>1){
 //one market orderbook
 if(triger[0]=="orderbook"){
     console.log(dt); // go to app
+    orderbook(dt);
 }
 
 //list market_show only
@@ -137,6 +138,76 @@ function openc(){
    }
 }
 
+ 
+                
+             
+
+
+
+function orderbook(d){
+       d.data.s.forEach(f => {
+            var p = f.p*1000000;
+
+            var tddata = '\
+            <td class="red   col-4 pl-2 ">'+number_format(f.p)+'</td>\
+                <td class=" text-right col-4">'+number_format(f.a)+'</td>\
+                <td class=" pr-2 text-right col-4">'+number_format(f.a*f.p)+'</td>';
+            var trdata = '\
+            <tr id="book_sell_'+p+'"  class="row red-bg-5 old-content"  style="margin:0px" >\
+            '+tddata+'\
+            </tr>';
+
+            if($('#book_sell_'+p).length){
+                $('#book_sell_'+p).html(tddata);
+            }
+            else 
+            $('#book_sell').append(trdata);
+
+             
+
+        })
+        d.data.b.forEach(f => {
+            var p = f.p*1000000;
+
+            var tddata = '\
+            <td class="green  pl-2 col-4">'+number_format(f.p)+'</td>\
+                <td class=" text-right  col-4">'+number_format(f.a)+'</td>\
+                <td class="text-right  pr-2 col-4">'+number_format(f.a*f.p)+'</td>';
+            var trdata = '\
+            <tr id="book_buy_'+p+'"  class="green-bg-5 row old-content"  style="margin:0px" >\
+            '+tddata+'\
+            </tr>';
+
+            if($('#book_buy_'+p).length){
+                $('#book_buy_'+p).html(tddata);
+            }
+            else 
+            $('#book_buy').append(trdata);
+
+             
+
+        })
+        d.data.h.forEach(f => {
+            var c = 'green';
+            if(f.m==2)c='red';
+            var tddata = '\
+            <td class="col-4 pl-2 '+c+'">'+f.d+'</td>\
+                <td class="col-4 text-right " > '+number_format(f.p)+'</td>\
+                <td class="col-4 text-right pr-2"  >'+number_format(f.t)+'</td>';
+
+            var trdata = '\
+            <tr  class=" old-content row"  style="margin:0px" >\
+            '+tddata+'\
+            </tr>';
+
+            
+            $('#book_history').append(trdata);
+
+             
+
+        })
+     
+}
 
 
 //fill all markets
@@ -182,7 +253,7 @@ if(SOCKET_URL=='exchange'){tddata = tddatam; row="row";}
 
 
 var trdata = '\
-<tr id="market-id-'+e.id+'" class="'+row+' '+market+' all-coin " style="width:100%; '+dnone+'" onCLick="goto(\''+e.market_show+'\')">\
+<tr id="market-id-'+e.id+'" class=" '+row+' '+market+' all-coin " style="width:100%; cursor:pointer; '+dnone+'" onCLick="goto(\''+e.market_show+'\')">\
 '+tddata+'\
 </tr>';
 
@@ -224,12 +295,19 @@ function goto(a){
    
 }
 
-var hash = "";
+var has = "";
+function getorderbook(){
+    sock.send(soket,'orderbook.'+has);
+}
 
+var hash = "";
+var inter = [];
 function gethash(){
   var h = window.location.hash;
   if(hash==h)return;
   //update data
+  
+  $('.old-content').remove();
 
   var coin = h.split("_")[0].replace("#","");
   var market = h.split("_")[1];
@@ -240,8 +318,9 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=coin;
 var m =document.querySelectorAll('.market-name');
 for(var i=0;i<m.length;i++) m[i].innerHTML=market;
 
-
-  
+  has = coin+"_"+market;
+  clearInterval(inter);
+  inter = setInterval(getorderbook,10000);
   
 }
 
