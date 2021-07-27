@@ -2434,3 +2434,11 @@ tbody.ob-heading {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+@media (max-width: 767px) {                  
+    .hide-xs {
+       display: none;
+    }
+ }

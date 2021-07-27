@@ -164,12 +164,12 @@ update_global_price(e.market_show,e.bid);
 
 var tddata = '\
 <td><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
-<td><img src="https://f1.bitsten.com/assets/images/logo/'+coin+'.png" alt="'+coin+'">'+coin.toUpperCase()+'</td>\
+<td class=" hide-xs"><img src="https://f1.bitsten.com/assets/images/logo/'+coin+'.png" alt="'+coin+'">'+coin.toUpperCase()+'</td>\
 <td>'+number_format(e.bid)+'</td>\
 <td class="'+col+'">'+number_format(change,2)+'%</td>\
-<td>'+number_format(e.high)+'</td>\
-<td>'+number_format(e.low)+'</td>\
-<td>'+number_format(e.volume)+'</td>';
+<td class="  hide-xs">'+number_format(e.high)+'</td>\
+<td class=" hide-xs ">'+number_format(e.low)+'</td>\
+<td class="   " >'+number_format(e.volume)+'</td>';
 
 var tddatam = '\
 <td   class="col-5 pl-4"><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
