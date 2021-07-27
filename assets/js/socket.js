@@ -177,7 +177,7 @@ function orderbook(d){
             bgg = Math.floor(bgg);
             bgg = Math.max(bgg,1);
             bgg = Math.min(bgg,7);
-            
+
             var tddata = '\
             <td class="green  pl-2 col-4">'+number_format(f.p)+'</td>\
                 <td class=" text-right  col-4">'+number_format(f.a)+'</td>\
@@ -253,6 +253,12 @@ if(h==e.market_show)
 
     var price =document.querySelectorAll('.last_price');
     for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.bid);
+    var price =document.querySelectorAll('.last_high');
+    for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.high);
+    var price =document.querySelectorAll('.last_low');
+    for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.low);
+    var price =document.querySelectorAll('.last_volume');
+    for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.volume);
     var price =document.querySelectorAll('.last_change');
     for(var i=0;i<price.length;i++) price[i].innerHTML="<span class=' ob-heading-big "+col+"' >"+number_format(change,2)+"%</span>";
 }
