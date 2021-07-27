@@ -141,19 +141,24 @@ function openc(){
  
                 
              
-
+var volume_this_pair = 0;
 
 
 function orderbook(d){
        d.data.s.forEach(f => {
             var p = f.p*1000000;
+            var bgg =  (f.p*f.a) / 100 ;
+            bgg = Math.floor(bgg);
+            bgg = Math.max(bgg,1);
+            bgg = Math.min(bgg,7);
+            
 
             var tddata = '\
             <td class="red   col-4 pl-2 ">'+number_format(f.p)+'</td>\
                 <td class=" text-right col-4">'+number_format(f.a)+'</td>\
                 <td class=" pr-2 text-right col-4">'+number_format(f.a*f.p)+'</td>';
             var trdata = '\
-            <tr id="book_sell_'+p+'"  class="row red-bg-5 old-content"  style="margin:0px" >\
+            <tr id="book_sell_'+p+'"  class="row red-bg-'+bgg+' old-content"  style="margin:0px" >\
             '+tddata+'\
             </tr>';
 
@@ -168,13 +173,16 @@ function orderbook(d){
         })
         d.data.b.forEach(f => {
             var p = f.p*1000000;
-
+            var bgg =  (f.p*f.a) / 100 ;
+            bgg = Math.floor(bgg);
+            bgg = Math.max(bgg,1);
+            bgg = Math.min(bgg,7);
             var tddata = '\
             <td class="green  pl-2 col-4">'+number_format(f.p)+'</td>\
                 <td class=" text-right  col-4">'+number_format(f.a)+'</td>\
                 <td class="text-right  pr-2 col-4">'+number_format(f.a*f.p)+'</td>';
             var trdata = '\
-            <tr id="book_buy_'+p+'"  class="green-bg-5 row old-content"  style="margin:0px" >\
+            <tr id="book_buy_'+p+'"  class="green-bg-'+bgg+' row old-content"  style="margin:0px" >\
             '+tddata+'\
             </tr>';
 
@@ -237,7 +245,7 @@ if(market=='usdt')dnone = "";
 
 var h = window.location.hash.replace("#","");
 if(h==e.market_show)
-{
+{   volume_this_pair = e.volume;
     var price =document.querySelectorAll('.last_price_usd');
     if(market == "usdt")
     for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(e.bid);
