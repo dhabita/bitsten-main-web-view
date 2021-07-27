@@ -177,6 +177,7 @@ function orderbook(d){
             bgg = Math.floor(bgg);
             bgg = Math.max(bgg,1);
             bgg = Math.min(bgg,7);
+            
             var tddata = '\
             <td class="green  pl-2 col-4">'+number_format(f.p)+'</td>\
                 <td class=" text-right  col-4">'+number_format(f.a)+'</td>\
