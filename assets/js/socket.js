@@ -74,7 +74,7 @@ sock.close(soket,function(e){});
  
 
 //only use triger on this list
-var router_used = ['market','orderbook','market_list'];
+var router_used = ['market','orderbook','market_list','chart'];
 function isUsed(a){
     var r = false;
     router_used.forEach((b)=>{
@@ -106,8 +106,14 @@ if(triger[0]=="market"&&triger.length>1){
 
 //one market orderbook
 if(triger[0]=="orderbook"){
-    console.log(dt); // go to app
+   // console.log(dt); // go to app
     orderbook(dt);
+}
+
+//one chart
+if(triger[0]=="chart"){
+   // console.log(dt); // go to app
+   chart_update_x(dt);
 }
 
 //list market_show only
@@ -216,13 +222,52 @@ function orderbook(d){
 
         })
         $("#book_sell").animate({
-            scrollTop: $(document).height()
+            scrollTop: 10000
         }, 1000);  
 
 
         $('.book-loading').hide();
 }
 
+
+
+var WS_VOLUME_DATA =[];
+var WS_CHART_DATA  = [];
+
+function chart_update_x(d){
+
+      WS_VOLUME_DATA =[];
+      WS_CHART_DATA  = [];
+
+//{c: 138.1, t: "2021-07-28T23:38:35.000Z", d: 54420, v: 24.68001}
+
+var x=0;
+d.data.forEach(e => {
+    x++;
+   // if(x>10) return;
+  var dd =  new Date(e.t);
+  dd = Date.parse(dd) / 1000;
+ 
+ 
+
+    WS_CHART_DATA.push(
+        { time: dd, value: e.c}
+        );
+
+    WS_VOLUME_DATA.push(
+        { time: dd, value: e.v, color: 'rgba(0, 150, 136, 0.8)' },
+        );
+});
+
+
+WS_VOLUME_DATA= WS_VOLUME_DATA.reverse();
+WS_CHART_DATA = WS_CHART_DATA.reverse();
+
+
+//setTimeout(chart_update,5);
+
+//chart_update();    
+}
 
 //fill all markets
 function all_market(d){
@@ -329,6 +374,7 @@ function goto(a){
 var has = "";
 function getorderbook(){
     sock.send(soket,'orderbook.'+has);
+    sock.send(soket,'chart.'+has);
 }
 
 var hash = "";
@@ -345,7 +391,7 @@ function gethash(){
   $('.book-loading').show();
 
   $("#book_sell").animate({
-    scrollTop: $(document).height(1000)
+    scrollTop: 0
 }, 1000); 
 
   var coin = h.split("_")[0].replace("#","");
@@ -362,6 +408,8 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=market;
   inter = setInterval(getorderbook,10000);
   getorderbook();
   getallmarket();
+ 
+
   
 }
 
