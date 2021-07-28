@@ -59,10 +59,24 @@ app.get('/exchange',function(req,res){
   res.render('pages/exchange',{'data' :   data });
 });
 
+app.get('/login',function(req,res){
+  var data = {};
+  res.render('pages/login',{'data' :   data });
+});
+
+app.get('/register',function(req,res){
+  var data = {};
+  res.render('pages/register',{'data' :   data });
+});
+
+app.get('/resetpassword',function(req,res){
+  var data = {};
+  res.render('pages/resetpassword',{'data' :   data });
+});
  
  
  
- 
+
 
 
 app.listen(port, () => console.info(`App listen on port ${port}`));
