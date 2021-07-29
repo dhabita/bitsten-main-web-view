@@ -59,7 +59,14 @@ var sse = {
 
 
 var soket = sock.ws(urlm);
+var online = 0;
 
+function connecting(){
+if(online) {
+soket.close();
+console.log("Connecting..");
+soket = sock.ws(urlm);
+}
 
 sock.msg(soket,function(a){
     //console.log(a.data);
@@ -67,9 +74,14 @@ sock.msg(soket,function(a){
 });
 
 sock.open(soket,function(e){});
-sock.close(soket,function(e){});
+sock.close(soket,function(e){
+    console.log(e);
+});
  
+}
 
+connecting();
+online=1;
  
  
 
@@ -85,9 +97,13 @@ function isUsed(a){
 }
 
 
-
+var last_time_connect = 0;
 //convert data from ws to object js
 function router(data){
+    
+    var date_now = Date.now();
+    last_time_connect = date_now;
+
 if(!isUsed(data))return;
 if(data.includes('triger')){} else return;
 var dt = JSON.parse(data);
@@ -141,7 +157,7 @@ function openc(){
     if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
         console.log("load data");
         getallmarket();
-        getorderbook();
+       if(SOCKET_URL=='exchange') getorderbook();
    }
 }
 
@@ -437,3 +453,11 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=market;
 gethash();
 
  
+
+//Check socket
+setInterval(function(){
+    var date_now = Date.now(); 
+    // console.log((date_now-last_time_connect)/1000);
+   //  soket.close();
+    if((date_now - last_time_connect)/1000 > 20 ) connecting();
+},10000)
