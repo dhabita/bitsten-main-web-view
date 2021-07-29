@@ -2435,12 +2435,17 @@ tbody.ob-heading {
 
 /*# sourceMappingURL=style.css.map */
 
-
+.show-xs {
+    display: none;
+ }
 
 @media (max-width: 767px) {                  
     .hide-xs {
        display: none;
     }
+    .show-xs {
+        display: inline-block;
+     }
  }
 
  .table td {

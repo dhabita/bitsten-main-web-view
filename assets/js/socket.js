@@ -335,8 +335,8 @@ else
 
 
 var tddata = '\
-<td><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
-<td class=" hide-xs"><img src="https://f1.bitsten.com/assets/images/logo/'+coin+'.png"  width="20px" alt="'+coin+'"> '+coin.toUpperCase()+'</td>\
+<td  ><i class="icon ion-md-star"></i>  <img class="show-xs" src="https://f1.bitsten.com/assets/images/logo/'+coin+'.png"  width="20px"  > '+e.market_show.toUpperCase()+'</td>\
+<td class=" hide-xs"><img src="https://f1.bitsten.com/assets/images/logo/'+coin+'.png"  width="20px" > '+coin.toUpperCase()+'</td>\
 <td class=" text-right  ">'+number_format(e.bid)+'</td>\
 <td class=" text-right '+col+'">'+number_format(change,2)+'%</td>\
 <td class=" text-right hide-xs">'+number_format(e.high)+'</td>\
