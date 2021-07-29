@@ -1,3 +1,4 @@
+if(SOCKET_URL == 'exchange'){ 
 
 var ww = $("#main-chart").offsetWidth;
 var chart = LightweightCharts.createChart("main-chart", {
@@ -54,8 +55,8 @@ volumeSeries.setData([
 
 
 function chart_update(){
-    console.log(WS_CHART_DATA);
-    console.log(WS_VOLUME_DATA);
+  //  console.log(WS_CHART_DATA);
+  //  console.log(WS_VOLUME_DATA);
 
   
     volumeSeries.setData(WS_VOLUME_DATA);
@@ -63,3 +64,4 @@ function chart_update(){
 }
 
 setInterval(chart_update,1000);
+}

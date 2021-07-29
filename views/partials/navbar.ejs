@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bitsten</title>
-  <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
  
-  
-  <style>
-    header .navbar-brand img {
-    height: 25px;
+
+
+<style>
+  header .navbar-brand img {
+  height: 25px;
 }
-  </style>
+</style>
 
-
-</head>
-
-<body>
+ 
   <header class="light-bb">
     <nav class="navbar navbar-expand-lg">
       <a class="navbar-brand" href="/"><img src="https://f1.bitsten.com/assets/images/logo_bitsten_terang.png" height='20px' alt="logo"></a>
@@ -44,6 +33,9 @@
             </a>
              
           </li>
+
+
+        
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -72,7 +64,7 @@
             </div>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto d-none logedin">
+        <ul class="navbar-nav ml-auto  logedin" style='display:none'>
           <li class="nav-item header-custom-icon">
             <a class="nav-link" href="#" id="clickFullscreen">
               <i class="icon ion-md-expand"></i>
@@ -176,24 +168,24 @@
                       <span>Settings</span>
                     </a>
                   </li>
-                  <li class="nav-item" id="changeThemeLight">
+                  <li class="nav-item d-none" id="changeThemeLight">
                     <a href="#!" class="nav-link">
                       <i class="icon ion-md-sunny"></i>
                       <span>Theme</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="exchange-light.html" class="nav-link red">
+                    <span  onClick="logout()" class="nav-link red" style='cursor:pointer'>
                       <i class="icon ion-md-power"></i>
                       <span>Log Out</span>
-                    </a>
+                    </span>
                   </li>
                 </ul>
               </div>
             </div>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto logedout">
+        <ul class="navbar-nav ml-auto logedout" style='display:none'>
          
           <li class="nav-item dropdown">
             <a class="nav-link  " href="login"  >
