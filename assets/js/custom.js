@@ -961,15 +961,17 @@ function numberWithCommas(x) {
 }
 
 function number_format(b,f= -1){
-
   var a =parseFloat(b);
 
   if(b==0) return 0;
-  
   if(f>=0) return numberWithCommas(a.toFixed(f));
+
   if(a>1000)return numberWithCommas(a.toFixed(0)); 
   if(a>10)return numberWithCommas(a.toFixed(2));
-  if(a>1)return numberWithCommas(a.toFixed(5));
+  if(a>1)return numberWithCommas(a.toFixed(3));
+  if(a>0.1)return numberWithCommas(a.toFixed(4));
+  if(a>0.001)return numberWithCommas(a.toFixed(5));
+
   //if(a>0.00000000) return a.toFixed(f);
   return a.toFixed(8);
   
