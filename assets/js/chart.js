@@ -32,6 +32,8 @@ var areaSeries = chart.addAreaSeries({
 	lineWidth: 2,
 });
 
+
+
 var volumeSeries = chart.addHistogramSeries({
 	color: '#26a69a',
 	priceFormat: {
@@ -61,6 +63,53 @@ function chart_update(){
   
     volumeSeries.setData(WS_VOLUME_DATA);
     areaSeries.setData(WS_CHART_DATA);
+    var pre = 8;
+	var minm = 0.00000001;
+    if(WS_CHART_DATA.length>0){
+
+	var lp = WS_CHART_DATA[0].value;
+    
+	if(lp>0.001) {
+		  pre  = 6;
+	      minm = 0.000001;
+	}
+	if(lp>0.01) {
+		pre  = 5;
+		minm = 0.00001;
+  }
+  if(lp>0.1) {
+	pre  = 4;
+	minm = 0.0001;
+}
+
+ 
+if(lp>1) {
+	pre  = 3;
+	minm = 0.001;
+}
+
+if(lp>10) {
+	pre  = 2;
+	minm = 0.01;
+}
+
+if(lp>1000) {
+	pre  = 0;
+	minm = 1;
+}
+
+
+	areaSeries.applyOptions({
+		priceFormat: {
+			type: 'price',
+			precision: pre,
+			minMove: minm,
+		},
+	});
+}
+
+
+
 }
 
 setInterval(chart_update,1000);
