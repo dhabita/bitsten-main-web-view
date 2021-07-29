@@ -24,22 +24,32 @@
           </div>
         
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text"       autocomplete="off" 
+   readonly  
+onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Username">
         </div>
        
         <div class="form-group">
-          <input type="email" class="form-control" placeholder="Email Address">
+          <input type="email" class="form-control"  autocomplete="off" 
+          readonly  
+       onfocus="this.removeAttribute('readonly');" placeholder="Email Address">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password"       autocomplete="off" 
+   readonly  
+onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Password">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Confirm Password">
+          <input type="password"       autocomplete="off" 
+   readonly  
+onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Confirm Password">
         </div>
         <div class="form-group">
         <div class="input-group mb-2">
                            
-          <input class=" form-control " type="text" id="code"  placeholder="Email Code" >
+          <input class=" form-control "        autocomplete="off" 
+   readonly  
+onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   type="text" id="code"  placeholder="Email Code" >
            <div class="input-group-append">
             <span class="input-group-text input-success" style="cursor:pointer" onclick="copy()">Get Code</span>     
             </div>
@@ -56,6 +66,10 @@
       <h2>Already have an account? <a href="login">Login in here</a></h2>
     </div>
   </div>
+
+  <script>
+    var SOCKET_URL = 'register';
+  </script>
 
   <script src="assets/js/jquery-3.4.1.min.js"></script>
   <script src="assets/js/popper.min.js"></script>

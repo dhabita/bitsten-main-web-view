@@ -25,10 +25,14 @@
           </div>
       
         <div class="form-group">
-          <input type="email"  id="email"  class="form-control" placeholder="Email Address">
+          <input type="email"  autocomplete="off" 
+          readonly  
+       onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   autocomplete="off" id="email"  class="form-control" placeholder="Email Address">
         </div>
         <div class="form-group">
-          <input type="password" id="password" class="form-control" placeholder="Password">
+          <input type="password"  autocomplete="off" 
+          readonly  
+       onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   autocomplete="off" id="password" class="form-control" placeholder="Password">
         </div>
         <div class="text-right">
           <a href="resetpassword">Forgot Password?</a>
@@ -45,6 +49,10 @@
       <h2>Don't have an account? <a href="register">Sign up here</a></h2>
     </div>
   </div>
+
+  <script>
+    var SOCKET_URL = 'login';
+  </script>
 
   <script src="assets/js/jquery-3.4.1.min.js"></script>
   <script src="assets/js/popper.min.js"></script>

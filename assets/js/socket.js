@@ -141,6 +141,7 @@ function openc(){
     if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
         console.log("load data");
         getallmarket();
+        getorderbook();
    }
 }
 
@@ -242,6 +243,7 @@ function chart_update_x(d){
 //{c: 138.1, t: "2021-07-28T23:38:35.000Z", d: 54420, v: 24.68001}
 
 var x=0;
+var last_p = 0;
 d.data.forEach(e => {
     x++;
    // if(x>10) return;
@@ -253,9 +255,13 @@ d.data.forEach(e => {
     WS_CHART_DATA.push(
         { time: dd, value: e.c}
         );
+    var colv = 'rgba(0, 250, 136, 0.7)';
+    if(last_p>e.c)colv = 'rgba(250,0,10,0.7)';
+
+    last_p = e.c;
 
     WS_VOLUME_DATA.push(
-        { time: dd, value: e.v, color: 'rgba(0, 150, 136, 0.8)' },
+        { time: dd, value: e.v, color: colv },
         );
 });
 
@@ -307,7 +313,26 @@ if(h==e.market_show)
     var price =document.querySelectorAll('.last_change');
     for(var i=0;i<price.length;i++) price[i].innerHTML="<span class=' ob-heading-big "+col+"' >"+number_format(change,2)+"%</span>";
 }
-update_global_price(e.market_show,e.bid);
+
+var pp =document.querySelectorAll('.price-'+e.market_show);
+//console.log(price);
+for(var i=0;i<pp.length;i++) pp[i].innerHTML=number_format(e.bid);
+
+var cc =document.querySelectorAll('.change-'+e.market_show);
+//console.log(price);
+for(var i=0;i<cc.length;i++) cc[i].innerHTML= (change>0?"+":"-") + number_format(change,2);
+
+if(change<0){ 
+$('.color_change-'+e.market_show).addClass("red");
+$('.color_change-'+e.market_show).removeClass("green");
+}
+else
+{
+    $('.color_change-'+e.market_show).addClass("green");
+    $('.color_change-'+e.market_show).removeClass("red");   
+}
+
+
 
 var tddata = '\
 <td><i class="icon ion-md-star"></i> '+e.market_show.toUpperCase()+'</td>\
@@ -353,11 +378,7 @@ function show(a){
     $("."+a).show();
 }
 
-function update_global_price(pair,p){
-var price =document.querySelectorAll('.price-'+pair);
-//console.log(price);
-for(var i=0;i<price.length;i++) price[i].innerHTML=number_format(p);
-}
+ 
  
 function goto(a){
     var u = window.location.href;
@@ -405,7 +426,7 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=market;
 
   has = coin+"_"+market;
   clearInterval(inter);
-  inter = setInterval(getorderbook,10000);
+  inter = setInterval(getorderbook,20000);
   getorderbook();
   getallmarket();
  

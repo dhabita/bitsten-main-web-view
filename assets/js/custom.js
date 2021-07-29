@@ -1019,6 +1019,8 @@ function logout(){
 $(document).ready(function(){
   if(getCookie("token").length>0){
    logedin();
+  if(SOCKET_URL == "login"  ) location.href = "markets";
+  if(SOCKET_URL == "register" ) location.href = "markets";
   }
   else
   logedout();
