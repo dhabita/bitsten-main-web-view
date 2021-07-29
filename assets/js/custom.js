@@ -1017,7 +1017,7 @@ function logout(){
 
 //get token
 $(document).ready(function(){
-  if(getCookie("token").length>0){
+  if(("a"+getCookie("token")).length>20){
    logedin();
   if(SOCKET_URL == "login"  ) location.href = "markets";
   if(SOCKET_URL == "register" ) location.href = "markets";
