@@ -954,23 +954,24 @@
 
 
 
-function numberWithCommas(x) {
+function numberWithCommas(x,m=0) {
+  if(m)return x;
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
 }
 
-function number_format(b,f= -1){
+function number_format(b,f= -1,m=0){
   var a =parseFloat(b);
 
   if(b==0) return 0;
-  if(f>=0) return numberWithCommas(a.toFixed(f));
+  if(f>=0) return numberWithCommas(a.toFixed(f),m);
 
-  if(a>1000)return numberWithCommas(a.toFixed(0)); 
-  if(a>10)return numberWithCommas(a.toFixed(2));
-  if(a>1)return numberWithCommas(a.toFixed(3));
-  if(a>0.1)return numberWithCommas(a.toFixed(4));
-  if(a>0.001)return numberWithCommas(a.toFixed(5));
+  if(a>1000)return numberWithCommas(a.toFixed(0),m); 
+  if(a>10)return numberWithCommas(a.toFixed(2),m);
+  if(a>1)return numberWithCommas(a.toFixed(3),m);
+  if(a>0.1)return numberWithCommas(a.toFixed(4),m);
+  if(a>0.001)return numberWithCommas(a.toFixed(5),m);
 
   //if(a>0.00000000) return a.toFixed(f);
   return a.toFixed(8);

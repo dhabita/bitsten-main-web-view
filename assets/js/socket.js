@@ -165,11 +165,24 @@ function openc(){
                 
              
 var volume_this_pair = 0;
+var last_price = {};
 
 
 function orderbook(d){
+    var lp = last_price[d.triger[1]];
+       
+       
        d.data.s.forEach(f => {
-            var p = f.p*1000000;
+        var p = f.p*100000000;
+        
+     
+        if(lp>0.001)p = f.p*1000000;
+        if(lp>1)p = f.p*100000;
+        if(lp>1000)p = f.p*1000;
+        if(lp>1000000)p = f.p ;
+
+        p = number_format(p,0,1);
+
             var bgg =  (f.p*f.a) / 100 ;
             bgg = Math.floor(bgg);
             bgg = Math.max(bgg,1);
@@ -177,7 +190,7 @@ function orderbook(d){
             
 
             var tddata = '\
-            <td class="red   col-4 pl-2 ">'+number_format(f.p)+'</td>\
+            <td id="book_sell_price_'+p+'" class="red   col-4 pl-2 ">'+number_format(f.p)+'</td>\
                 <td class=" text-right col-4">'+number_format(f.a)+'</td>\
                 <td class=" pr-2 text-right col-4">'+number_format(f.a*f.p)+'</td>';
             var trdata = '\
@@ -188,21 +201,43 @@ function orderbook(d){
             if($('#book_sell_'+p).length){
                 $('#book_sell_'+p).html(tddata);
             }
-            else 
-            $('#book_sell').append(trdata);
+            else {
+                 
+                var id_up = "";
+                var id = 0;
+                $("#book_sell tr").each(function() {
+                    id = this.id.replace("book_sell_","") *1;
+                    
+                    if(id>p)
+                    id_up = this.id;
 
+                   // console.log(id + " "+ p + " "+ id_up);
+            
+                });
+                
+                
+          
+            if(id>0&&f.a*f.p>0.0000001)
+            $('#'+id_up).after(trdata);
+            }
              
 
         })
         d.data.b.forEach(f => {
-            var p = f.p*1000000;
+            var p = f.p*100000000;
+            if(lp>0.001)p = f.p*1000000;
+            if(lp>1)p = f.p*100000;
+            if(lp>1000)p = f.p*1000;
+            if(lp>1000000)p = f.p ;
+
+            p = number_format(p,0,1);
             var bgg =  (f.p*f.a) / 100 ;
             bgg = Math.floor(bgg);
             bgg = Math.max(bgg,1);
             bgg = Math.min(bgg,7);
 
             var tddata = '\
-            <td class="green  pl-2 col-4">'+number_format(f.p)+'</td>\
+            <td id="book_buy_price_'+p+'" class="green  pl-2 col-4">'+number_format(f.p)+'</td>\
                 <td class=" text-right  col-4">'+number_format(f.a)+'</td>\
                 <td class="text-right  pr-2 col-4">'+number_format(f.a*f.p)+'</td>';
             var trdata = '\
@@ -213,8 +248,28 @@ function orderbook(d){
             if($('#book_buy_'+p).length){
                 $('#book_buy_'+p).html(tddata);
             }
-            else 
-            $('#book_buy').append(trdata);
+            else {
+                 
+                var id_up = "";
+                var id = 0;
+                var fin = 0 ;
+                $("#book_buy tr").each(function() {
+                    id = this.id.replace("book_buy_","") *1;
+                    
+                    if(id<p &&!fin){
+                    id_up = this.id;
+                     fin=1;
+                    }
+
+                   // console.log(id + " "+ p + " "+ id_up);
+            
+                });
+                
+                
+          
+            if(id>0&&f.a*f.p>0.000001)
+            $('#'+id_up).before(trdata);
+            }
 
              
 
@@ -223,7 +278,7 @@ function orderbook(d){
             var c = 'green';
             if(f.m==2)c='red';
             var tddata = '\
-            <td class="col-4 pl-2 '+c+'">'+f.d+'</td>\
+            <td  class="col-4 pl-2 '+c+'">'+f.d+'</td>\
                 <td class="col-4 text-right " > '+number_format(f.p)+'</td>\
                 <td class="col-4 text-right pr-2"  >'+number_format(f.t)+'</td>';
 
@@ -296,7 +351,7 @@ function all_market(d){
  
 d.data.forEach(e => {
 
-
+    last_price[e.market_show] = e.last_price;
 
 //console.log(e);
 var change = ( e.bid - e.open ) / (e.open*0.01);
@@ -370,7 +425,7 @@ if(SOCKET_URL=='exchange'){tddata = tddatam; row="row";}
 
 
 var trdata = '\
-<tr id="market-id-'+e.id+'" class=" '+row+' '+market+' all-coin " style="width:100%; cursor:pointer; '+dnone+'" onCLick="goto(\''+e.market_show+'\')">\
+<tr id="market-id-'+number_format(e.id,0)+'" class=" '+row+' '+market+' all-coin " style="width:100%; cursor:pointer; '+dnone+'" onCLick="goto(\''+e.market_show+'\')">\
 '+tddata+'\
 </tr>';
 
