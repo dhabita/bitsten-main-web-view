@@ -267,7 +267,7 @@ function orderbook(d){
                 
                 
           
-            if(id>0&&f.a*f.p>0.000001)
+            if(id>0&&f.a*f.p>0.000001&&fin)
             $('#'+id_up).before(trdata);
             }
 
@@ -327,7 +327,7 @@ d.data.forEach(e => {
         { time: dd, value: e.c}
         );
     var colv = 'rgba(0, 250, 136, 0.7)';
-    if(last_p>e.c)colv = 'rgba(250,0,10,0.7)';
+    if(last_p<e.c)colv = 'rgba(250,0,10,0.7)';
 
     last_p = e.c;
 
