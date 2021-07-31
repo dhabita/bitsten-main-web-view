@@ -157,7 +157,10 @@ function openc(){
     if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
         console.log("load data");
         getallmarket();
-       if(SOCKET_URL=='exchange') getorderbook();
+       if(SOCKET_URL=='exchange') {
+           getorderbook();
+           gethash();
+       }
    }
 }
 
@@ -505,7 +508,7 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=market;
   
 }
 
-gethash();
+
 
  
 
