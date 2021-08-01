@@ -75,7 +75,7 @@
                 <tbody>
                   <tr id = 'load-markets' class='text-center row'>
                     <td   class='text-center col-12 pt-5 pb-5' colspan="3"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
-                    </tr>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -104,7 +104,7 @@
         <div class="main-chart" id='main-chart'>
           
         </div>
-        <div class="market-trade pt-3 pb-3">
+        <div class="market-trade pt-3 pb-3" style="border:none">
           <ul class="nav nav-pills d-none" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" data-toggle="pill" href="#pills-trade-limit" role="tab"
@@ -113,10 +113,15 @@
             
           
           </ul>
-          <div class="tab-content">
+          <div class="tab-content" >
             <div class="tab-pane fade show active" id="pills-trade-limit" role="tabpanel">
               <div class="d-flex justify-content-between">
                 <div class="market-trade-buy">
+                  <div class='col-12'>
+                    <div class="row   mb-3">
+                      <div class="col-3 ">Available</div> <div class="col-6 text-right text-info " ><span class='class_balance_market'>0</span></div> <div class="col-3 market-name text-right text-uppercase">---</div> 
+                    </div>
+                  </div>
                   <div class="input-group">
                     <input type="number" class="form-control" placeholder="Price">
                     <div class="input-group-append">
@@ -129,19 +134,47 @@
                       <span class="input-group-text coin-name text-uppercase">---</span>
                     </div>
                   </div>
-                  <ul class="market-trade-list">
-                    <li><a href="#!">25%</a></li>
-                    <li><a href="#!">50%</a></li>
-                    <li><a href="#!">75%</a></li>
-                    <li><a href="#!">100%</a></li>
-                  </ul>
-                  <p>Spend:   <span class="market-name text-uppercase">---</span> <span>0</span> </p>
-                  <p>Get:  <span class="coin-name text-uppercase">---</span> <span>0</span> </p>
-                  <p>Fee:  <span class="coin-name text-uppercase">---</span> <span>0</span> </p>
-                  <p>Receive:  <span class="coin-name text-uppercase">---</span> <span>0</span> </p>
-                  <button class="btn buy">Buy</button>
+                  
+                  <div class='col-12'>
+                    <div class="row small">
+                      <div class="col-3"><button class="btn btn-sm border small">25%</button></div>
+                      <div class="col-3"><button class="btn btn-sm border small">50%</button></div>
+                      <div class="col-3"><button class="btn btn-sm border small">75%</button></div>
+                      <div class="col-3"><button class="btn btn-sm border small">100%</button></div>
+                    </div>
+                  </div>
+               
+                  <div class="col-12 mt-3">
+                    
+                    <div class="row">
+                      <div class="col-3">Spend</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-3">Get</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-3">Fee</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-3">Receive</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row"> 
+                     
+                      <button class="btn buy btn-sm">BUY</button>
+                   </div>
+
+
+                </div>
+
                 </div>
                 <div class="market-trade-sell">
+                  <div class='col-12'>
+                    <div class="row mb-3">
+                      <div class="col-3 ">Available</div> <div class="col-6 text-right  text-info " ><span class='class_balance_coin'>0</span></div> <div class="col-3 text-right coin-name text-uppercase">---</div> 
+                    </div>
+                </div>
+
+
                   <div class="input-group">
                     <input type="number" class="form-control" placeholder="Price">
                     <div class="input-group-append">
@@ -154,17 +187,36 @@
                       <span class="input-group-text coin-name text-uppercase">---</span>
                     </div>
                   </div>
-                  <ul class="market-trade-list">
-                    <li><a href="#!">25%</a></li>
-                    <li><a href="#!">50%</a></li>
-                    <li><a href="#!">75%</a></li>
-                    <li><a href="#!">100%</a></li>
-                  </ul>
-                  <p>Spend:  <span class="coin-name text-uppercase">---</span> <span>0</span> </p>
-                  <p>Get:  <span class="market-name text-uppercase">---</span> <span>0</span> </p>
-                  <p>Fee:  <span class="market-name text-uppercase">---</span> <span>0</span> </p>
-                  <p>Receive:  <span class="market-name text-uppercase">---</span> <span>0</span> </p>
-                  <button class="btn sell">Sell</button>
+                  <div class='col-12'>
+                    <div class="row small">
+                      <div class="col-3"><button class="btn btn-sm border small">25%</button></div>
+                      <div class="col-3"><button class="btn btn-sm border small">50%</button></div>
+                      <div class="col-3"><button class="btn btn-sm border small">75%</button></div>
+                      <div class="col-3"><button class="btn btn-sm border small">100%</button></div>
+                    </div>
+                  </div>
+               
+                  <div class="col-12 mt-3">
+                   
+                    <div class="row">
+                      <div class="col-3">Spend</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-3">Get</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-3">Fee</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row">
+                      <div class="col-3">Receive</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
+                    </div>
+                    <div class="row"> 
+                     
+                      <button class="btn sell btn-sm">SELL</button>
+                   </div>
+
+
+                </div>
                 </div>
               </div>
             </div>

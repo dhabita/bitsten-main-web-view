@@ -498,13 +498,31 @@ for(var i=0;i<m.length;i++) m[i].innerHTML=coin;
 var m =document.querySelectorAll('.market-name');
 for(var i=0;i<m.length;i++) m[i].innerHTML=market;
 
+
+var m =document.querySelectorAll('.class_balance_market');
+for(var i=0;i<m.length;i++)  {
+    $(m[i]).removeClass();
+    $(m[i]).addClass("class_balance_market");
+    $(m[i]).addClass("balance_"+market);
+
+}
+
+var m =document.querySelectorAll('.class_balance_coin');
+for(var i=0;i<m.length;i++)  {
+    $(m[i]).removeClass();
+    $(m[i]).addClass("class_balance_coin");
+    $(m[i]).addClass("balance_"+coin);
+}
+
+
   has = coin+"_"+market;
   clearInterval(inter);
   inter = setInterval(getorderbook,20000);
   getorderbook();
   getallmarket();
  
-
+  balance(coin);
+  balance(market);
   
 }
 

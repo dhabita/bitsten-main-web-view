@@ -73,7 +73,12 @@ app.get('/resetpassword',function(req,res){
   var data = {};
   res.render('pages/resetpassword',{'data' :   data });
 });
- 
+
+
+app.get('/wallet',function(req,res){
+  var data = {};
+  res.render('pages/wallet',{'data' :   data });
+});
  
  
 
