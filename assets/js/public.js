@@ -26,8 +26,8 @@ if(SOCKET_URL=="wallet"){
     assets(function(d){
          d.forEach(e => {
             var da = '\
-                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
-                        href="#coinETH" role="tab" aria-selected="true">\
+                    <a href="#'+e.code.toUpperCase()+'" onCLick="select_coin(\''+e.code+'\')" class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
+                          aria-selected="true">\
                         <div class="d-flex">\
                         <img src="https://f1.bitsten.com/assets/images/logo/'+e.code+'.png"  style="width:45px !important ; height:45px !important" > \
                         <div>\

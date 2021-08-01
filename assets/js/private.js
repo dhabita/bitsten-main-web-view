@@ -30,4 +30,51 @@ function balance(coin){
     });
 }
 
+var wallet_m = {};
+function wallet(coin){
+    $.ajaxSetup({
+        headers:{
+           'Authorization': 'Bearer ' + getCookie("token")
+        }
+     });
+
+
+ 
+
+    $.get( url+"/wallet/"+coin)
+    .done(function( data ) {
+        
+        if(data.status) { 
+            var m =document.querySelectorAll('.wallet_'+coin);
+            for(var i=0;i<m.length;i++)  $(m[i]).val(data.data[coin]);
+            wallet_m[coin] = data.data[coin];
+        }
+        if(data.status == false){
+            var m =document.querySelectorAll('.wallet_'+coin);
+            for(var i=0;i<m.length;i++) $(m[i]).val("---");
+        }
+    });
+}
+
+function select_coin(a){
+      
+
+    var m =document.querySelectorAll('.deposit_address');
+    for(var i=0;i<m.length;i++) $(m[i]).val("---");
+
+    var m =document.querySelectorAll('.deposit_address');
+    for(var i=0;i<m.length;i++)  {
+        $(m[i]).removeClass();
+        $(m[i]).addClass("deposit_address"); 
+        $(m[i]).addClass("form-control");
+        $(m[i]).addClass("text-center");
+        $(m[i]).addClass("wallet_"+a);
+       
+
+    }
+
+    wallet(a);
+
+
+}
  

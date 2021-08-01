@@ -19,11 +19,17 @@ var data = {
 
      $.post( url+"/login", data)
     .done(function( data ) {
+        console.log(data);
         //alert( "Data Loaded: " + data );
         if(data.status){
             console.log("success Login");
             setCookie("token",data.data.token,1);
             location.href = "markets"
+        } else {
+            $("#login_error").html(data.message);
+            $('#login-modal').modal('show');
         }
     });
 }
+
+
