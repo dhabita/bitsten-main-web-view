@@ -90,21 +90,55 @@
                         <div class="card" id="withdraw" style='display: none;'>
                           <div class="card-body">
                             <h5 class="card-title">Withdraw</h5>
-                            <div class="row wallet-address">
-                              <div class="col-md-8">
+                            <div class="row ">
+                              <div class="col-12">
                                 <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
                                   of your
                                   funds at once if you deposit more than your daily withdrawal limit.</p>
-                                <div class="input-group">
-                                  <input type="text" class="form-control text-center" value="---">
-                                  <div class="input-group-prepend">
-                                    <button class="btn btn-primary">COPY</button>
+
+                                  <div class="row">
+                                    <div class="col-12 col-md-7 col-lg-6">
+                                  <div class="form-access my-auto">
+                                    <form>
+                                      
+                                      
+                                      <div class="form-group">
+                                        <input type="text"       autocomplete="off" 
+                                 readonly  
+                              onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Wallet address">
+                                      </div>
+                                     
+                                      <div class="form-group">
+                                        <input type="number" class="form-control"  autocomplete="off" 
+                                        readonly  
+                                     onfocus="this.removeAttribute('readonly');" placeholder="Amount">
+                                      </div>
+                                      
+                                     
+                                      <div class="form-group">
+                                      <div class="input-group mb-2">
+                                                         
+                                        <input class=" form-control "        autocomplete="off" 
+                                 readonly  
+                              onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   type="text" id="code"  placeholder="Email Code" >
+                                         <div class="input-group-append">
+                                          <span class="input-group-text input-success" style="cursor:pointer" onclick="copy()">Get Code</span>     
+                                          </div>
+                                     </div>
+                                     </div>
+                              
+                                      <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="form-checkbox">
+                                        <label class="custom-control-label" for="form-checkbox">I agree to the <a href="#!">Terms &
+                                            Conditions</a></label>
+                                      </div>
+                                      <button type="submit" class="btn btn-warning">Withdraw</button>
+                                    </form> 
                                   </div>
-                                </div>
                               </div>
-                              <div class="col-md-4">
-                                <img src="assets/img/qr-code-dark.svg" alt="qr-code">
-                              </div>
+                            </div>
+                          </div>
+                              
                             </div>
                           </div>
                         </div>

@@ -1005,6 +1005,7 @@ function eraseCookie(name) {
 function logedin(){
   $(".logedin").show();
   $(".logedout").hide();
+  getprofile();
 }
 
 function logedout(){

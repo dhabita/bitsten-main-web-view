@@ -58,6 +58,30 @@ function wallet(coin){
     });
 }
 
+
+function getprofile(){
+    $.ajaxSetup({
+        headers:{
+           'Authorization': 'Bearer ' + getCookie("token")
+        }
+     });
+
+
+ 
+
+    $.get( url+"/profile")
+    .done(function( data ) {
+        if(data.status) { 
+             $('#p_name').html(data.data.real_name);
+             $('#p_uname').html(data.data.username);
+             $('#p_email').html(data.data.email);
+        }
+        if(data.status == false){
+          
+        }
+    });
+}
+
 function select_coin(a){
       
 
