@@ -48,10 +48,12 @@ function wallet(coin){
             var m =document.querySelectorAll('.wallet_'+coin);
             for(var i=0;i<m.length;i++)  $(m[i]).val(data.data[coin]);
             wallet_m[coin] = data.data[coin];
+            create_qr(data.data[coin]);
         }
         if(data.status == false){
             var m =document.querySelectorAll('.wallet_'+coin);
             for(var i=0;i<m.length;i++) $(m[i]).val("---");
+            create_qr("-");
         }
     });
 }
@@ -69,6 +71,7 @@ function select_coin(a){
         $(m[i]).addClass("form-control");
         $(m[i]).addClass("text-center");
         $(m[i]).addClass("wallet_"+a);
+       
        
 
     }

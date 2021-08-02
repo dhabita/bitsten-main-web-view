@@ -23,6 +23,9 @@ function assets(e){
     });
 }
 if(SOCKET_URL=="wallet"){
+
+    if(getCookie("token")=="") location.href = "login";  
+
     assets(function(d){
          d.forEach(e => {
             var da = '\

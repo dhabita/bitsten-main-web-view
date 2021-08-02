@@ -1025,6 +1025,26 @@ $(document).ready(function(){
   if(SOCKET_URL == "login"  ) location.href = "markets";
   if(SOCKET_URL == "register" ) location.href = "markets";
   }
-  else
+  else {
   logedout();
+  if(SOCKET_URL == "wallet"  ) location.href = "login";
+  }
 });
+
+
+function create_qr(a){
+  $("#qrcode").html("");
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 150,
+	height : 150
+});
+
+ 	
+
+qrcode.makeCode(a);
+ 
+
+ 
+}
+
+ 
