@@ -18,29 +18,26 @@
   <div class="vh-100 d-flex justify-content-center">
  
     <div class="form-access my-auto">
-      <form>
+      <div class='p-3 pt-5 pb-5   shadow' style='width:350px;max-width:98%'>
+
         <div class ="col-12 text-center p-3 mb-4">
           <a href="/"><img src='https://f1.bitsten.com/assets/images/logo_bitsten_terang.png' width="150px"/></a>
           </div>
         
-        <div class="form-group">
-          <input type="text"       autocomplete="off" 
-   readonly  
-onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Username">
-        </div>
+       
        
         <div class="form-group">
-          <input type="email" class="form-control"  autocomplete="off" 
+          <input type="email" class="form-control"  id="email" autocomplete="off" 
           readonly  
        onfocus="this.removeAttribute('readonly');" placeholder="Email Address">
         </div>
         <div class="form-group">
-          <input type="password"       autocomplete="off" 
+          <input type="password"   id="password"    autocomplete="off" 
    readonly  
 onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Password">
         </div>
         <div class="form-group">
-          <input type="password"       autocomplete="off" 
+          <input type="password"    id="c_password"     autocomplete="off" 
    readonly  
 onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Confirm Password">
         </div>
@@ -49,21 +46,61 @@ onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('reado
                            
           <input class=" form-control "        autocomplete="off" 
    readonly  
-onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   type="text" id="code"  placeholder="Email Code" >
+onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   type="text" id="email_code"  placeholder="Email Code" >
            <div class="input-group-append">
-            <span class="input-group-text input-success" style="cursor:pointer" onclick="copy()">Get Code</span>     
+            <span class="input-group-text input-success" style="cursor:pointer" onclick="get_code_register()">Get Code</span>     
             </div>
        </div>
        </div>
 
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="form-checkbox">
-          <label class="custom-control-label" for="form-checkbox">I agree to the <a href="#!">Terms &
+          <input type="checkbox" class=" mr-2" id="tos">
+          <label class=" " for="form-checkbox">I agree to the <a href="#!">Terms &
               Conditions</a></label>
         </div>
-        <button type="submit" class="btn btn-primary">Create Account</button>
-      </form>
+        <button type="submit" onClick="register()" class="btn btn-primary">Create Account</button>
+      </div>
       <h2>Already have an account? <a href="login">Login in here</a></h2>
+    </div>
+  </div>
+
+
+  <div id='login-modal' class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Warning !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="login_error" class="error text-danger"></p>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id='login-modal-s' class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Warning !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="login_success" class="error text-success"></p>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -76,6 +113,7 @@ onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('reado
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/amcharts-core.min.js"></script>
   <script src="assets/js/amcharts.min.js"></script>
+  <script src="assets/js/transactions.js"></script>
   <script src="assets/js/custom.js"></script>
 </body>
 
