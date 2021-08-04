@@ -30,7 +30,7 @@ function balance(coin){
     });
 }
 
-var wallet_m = {};
+var coin_memory = {};
 function wallet(coin){
     $.ajaxSetup({
         headers:{
@@ -46,9 +46,9 @@ function wallet(coin){
         
         if(data.status) { 
             var m =document.querySelectorAll('.wallet_'+coin);
-            for(var i=0;i<m.length;i++)  $(m[i]).val(data.data[coin]);
-            wallet_m[coin] = data.data[coin];
-            create_qr(data.data[coin]);
+            for(var i=0;i<m.length;i++)  $(m[i]).val(data.data.addr);
+            coin_memory[coin] = data.data;
+            create_qr(data.data.addr);
         }
         if(data.status == false){
             var m =document.querySelectorAll('.wallet_'+coin);
