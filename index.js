@@ -6,6 +6,9 @@ const expressLayouts = require('express-ejs-layouts');
 var timeout = require('connect-timeout');
 app.use(timeout('5s'));
 const rateLimit = require("express-rate-limit");
+const axios = require('axios');
+
+
 
 // Enable if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
 // see https://expressjs.com/en/guide/behind-proxies.html
@@ -54,8 +57,92 @@ app.set('view engine', 'ejs');
 //    // res.send("aaaa");
 // });
 
+app.get('/api/v1/public/getorderbook/:pair/:both/:limit',function(req,res){
+  // Make a request for a user with a given ID
+  let limit = "";
+  if(req.params.limit>0)limit="/"+req.params.limit;
+  var url = 'https://api.bitsten.com/api/v1/public/getorderbook/'+req.params.pair+'/'+req.params.both+limit;
+  console.log(url);
+  axios.get(url)
+  .then(function (response) {
+    res.status(200).json(response.data);
+  })
+  .catch(function (error) {
+    res.status(200).json({});
+  })
+  .then(function () {
+  });
+     
+  });
 
- 
+   
+  app.get('/api/v1/public/assets',function(req,res){
+    // Make a request for a user with a given ID
+    
+    var url = 'https://bitsten.com/api/v1/public/assets/';
+    console.log(url);
+    axios.get(url)
+    .then(function (response) {
+      console.log(response);
+      res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+      //console.log(error);
+      res.status(200).json(error);
+    })
+    .then(function () {
+    });
+    });
+
+  app.get('/api/v1/public/history/:pair',function(req,res){
+    // Make a request for a user with a given ID
+    
+    var url = 'https://api.bitsten.com/api/v1/public/history/'+req.params.pair;
+    console.log(url);
+    axios.get(url)
+    .then(function (response) {
+      console.log(response);
+      res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+      //console.log(error);
+      res.status(200).json(error);
+    })
+    .then(function () {
+    });
+    });
+
+  app.get('/api/v1/public/getorderbook/:pair/:both',function(req,res){
+    // Make a request for a user with a given ID
+    
+    var url = 'https://api.bitsten.com/api/v1/public/getorderbook/'+req.params.pair+'/'+req.params.both;
+    //console.log(url);
+    axios.get(url)
+    .then(function (response) {
+       res.status(200).json(response.data);
+    })
+    .catch(function (error) {
+      //console.log(error);
+      res.status(200).json(error);
+    })
+    .then(function () {
+    });
+       
+    });
+
+app.get('/api/v1/public/getticker/all',function(req,res){
+// Make a request for a user with a given ID
+axios.get('https://api.bitsten.com/api/v1/public/getticker/all')
+.then(function (response) {
+  res.status(200).json(response.data);
+})
+.catch(function (error) {
+  res.status(200).json(error);
+})
+.then(function () {
+});
+   
+});
  
 
 app.get('/',function(req,res){
