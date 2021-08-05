@@ -39,12 +39,15 @@ if(SOCKET_URL=="wallet"){
                         </div>\
                         </div>\
                         <div>\
-                        <h6 class="balance_'+e.code+'">--</h5>\
-                        <p   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_'+e.code+'_hold"> -- </span> </p>\
+                        <h6 class="balance_'+e.code+'"></h5>\
+                        <p   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_'+e.code+'_hold ">  </span> </p>\
                         </div>\
                     </a> \
                         ';
+
             $("#list_assets").append(da);
+            loader($(".balance_"+e.code),15);
+            loader($(".balance_"+e.code+"_hold"),13);
             balance(e.code);
             $("#load-assets").hide();
          });

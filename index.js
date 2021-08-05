@@ -3,11 +3,8 @@ var app     = express();
 var path    = require("path");
 const port = 80;
 const expressLayouts = require('express-ejs-layouts');
-
 var timeout = require('connect-timeout');
-
 app.use(timeout('5s'));
-
 const rateLimit = require("express-rate-limit");
 
 // Enable if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
@@ -24,8 +21,25 @@ app.use(limiter);
 
 
 
-//const helmet = require("helmet");
-//app.use(helmet());
+// const helmet = require("helmet");
+// //app.use(helmet());
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//         "img-src": ["'self'", "f1.bitsten.com"],
+//         "script-src":["'self' 'unsafe-inline'"],
+//       },
+//     },
+//   })
+// );
+
+// const cors = require('cors');
+// app.use(cors({
+//     origin: ['https://f1.bitsten.com/']
+// }));
+ 
 
 app.use(express.static(__dirname+"/"));
 

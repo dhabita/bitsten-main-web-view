@@ -64,18 +64,49 @@
                            
                         <div class="card" id="deposit">
                           <div class="card-body">
-                            <h5 class="card-title">Wallet Deposit Address</h5>
+                            <h5 class="card-title">Wallet Deposit Address for <span class='coin_nama text-info loader_12'>---</span> ( <span class='coin_name text-info loader_12'>---</span> )</h5>
                             <div class="row wallet-address">
-                              <div class="col-md-8">
-                                <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                  of your
-                                  funds at once if you deposit more than your daily withdrawal limit.</p>
-                                <div class="input-group">
-                                  <input type="text" class="form-control text-center deposit_address " value="---">
-                                  <div class="input-group-prepend">
-                                    <button class="btn btn-primary">COPY</button>
+                              <div class="col-12">
+
+                                  <script>
+                                      function copy() {
+                                  /* Get the text field */
+                                  var copyText = document.getElementById("w_addr");
+                                  /* Select the text field */
+                                  copyText.select();
+                                  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+                                
+                                  /* Copy the text inside the text field */
+                                  document.execCommand("copy");
+                                
+                                  /* Alert the copied text */
+                                  alert("Address Copied : " + copyText.value);
+                              }
+                                </script>
+                                
+                                  <div class="input-group" style='padding-top:0px !important'>
+                                    <input type="text" id='w_addr' class="form-control text-center deposit_address loader_12" value="---">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-primary" onClick='copy()'>COPY</button>
+                                    </div>
                                   </div>
-                                </div>
+                              </div>
+                                
+                                  <div class="col-md-8">
+                                  <ul>
+                                  
+                                  <li><h4>Important !</h4></li>
+                                  <li>Send only <span class='coin_nama text-info loader_12'>--------</span> ( <span class='coin_name text-info loader_12'>---</span> ) to this deposit address.</li>
+                                  <li>Sending any other currency to this address may result in the loss of your deposit.</li>
+                                  <!--This Token is Binance Smart Chain ( BEP20 ).-->
+                                  <li>For self destruction token will be reduced 2 * BURN value.</li>
+        
+                                  <li>Minimum deposit is <span class='min_dp text-info loader_12'></span> <span class='coin_name text-info loader_12'>---</span> deposits below that value will not be added.</li>
+                                  <li>Coins will be deposited immediately after <span class='min_conf text-info loader_12'>20</span> network confirmation</li>
+                                  <li class='contract_address text-info' style='display:none'></li>
+                                </ul>
+                                </p>
+                                
                               </div>
                               <div class="col-md-4 text-center" style=''>
                                 <div class="" id = "qrcode" style='margin:10px auto;width:170px'>
@@ -145,48 +176,20 @@
 
                         <div class="card  " id="history" style='display:none'>
                           <div class="card-body">
-                            <h5 class="card-title">Latest Transactions</h5>
+                            <h5 class="card-title">Latest Deposit and Withdraw history <b class='coin_name loader_12'></b> in last 30 Days</h5>
                             <div class="wallet-history">
                               <table class="table">
                                 <thead>
                                   <tr>
-                                    <th>No.</th>
+                                    <th>Id</th>
                                     <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Confirm</th>
                                     <th>Amount</th>
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>1</td>
-                                    <td>25-04-2019</td>
-                                    <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                    <td>4.5454334</td>
-                                  </tr>
-                                  <tr>
-                                    <td>2</td>
-                                    <td>25-05-2019</td>
-                                    <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                    <td>0.5484468</td>
-                                  </tr>
-                                  <tr>
-                                    <td>3</td>
-                                    <td>25-06-2019</td>
-                                    <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                    <td>2.5454545</td>
-                                  </tr>
-                                  <tr>
-                                    <td>4</td>
-                                    <td>25-07-2019</td>
-                                    <td><i class="icon ion-md-checkmark-circle-outline green"></i></td>
-                                    <td>1.45894147</td>
-                                  </tr>
-                                  <tr>
-                                    <td>3</td>
-                                    <td>25-08-2019</td>
-                                    <td><i class="icon ion-md-close-circle-outline red"></i></td>
-                                    <td>2.5454545</td>
-                                  </tr>
+                                <tbody id="transaction">
+                                 
+                                  <tr> 
                                 </tbody>
                               </table>
                             </div>

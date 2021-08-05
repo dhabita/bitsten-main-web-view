@@ -1011,12 +1011,14 @@ function logedin(){
 function logedout(){
   $(".logedin").hide();
   $(".logedout").show();
+  if(SOCKET_URL == "wallet"  ) location.href = "login";
 }
 
 function logout(){
   $(".logedin").hide();
   $(".logedout").show();
   eraseCookie("token");
+  if(SOCKET_URL == "wallet"  ) location.href = "login";
 }
 
 //get token
@@ -1028,7 +1030,7 @@ $(document).ready(function(){
   }
   else {
   logedout();
-  if(SOCKET_URL == "wallet"  ) location.href = "login";
+ 
   }
 });
 
@@ -1046,6 +1048,22 @@ qrcode.makeCode(a);
  
 
  
+}
+
+
+function loader(location,height){
+
+  location.html(
+    ' <span class="loading loading03" style="font-size:'+height+'px">\
+    <span>L</span>\
+    <span>o</span>\
+    <span>a</span>\
+    <span>d</span>\
+    <span>i</span>\
+    <span>n</span>\
+    <span>g</span>\
+  </span> '
+  );
 }
 
  
