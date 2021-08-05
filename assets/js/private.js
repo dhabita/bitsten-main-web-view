@@ -181,6 +181,72 @@ function transaction(coin){
 }
 
 
+
+function openorder_result(market,data){
+    $("#openorder").html("");
+    data = data.sort(function(a,b){
+       
+        return  b.price  -  a.price ;
+      });
+    data.forEach(e => {
+        let d = new Date(e.date);
+        d=d.toLocaleString();
+        let color = " text-success ";
+        if(e.tx=="sell") color = " text-danger ";
+        $("#openorder").append(
+            '<tr class="d-flex justify-content-between market-order-item">\
+                <td>'+e.id+'</td>\
+                <td>'+d+'</td>\
+                <td class="text-center '+color+'">'+e.tx.toUpperCase()+'</td>\
+                <td>'+number_format(e.price)+'</td>\
+                <td>'+number_format(e.total)+'</td>\
+                <td>'+number_format(e.filled)+'</td>\
+                <td class="text-center">Cancel</td>\
+              </tr>'
+        );
+           
+       });
+}
+
+
+function openorder(market){
+    loader($("#openorder"),12);
+
+   // var size =  transaction_memory[coin].length;
+   // if(size>0) transaction_result(coin,transaction_memory[coin]);
+
+    $.ajaxSetup({
+        headers:{
+           'Authorization': 'Bearer ' + getCookie("token")
+        }
+     });
+
+
+ 
+
+    $.get( url+"/openorder/"+market)
+    .done(function( data ) {
+        
+       
+        if(data.status) { 
+           console.log(data);
+           // $("#transaction").html("");
+           // var m =document.querySelectorAll('.wallet_'+coin);
+           // for(var i=0;i<m.length;i++)  $(m[i]).val(data.data.addr);
+           // coin_memory[coin] = data.data;
+           // create_qr(data.data.addr);
+           // transaction_memory[coin] = data.data[coin];
+           openorder_result(market,data.data[market]);
+          
+        }
+        if(data.status == false){
+           // var m =document.querySelectorAll('.wallet_'+coin);
+           // for(var i=0;i<m.length;i++) $(m[i]).val("---");
+           // create_qr("-");
+        }
+    });
+}
+
 function getprofile(){
     $.ajaxSetup({
         headers:{

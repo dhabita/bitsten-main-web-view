@@ -497,6 +497,8 @@ function gethash(){
   var coin = h.split("_")[0].replace("#","");
   var market = h.split("_")[1];
 
+openorder(coin+"_"+market);
+
 var m =document.querySelectorAll('.coin-name');
 for(var i=0;i<m.length;i++) m[i].innerHTML=coin;
 
