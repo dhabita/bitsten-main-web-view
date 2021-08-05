@@ -612,3 +612,7 @@
       */
      QRCode.CorrectLevel = QRErrorCorrectLevel;
  })();
+
+
+
+ 

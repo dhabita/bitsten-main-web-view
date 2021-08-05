@@ -1,4 +1,8 @@
  
+var socket_used = 
+SOCKET_URL=='market'||
+SOCKET_URL=='exchange'
+;
 
  
 var urlm = "wss://socket.bitsten.com:8443/market"; 
@@ -44,6 +48,7 @@ var sock = {
         s.send(msg);
     },
 };
+/*
 var sse = {
     initialize: function (url) {
         var source = new EventSource(url);
@@ -55,13 +60,14 @@ var sse = {
         };
     },
 };
-
+*/
 
 
 var soket = sock.ws(urlm);
 var online = 0;
 
 function connecting(){
+if(!socket_used)return;
 if(online) {
 soket.close();
 console.log("Connecting..");
@@ -136,8 +142,6 @@ if(triger[0]=="chart"){
 if(triger[0]=="market_list"){
     console.log(dt); // go to app
 }
- 
-
 
 }
 
@@ -146,6 +150,7 @@ if(triger[0]=="market_list"){
 
 //get all market
 function getallmarket(){
+    if(!socket_used)return;
     sock.send(soket,'market');
 }
 if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
@@ -153,15 +158,15 @@ if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
 }
 
 function openc(){
-   
-    if(SOCKET_URL=='market'||SOCKET_URL=='exchange'){
+    console.log(socket_used);
+    if(!socket_used)return;
         console.log("load data");
         getallmarket();
        if(SOCKET_URL=='exchange') {
            getorderbook();
            gethash();
        }
-   }
+   
 }
 
  

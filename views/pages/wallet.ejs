@@ -56,7 +56,7 @@
                           <label class="btn btn-warning" onClick="$('.card').hide();$('#withdraw').show()">
                             <input type="radio" name="options" id="option2" autocomplete="off" onClick="$('.card').hide();$('#withdraw').show()"> Withdraw
                           </label>
-                          <label class="btn btn-info" onClick="$('.card').hide();$('#history').show()">
+                          <label class="btn btn-info" onClick="$('.card').hide();$('#history').show(); transaction($('.coin_name').first().text().toLowerCase());">
                             <input type="radio" name="options" id="option3" autocomplete="off" > History
                           </label>
                         </div>
@@ -96,6 +96,7 @@
                                   <ul>
                                   
                                   <li><h4>Important !</h4></li>
+                                  <li class='coin_network ' style='display:none'></li>
                                   <li>Send only <span class='coin_nama text-info loader_12'>--------</span> ( <span class='coin_name text-info loader_12'>---</span> ) to this deposit address.</li>
                                   <li>Sending any other currency to this address may result in the loss of your deposit.</li>
                                   <!--This Token is Binance Smart Chain ( BEP20 ).-->

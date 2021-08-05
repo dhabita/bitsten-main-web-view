@@ -1041,13 +1041,7 @@ var qrcode = new QRCode(document.getElementById("qrcode"), {
 	width : 150,
 	height : 150
 });
-
- 	
-
 qrcode.makeCode(a);
- 
-
- 
 }
 
 

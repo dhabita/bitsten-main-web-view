@@ -1,7 +1,14 @@
 var url = "https://api4.bitsten.com/private";
 
+let coin_memory = {};
+let transaction_memory = {};
 
 function balance(coin){
+    if(coin_memory.hasOwnProperty(coin)){}
+    else coin_memory[coin] = {};
+    if(transaction_memory.hasOwnProperty(coin)){}
+    else transaction_memory[coin] = [];
+
     $.ajaxSetup({
         headers:{
            'Authorization': 'Bearer ' + getCookie("token")
@@ -30,9 +37,51 @@ function balance(coin){
     });
 }
 
-var coin_memory = {};
+
+ 
+
+
+function wallet_result(coin,data){
+
+
+    var m =document.querySelectorAll('.coin_nama');
+    for(var i=0;i<m.length;i++) $(m[i]).html(data.name);
+    var m =document.querySelectorAll('.min_dp');
+    for(var i=0;i<m.length;i++) $(m[i]).html(number_format(data.min_deposit,data.min_deposit>1?2:4));
+    var m =document.querySelectorAll('.contract_address');
+    for(var i=0;i<m.length;i++){
+         if(data.network>0)
+         $(m[i]).show();
+         $(m[i]).html(data.contract);
+    }
+    var m =document.querySelectorAll('.coin_network');
+    for(var i=0;i<m.length;i++){
+         if(data.network>0){
+        let net = "This token Network is <b class='text-info'>Binance Samart Chain BEP20  </b> make sure you send correct network token ";
+        if(data.network==2) net = "This token  Network  is <b class='text-info'>Tron TRC20   </b> make sure you send correct network token";
+        if(data.network==1) net = "This token  Network is <b class='text-info'>Ethereum  ERC20   </b> make sure you send correct network token";
+         
+         $(m[i]).show();
+         $(m[i]).html(net);}
+    }
+    
+    var m =document.querySelectorAll('.min_conf');
+    for(var i=0;i<m.length;i++) $(m[i]).html(data.confirm);
+    var m =document.querySelectorAll('.wallet_'+coin);
+    for(var i=0;i<m.length;i++)  $(m[i]).val(data.addr);
+    create_qr(data.addr);
+}
+
+
 
 function wallet(coin){
+     var size = Object.keys(coin_memory[coin]).length;
+     if(size>0)wallet_result(coin,coin_memory[coin]);
+     else {
+     var m =document.querySelectorAll('.deposit_address');
+     for(var i=0;i<m.length;i++) $(m[i]).val("---");
+     }
+
     $.ajaxSetup({
         headers:{
            'Authorization': 'Bearer ' + getCookie("token")
@@ -45,25 +94,13 @@ function wallet(coin){
     $.get( url+"/wallet/"+coin)
     .done(function( data ) {
 
-        var m =document.querySelectorAll('.coin_nama');
-        for(var i=0;i<m.length;i++) $(m[i]).html(data.data.name);
-        var m =document.querySelectorAll('.min_dp');
-        for(var i=0;i<m.length;i++) $(m[i]).html(number_format(data.data.min_deposit,data.data.min_deposit>1?2:4));
-        var m =document.querySelectorAll('.contract_address');
-        for(var i=0;i<m.length;i++){
-             if(data.data.network>0)
-             $(m[i]).show();
-             $(m[i]).html(data.data.contract);
-        }
-        var m =document.querySelectorAll('.min_conf');
-        for(var i=0;i<m.length;i++) $(m[i]).html(data.data.confirm);
+       
         
 
         if(data.status) { 
-            var m =document.querySelectorAll('.wallet_'+coin);
-            for(var i=0;i<m.length;i++)  $(m[i]).val(data.data.addr);
+            wallet_result(coin,data.data);
             coin_memory[coin] = data.data;
-            create_qr(data.data.addr);
+           
         }
         if(data.status == false){
             var m =document.querySelectorAll('.wallet_'+coin);
@@ -73,8 +110,45 @@ function wallet(coin){
     });
 }
 
+
+function transaction_result(coin,data){
+    data.forEach(e => {
+        let d = new Date(e.date);
+        let st = "pending";
+        
+        if(e.tx=="dp"){
+            if(e.statuse==1)st = "complete";
+            else
+            if(e.conf>=coin_memory[coin].confirm)st = "complete";
+            else
+            st = "( "+e.conf+" / "+coin_memory[coin].confirm+" )";
+        }
+        if(e.tx=="wd"){
+            if(e.statuse==3)st = "complete";
+            else
+            if(e.statuse==1)st = "on Process";
+        }
+
+        d=d.toLocaleString();
+        $("#transaction").append(
+            "\
+            <tr>\
+            <td>"+e.tx+"-"+e.id+"</td>\
+            <td>"+d+"</td>\
+            <td>"+st+"</td>\
+            <td>"+e.amount+"</td>\
+          </tr>"
+        );
+           
+       });
+}
+
 function transaction(coin){
     loader($("#transaction"),15);
+
+    var size =  transaction_memory[coin].length;
+    if(size>0) transaction_result(coin,transaction_memory[coin]);
+
     $.ajaxSetup({
         headers:{
            'Authorization': 'Bearer ' + getCookie("token")
@@ -94,36 +168,9 @@ function transaction(coin){
            // for(var i=0;i<m.length;i++)  $(m[i]).val(data.data.addr);
            // coin_memory[coin] = data.data;
            // create_qr(data.data.addr);
-           console.log(data);
-           data.data[coin].forEach(e => {
-            let d = new Date(e.date);
-            let st = "pending";
-            
-            if(e.tx=="dp"){
-                if(e.statuse==1)st = "complete";
-                else
-                if(e.conf>=coin_memory[coin].confirm)st = "complete";
-                else
-                st = "( "+e.conf+" / "+coin_memory[coin].confirm+" )";
-            }
-            if(e.tx=="wd"){
-                if(e.statuse==3)st = "complete";
-                else
-                if(e.statuse==1)st = "on Process";
-            }
-
-            d=d.toLocaleString();
-            $("#transaction").append(
-                "\
-                <tr>\
-                <td>"+e.tx+"-"+e.id+"</td>\
-                <td>"+d+"</td>\
-                <td>"+st+"</td>\
-                <td>"+e.amount+"</td>\
-              </tr>"
-            );
-               
-           });
+           transaction_memory[coin] = data.data[coin];
+           transaction_result(coin,data.data[coin]);
+          
         }
         if(data.status == false){
            // var m =document.querySelectorAll('.wallet_'+coin);
@@ -160,14 +207,11 @@ function getprofile(){
 function select_coin(a){
     loader($(".loader_12"),12);
     $(".contract_address").hide();
+    $(".coin_network").hide();
     loader($(".balance_"+a),15);
     loader($(".balance_"+a+"_hold"),13);
     var m =document.querySelectorAll('.coin_name');
     for(var i=0;i<m.length;i++) $(m[i]).html(a.toUpperCase());
-
-
-    var m =document.querySelectorAll('.deposit_address');
-    for(var i=0;i<m.length;i++) $(m[i]).val("---");
 
     var m =document.querySelectorAll('.deposit_address');
     for(var i=0;i<m.length;i++)  {
@@ -184,9 +228,11 @@ function select_coin(a){
     balance(a);
     wallet(a);
     transaction(a);
+   
 
 
 }
- 
+ if(SOCKET_URL=='wallet'){
 loader($(".loader_12"),12);
 select_coin("wbst");
+ }
