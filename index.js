@@ -1,6 +1,6 @@
 var express = require("express");
-var app     = express();
-var path    = require("path");
+var app = express();
+var path = require("path");
 const port = 80;
 const expressLayouts = require('express-ejs-layouts');
 var timeout = require('connect-timeout');
@@ -15,8 +15,8 @@ const axios = require('axios');
 // app.set('trust proxy', 1);
 
 const limiter = rateLimit({
-  windowMs: 1 * 30 * 1000, // 15 minutes
-  max: 200 // limit each IP to 100 requests per windowMs
+    windowMs: 1 * 30 * 1000, // 15 minutes
+    max: 200 // limit each IP to 100 requests per windowMs
 });
 
 //  apply to all requests
@@ -42,9 +42,9 @@ app.use(limiter);
 // app.use(cors({
 //     origin: ['https://f1.bitsten.com/']
 // }));
- 
 
-app.use(express.static(__dirname+"/"));
+
+app.use(express.static(__dirname + "/"));
 
 //set view engine
 // app.use(expressLayouts);
@@ -57,131 +57,95 @@ app.set('view engine', 'ejs');
 //    // res.send("aaaa");
 // });
 
-app.get('/api/v1/public/getorderbook/:pair/:both/:limit',function(req,res){
-  // Make a request for a user with a given ID
-  let limit = "";
-  if(req.params.limit>0)limit="/"+req.params.limit;
-  var url = 'https://api.bitsten.com/api/v1/public/getorderbook/'+req.params.pair+'/'+req.params.both+limit;
-  console.log(url);
-  axios.get(url)
-  .then(function (response) {
-    res.status(200).json(response.data);
-  })
-  .catch(function (error) {
-    res.status(200).json({});
-  })
-  .then(function () {
-  });
-     
-  });
-
-   
-  app.get('/api/v1/public/assets',function(req,res){
-    // Make a request for a user with a given ID
-    
-    var url = 'https://bitsten.com/api/v1/public/assets/';
-    console.log(url);
+function api_get(url, res) {
     axios.get(url)
-    .then(function (response) {
-      console.log(response);
-      res.status(200).json(response.data);
-    })
-    .catch(function (error) {
-      //console.log(error);
-      res.status(200).json(error);
-    })
-    .then(function () {
+        .then(function(response) {
+            res.status(200).json(response.data);
+        })
+        .catch(function(error) {
+            res.status(200).json({});
+        })
+        .then(function() {});
+}
+app.get('/api/v1/public/getorderbook/:pair/:both/:limit', function(req, res) {
+    let limit = "";
+    if (req.params.limit > 0) limit = "/" + req.params.limit;
+    var url = 'https://api.bitsten.com/api/v1/public/getorderbook/' + req.params.pair + '/' + req.params.both + limit;
+    api_get(url, res);
+});
+
+
+app.get('/api/v1/public/assets', function(req, res) {
+    var url = 'https://api.bitsten.com/api/v1/public/assets/';
+    api_get(url, res);
+});
+
+app.get('/api/v1/public/history/:pair', function(req, res) {
+    var url = 'https://api.bitsten.com/api/v1/public/history/' + req.params.pair;
+    api_get(url, res);
+});
+
+app.get('/api/v1/public/getorderbook/:pair/:both', function(req, res) {
+    var url = 'https://api.bitsten.com/api/v1/public/getorderbook/' + req.params.pair + '/' + req.params.both;
+    api_get(url, res);
+});
+
+app.get('/api/v1/public/getticker/:all', function(req, res) {
+    var url = 'https://api.bitsten.com/api/v1/public/getticker/' + req.params.all;
+    api_get(url, res);
+});
+
+
+app.get('/', function(req, res) {
+    var data = {};
+    res.render('pages/landing', {
+        'data': data
     });
+});
+
+app.get('/markets', function(req, res) {
+    var data = {};
+    res.render('pages/markets', {
+        'data': data
     });
+});
 
-  app.get('/api/v1/public/history/:pair',function(req,res){
-    // Make a request for a user with a given ID
-    
-    var url = 'https://api.bitsten.com/api/v1/public/history/'+req.params.pair;
-    console.log(url);
-    axios.get(url)
-    .then(function (response) {
-      console.log(response);
-      res.status(200).json(response.data);
-    })
-    .catch(function (error) {
-      //console.log(error);
-      res.status(200).json(error);
-    })
-    .then(function () {
+app.get('/exchange', function(req, res) {
+    var data = {};
+    res.render('pages/exchange', {
+        'data': data
     });
+});
+
+app.get('/login', function(req, res) {
+    var data = {};
+    res.render('pages/login', {
+        'data': data
     });
+});
 
-  app.get('/api/v1/public/getorderbook/:pair/:both',function(req,res){
-    // Make a request for a user with a given ID
-    
-    var url = 'https://api.bitsten.com/api/v1/public/getorderbook/'+req.params.pair+'/'+req.params.both;
-    //console.log(url);
-    axios.get(url)
-    .then(function (response) {
-       res.status(200).json(response.data);
-    })
-    .catch(function (error) {
-      //console.log(error);
-      res.status(200).json(error);
-    })
-    .then(function () {
+app.get('/register', function(req, res) {
+    var data = {};
+    res.render('pages/register', {
+        'data': data
     });
-       
+});
+
+app.get('/resetpassword', function(req, res) {
+    var data = {};
+    res.render('pages/resetpassword', {
+        'data': data
     });
-
-app.get('/api/v1/public/getticker/all',function(req,res){
-// Make a request for a user with a given ID
-axios.get('https://api.bitsten.com/api/v1/public/getticker/all')
-.then(function (response) {
-  res.status(200).json(response.data);
-})
-.catch(function (error) {
-  res.status(200).json(error);
-})
-.then(function () {
-});
-   
-});
- 
-
-app.get('/',function(req,res){
-   var data = {};
-    res.render('pages/landing',{'data' :   data });
- });
-
- app.get('/markets',function(req,res){
-  var data = {};
-  res.render('pages/markets',{'data' :   data });
-});
-
-app.get('/exchange',function(req,res){
-  var data = {};
-  res.render('pages/exchange',{'data' :   data });
-});
-
-app.get('/login',function(req,res){
-  var data = {};
-  res.render('pages/login',{'data' :   data });
-});
-
-app.get('/register',function(req,res){
-  var data = {};
-  res.render('pages/register',{'data' :   data });
-});
-
-app.get('/resetpassword',function(req,res){
-  var data = {};
-  res.render('pages/resetpassword',{'data' :   data });
 });
 
 
-app.get('/wallet',function(req,res){
-  var data = {};
-  res.render('pages/wallet',{'data' :   data });
+app.get('/wallet', function(req, res) {
+    var data = {};
+    res.render('pages/wallet', {
+        'data': data
+    });
 });
- 
- 
+
 
 
 
