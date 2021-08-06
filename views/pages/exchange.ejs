@@ -1,446 +1,496 @@
 <% layout('../layouts/app') -%>
-  
-<style>
-   .table td {
-    font-size: 13px;
-    padding: 5px 5px ;
-}
 
-.green-bg-7:after, 
-.green-bg-6:after, 
-.green-bg-5:after, 
-.green-bg-4:after, 
-.green-bg-3:after,
- .green-bg-2:after, 
- .green-bg-1:after, 
- .green-bg:after {
-    
-    background:rgba(0,200,0,0.1);
-     
-}
+    <style>
+        .table td {
+            font-size: 13px;
+            padding: 5px;
+        }
+        
+        .green-bg-1:after,
+        .green-bg-2:after,
+        .green-bg-3:after,
+        .green-bg-4:after,
+        .green-bg-5:after,
+        .green-bg-6:after,
+        .green-bg-7:after,
+        .green-bg:after {
+            background: rgba(0, 200, 0, 0.1);
+        }
+        
+        .red-bg-1:after,
+        .red-bg-2:after,
+        .red-bg-3:after,
+        .red-bg-4:after,
+        .red-bg-5:after,
+        .red-bg-6:after,
+        .red-bg-7:after,
+        .red-bg:after {
+            background: rgba(200, 0, 0, 0.1);
+        }
+    </style>
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-md-3">
+                <div class="market-pairs">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">
+                                <i class="icon ion-md-search"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Search" aria-describedby="inputGroup-sizing-sm"></div>
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item ml-3">
+                            <a class="nav-link" data-toggle="pill" href="#STAR" onclick='show("star")' role="tab" aria-selected="true">
+                                <i class="icon ion-md-star"></i>
+                            </a>
+                        </li>
 
-.red-bg-7:after,
-.red-bg-6:after,
-.red-bg-5:after,
-.red-bg-4:after,
-.red-bg-3:after,
-.red-bg-2:after,
-.red-bg-1:after,
-.red-bg:after {
-   
-  background: rgba(200,0,0,0.1);
-   
-}
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#BST" onclick='show("bst")' role="tab" aria-selected="true">BST</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#USDT" onclick='show("usdt")' role="tab" aria-selected="false">USDT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#IDRT" onclick='show("idrt")' role="tab" aria-selected="true">IDRT</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#ALT" onclick='show("alt")' role="tab" aria-selected="true">ALT</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" role="tabpanel">
+                            <table class="table" id='all_markets_table'>
+                                <thead>
+                                    <tr class='row'>
+                                        <th class='col-5 pl-5'>Pairs</th>
+                                        <th class='col-4 text-right'>Last Price</th>
+                                        <th class='col-3 text-right'>Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id='load-markets' class='text-center row'>
+                                        <td class='text-center col-12 pt-5 pb-5' colspan="3">
+                                            <img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-</style>
-  <div class="container-fluid p-0">
-    <div class="row no-gutters">
-      <div class="col-md-3">
-        <div class="market-pairs">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm"><i class="icon ion-md-search"></i></span>
-            </div>
-            <input type="text" class="form-control" placeholder="Search" aria-describedby="inputGroup-sizing-sm">
-          </div>
-          <ul class="nav nav-pills" id="pills-tab" role="tablist">
-            <li class="nav-item ml-3">
-              <a class="nav-link" data-toggle="pill" href="#STAR"  onclick = 'show("star")'  role="tab" aria-selected="true"><i
-                  class="icon ion-md-star"></i></a>
-            </li>
-           
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#BST" onclick = 'show("bst")' role="tab" aria-selected="true">BST</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#USDT" onclick = 'show("usdt")'  role="tab" aria-selected="false">USDT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#IDRT" onclick = 'show("idrt")'  role="tab" aria-selected="true">IDRT</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#ALT" onclick = 'show("alt")'  role="tab" aria-selected="true">ALT</a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane fade show active"   role="tabpanel">
-              <table class="table" id='all_markets_table'>
-                <thead>
-                  <tr class='row'>
-                    <th  class='col-5 pl-5' >Pairs</th>
-                    <th   class='col-4 text-right'  >Last Price</th>
-                    <th    class='col-3 text-right' >Change</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr id = 'load-markets' class='text-center row'>
-                    <td   class='text-center col-12 pt-5 pb-5' colspan="3"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
-
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row m-0">
-        <div class="col-4  col-sm-3 p-3 font-weight-bold" style='height: 50px;'>
-          <span class='coin-name  text-uppercase mt-3'>---</span>_<span class='market-name text-uppercase mt-3'>---</span>
-        </div>
-        <div class="col-4  col-sm-3 pt-1 " style='height: 50px;'>
-          <small >High</small><br><span class='last_high font-weight-bold text-uppercase'>--</span>
-        </div>
-        <div class="col-4 col-sm-3 pt-1 " style='height: 50px;'>
-          <small  >Low</small><br><span class='last_low font-weight-bold text-uppercase'>--</span>
-        </div>
-        <div class="col-4 col-sm-3 pt-1 hide-xs " style='height: 50px;'>
-          <small >Volume</small><br><span class='last_volume font-weight-bold  text-uppercase'>--</span>
-        </div>
-       </div>
-
-
-        <div class="main-chart" id='main-chart'>
-          
-        </div>
-        <div class="market-trade pt-3 pb-3" style="border:none">
-          <ul class="nav nav-pills d-none" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="pill" href="#pills-trade-limit" role="tab"
-                aria-selected="true">Limit</a>
-            </li>
-            
-          
-          </ul>
-          <div class="tab-content" >
-            <div class="tab-pane fade show active" id="pills-trade-limit" role="tabpanel">
-              <div class="d-flex justify-content-between">
-                <div class="market-trade-buy">
-                  <div class='col-12'>
-                    <div class="row   mb-3">
-                      <div class="col-3 hide-xs">Available</div> <div class="col-6 text-right text-info col-xs-8" ><span class='class_balance_market'>0</span></div> <div class="col-3 market-name col-xs-4 text-right text-uppercase">---</div> 
                     </div>
-                  </div>
-                  <div class="input-group">
-                    <input type="number" class="form-control" placeholder="Price">
-                    <div class="input-group-append">
-                      <span class="input-group-text market-name text-uppercase">---</span>
-                    </div>
-                  </div>
-                  <div class="input-group">
-                    <input type="number" class="form-control" placeholder="Amount">
-                    <div class="input-group-append">
-                      <span class="input-group-text coin-name text-uppercase">---</span>
-                    </div>
-                  </div>
-                  
-                  <div class='col-12'>
-                    <div class="row small">
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">25%</button></div>
-                      <div class="col-md-3 col-6  mt-1"><button class="btn btn-sm border small">50%</button></div>
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">75%</button></div>
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">100%</button></div>
-                    </div>
-                  </div>
-               
-                  <div class="col-12 mt-3">
-                    
-                    <div class="row">
-                      <div class="col-3">Spend</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row">
-                      <div class="col-3">Get</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row">
-                      <div class="col-3">Fee</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row">
-                      <div class="col-3">Receive</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row"> 
-                     
-                      <button class="btn buy btn-sm">BUY</button>
-                   </div>
-
-
                 </div>
-
-                </div>
-                <div class="market-trade-sell">
-                  <div class='col-12'>
-                    <div class="row mb-3">
-                      <div class="col-3 hide-xs">Available</div> <div class="col-6 col-xs-8 text-right  text-info " ><span class='class_balance_coin'>0</span></div> <div class="col-3 col-xs-4 text-right coin-name text-uppercase">---</div> 
+            </div>
+            <div class="col-md-6">
+                <div class="row m-0">
+                    <div class="col-4  col-sm-3 p-3 font-weight-bold" style='height: 50px;'>
+                        <span class='coin-name  text-uppercase mt-3'>---</span>_<span class='market-name text-uppercase mt-3'>---</span>
+                    </div>
+                    <div class="col-4  col-sm-3 pt-1 " style='height: 50px;'>
+                        <small>High</small>
+                        <br>
+                        <span class='last_high font-weight-bold text-uppercase'>--</span>
+                    </div>
+                    <div class="col-4 col-sm-3 pt-1 " style='height: 50px;'>
+                        <small>Low</small>
+                        <br>
+                        <span class='last_low font-weight-bold text-uppercase'>--</span>
+                    </div>
+                    <div class="col-4 col-sm-3 pt-1 hide-xs " style='height: 50px;'>
+                        <small>Volume</small>
+                        <br>
+                        <span class='last_volume font-weight-bold  text-uppercase'>--</span>
                     </div>
                 </div>
 
+                <div class="main-chart" id='main-chart'></div>
+                <div class="market-trade pt-3 pb-3" style="border:none">
+                    <ul class="nav nav-pills d-none" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#pills-trade-limit" role="tab" aria-selected="true">Limit</a>
+                        </li>
 
-                  <div class="input-group">
-                    <input type="number" class="form-control" placeholder="Price">
-                    <div class="input-group-append">
-                      <span class="input-group-text market-name text-uppercase">---</span>
-                    </div>
-                  </div>
-                  <div class="input-group">
-                    <input type="number" class="form-control" placeholder="Amount">
-                    <div class="input-group-append">
-                      <span class="input-group-text coin-name text-uppercase">---</span>
-                    </div>
-                  </div>
-                  <div class='col-12'>
-                    <div class="row small">
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">25%</button></div>
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">50%</button></div>
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">75%</button></div>
-                      <div class="col-md-3 col-6 mt-1"><button class="btn btn-sm border small">100%</button></div>
-                    </div>
-                  </div>
-               
-                  <div class="col-12 mt-3">
-                   
-                    <div class="row">
-                      <div class="col-3">Spend</div> <div class="col-6 text-right" >0</div> <div class="col-3 coin-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row">
-                      <div class="col-3">Get</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row">
-                      <div class="col-3">Fee</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row">
-                      <div class="col-3">Receive</div> <div class="col-6 text-right" >0</div> <div class="col-3 market-name text-uppercase">---</div> 
-                    </div>
-                    <div class="row"> 
-                     
-                      <button class="btn sell btn-sm">SELL</button>
-                   </div>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="pills-trade-limit" role="tabpanel">
+                            <div class="d-flex justify-content-between">
+                                <div class="market-trade-buy">
+                                    <div class='col-12'>
+                                        <div class="row   mb-3">
+                                            <div class="col-3 hide-xs">Available</div>
+                                            <div class="col-6 text-right text-info col-xs-8">
+                                                <span class='class_balance_market'>0</span>
+                                            </div>
+                                            <div class="col-3 market-name col-xs-4 text-right text-uppercase">---</div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text " style='min-width: 75px;'><small>Price</small></span>
+                                        </div>
+                                        <input type="text" id="input-buy-price" class="form-control text-center to0i" placeholder="Price">
+                                        <div class="input-group-append">
+                                            <small class="input-group-text market-name text-uppercase" style='min-width: 50px;'>---</small>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text " style='min-width: 75px;'><small>Amount</small></span>
+                                        </div>
+                                        <input type="text" class="form-control text-center to0i" id="input-buy-amount" placeholder="Amount">
+                                        <div class="input-group-append">
+                                            <small class="input-group-text coin-name text-uppercase" style='min-width: 50px;'>---</small>
+                                        </div>
+                                    </div>
+
+                                    <div class='col-12'>
+                                        <div class="row small">
+                                            <div class="col-md-3 col-6 mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('market',0.25)">25%</button>
+                                            </div>
+                                            <div class="col-md-3 col-6  mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('market',0.5)">50%</button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('market',0.75)">75%</button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('market',1)">100%</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-4">Total</div>
+                                            <div class="col-6 text-right to0" id="total-buy">0</div>
+                                            <div class="col-2 market-name text-right text-uppercase">---</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">Fee <small>( <span class="fee">0.15</span>% )</small></div>
+                                            <div class="col-6 text-right to0" id="fee-buy">0</div>
+                                            <div class="col-2 coin-name text-right text-uppercase">---</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">Est. Receive</div>
+                                            <div class="col-6 text-right to0" id="est-buy">0</div>
+                                            <div class="col-2 coin-name text-right text-uppercase">---</div>
+                                        </div>
+                                        <div class="row">
+
+                                            <button class="btn buy btn-sm" onclick="openr(0)">BUY</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="market-trade-sell">
+                                    <div class='col-12'>
+                                        <div class="row mb-3">
+                                            <div class="col-3 hide-xs">Available</div>
+                                            <div class="col-6 col-xs-8 text-right  text-info ">
+                                                <span class='class_balance_coin to0'>0</span>
+                                            </div>
+                                            <div class="col-3 col-xs-4 text-right coin-name text-uppercase">---</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style='min-width: 75px;'><small>Price</small></span>
+                                        </div>
+                                        <input type="text" id="input-sell-price" class="form-control to0i text-center" placeholder="Price">
+                                        <div class="input-group-append">
+                                            <small class="input-group-text market-name text-uppercase" style='min-width: 50px;'>---</small>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style='min-width: 75px;'><small>Amount</small></span>
+                                        </div>
+                                        <input type="text" id="input-sell-amount" class="form-control text-center to0i" placeholder="Amount">
+                                        <div class="input-group-append">
+                                            <small class="input-group-text coin-name text-uppercase" style='min-width: 50px;'>---</small>
+                                        </div>
+                                    </div>
+                                    <div class='col-12'>
+                                        <div class="row small">
+                                            <div class="col-md-3 col-6 mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('coin',0.25)">25%</button>
+                                            </div>
+                                            <div class="col-md-3 col-6  mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('coin',0.5)">50%</button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('coin',0.75)">75%</button>
+                                            </div>
+                                            <div class="col-md-3 col-6 mt-1">
+                                                <button class="btn btn-sm border small" onclick="clicker.autobalance('coin',1)">100%</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
 
 
+                                        <div class="row">
+                                            <div class="col-4">Total</div>
+                                            <div class="col-6 text-right to0" id="total-sell">0</div>
+                                            <div class="col-2 market-name text-right text-uppercase">---</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">Fee <small>( <span class="fee">0.15</span>% )</small></div>
+                                            <div class="col-6 text-right to0" id="fee-sell">0</div>
+                                            <div class="col-2 market-name text-right text-uppercase">---</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">Est. Receive</div>
+                                            <div class="col-6 text-right to0" id="est-sell">0</div>
+                                            <div class="col-2 market-name  text-right text-uppercase">---</div>
+                                        </div>
+                                        <div class="row">
+
+                                            <button class="btn sell btn-sm" onclick="openr(1)">SELL</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="order-book">
+                    <h2 class="heading">Order Book</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Price(<span class='market-name text-uppercase'>---</span>)</th>
+                                <th>Amount(<span class='coin-name text-uppercase'>---</span>)</th>
+                                <th>Total(<span class='market-name text-uppercase'>---</span>)</th>
+                            </tr>
+                        </thead>
+                        <tbody id='book_sell'>
+                            <tr class='book-loading text-center row' id='book_sell_90000000000' style='margin-bottom:200px'>
+                                <td class='text-center col-12 pt-5 pb-5' colspan="3">
+                                    <img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
+                            </tr>
+
+                        </tbody>
+                        <tbody class="ob-heading" style='background:rgb(232, 236, 232)'>
+                            <tr>
+                                <td>
+                                    <span>Last Price</span>
+                                    <span class='last_price ob-heading-big' onCLick="clicker.getPrice($(this).text())">--</span>
+                                </td>
+                                <td>
+                                    <span>USD</span>
+                                    <span class='last_price_usd ob-heading-big'>--</span>
+                                </td>
+                                <td>
+                                    <span>Change</span>
+                                    <span class='last_change ob-heading-big'>--</span>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody id='book_buy'>
+                            <tr class='text-center row book-loading' id='book_buy_1'>
+                                <td class='text-center col-12 pt-5 pb-5' colspan="3">
+                                    <img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
-              </div>
-            </div>
-            
-            
-            
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="order-book">
-          <h2 class="heading">Order Book</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Price(<span class='market-name text-uppercase'>---</span>)</th>
-                <th>Amount(<span class='coin-name text-uppercase'>---</span>)</th>
-                <th>Total(<span class='market-name text-uppercase'>---</span>)</th>
-              </tr>
-            </thead>
-            <tbody   id='book_sell'>
-              <tr   class='book-loading text-center row' id='book_sell_90000000000' style='margin-bottom:200px' >
-                <td   class='text-center col-12 pt-5 pb-5' colspan="3"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
-              </tr>
-               
-            </tbody>
-            <tbody class="ob-heading" style='background:rgb(232, 236, 232)'>
-              <tr>
-                <td>
-                  <span>Last Price</span>
-                  <span class='last_price ob-heading-big' >--</span>
-                </td>
-                <td>
-                  <span>USD</span>
-                  <span class='last_price_usd ob-heading-big'  >--</span>
-                </td>
-                <td  >
-                  <span>Change</span>
-                  <span class='last_change ob-heading-big'  >--</span>
-                   
-                </td>
-              </tr>
-            </tbody>
-            <tbody id='book_buy'>
-              <tr   class='text-center row book-loading' id='book_buy_1'>
-                <td   class='text-center col-12 pt-5 pb-5' colspan="3"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
-              </tr>
-               
-              
-            </tbody>
-          </table>
-        </div>
-        <div class="market-history">
-          <ul class="nav nav-pills" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="pill" href="#recent-trades" role="tab" aria-selected="true">Recent
-                Trades</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " data-toggle="pill" href="#market-depth" role="tab" aria-selected="false">Market
-                Depth</a>
-            </li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane fade show active" id="recent-trades" role="tabpanel">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Time</th>
-                    <th>Price(<span class='market-name text-uppercase'>---</span>)</th>
-                    <th>Amount(<span class='coin-name text-uppercase'>---</span>)</th>
-                  </tr>
-                </thead>
-                <tbody id='book_history'>
-                  <tr   class='text-center row book-loading'>
-                    <td   class='text-center col-12 pt-5 pb-5' colspan="3"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-            <div class="tab-pane fade " id="market-depth" role="tabpanel">
-              <div class="depth-chart-container">
-                <div class="depth-chart-inner">
-                  <div id="lightDepthChart"></div>
+                <div class="market-history">
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#recent-trades" role="tab" aria-selected="true">Recent Trades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="pill" href="#market-depth" role="tab" aria-selected="false">Market Depth</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="recent-trades" role="tabpanel">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Price(<span class='market-name text-uppercase'>---</span>)</th>
+                                        <th>Amount(<span class='coin-name text-uppercase'>---</span>)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='book_history'>
+                                    <tr class='text-center row book-loading'>
+                                        <td class='text-center col-12 pt-5 pb-5' colspan="3">
+                                            <img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade " id="market-depth" role="tabpanel">
+                            <div class="depth-chart-container">
+                                <div class="depth-chart-inner">
+                                    <div id="lightDepthChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            <div class="col-md-3">
+                <div class="market-news">
+                    <h2 class="heading">Market News</h2>
+                    <ul>
+                        <li>
+                            <a class="twitter-timeline" href="https://twitter.com/BitstenToken" data-tweet-limit="3" data-width="399"></a>
+                            <script async="async" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="market-history market-order">
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#open-orders" role="tab" aria-selected="true">Open Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#stop-orders" role="tab" aria-selected="false">Closed Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#order-history" role="tab" aria-selected="false">Order history</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#trade-history" role="tab" aria-selected="false">Balance</a>
+                        </li>
+                    </ul>
+                    <style>
+                        .market-order-item {
+                            padding: 0;
+                        }
+                    </style>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="open-orders" role="tabpanel">
+                            <div class='col-12'>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="d-flex justify-content-between market-order-item">
+                                            <th>Id</th>
+                                            <th>Time</th>
+                                            <th class='text-center'>Buy/Sell</th>
+                                            <th>Price</th>
+                                            <th>Amount</th>
+                                            <th>Filled</th>
+                                            <th class='text-center'>Cancel All</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="openorder">
+
+                                        <tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class='col-12' id='openorder'></div>
+                        </div>
+                        <div class="tab-pane fade" id="stop-orders" role="tabpanel">
+                            <ul class="d-flex justify-content-between market-order-item">
+                                <li>Time</li>
+                                <li>All pairs</li>
+                                <li>All Types</li>
+                                <li>Buy/Sell</li>
+                                <li>Price</li>
+                                <li>Amount</li>
+                                <li>Executed</li>
+                                <li>Unexecuted</li>
+                            </ul>
+                            <span class="no-data">
+                                                                                    <i class="icon ion-md-document"></i>
+                                                                                    No data
+                                                                                </span>
+                        </div>
+                        <div class="tab-pane fade" id="order-history" role="tabpanel">
+                            <ul class="d-flex justify-content-between market-order-item">
+                                <li>Time</li>
+                                <li>All pairs</li>
+                                <li>All Types</li>
+                                <li>Buy/Sell</li>
+                                <li>Price</li>
+                                <li>Amount</li>
+                                <li>Executed</li>
+                                <li>Unexecuted</li>
+                            </ul>
+                            <span class="no-data">
+                                                                                    <i class="icon ion-md-document"></i>
+                                                                                    No data
+                                                                                </span>
+                        </div>
+                        <div class="tab-pane fade" id="trade-history" role="tabpanel">
+                            <ul class="d-flex justify-content-between market-order-item">
+                                <li>Time</li>
+                                <li>All pairs</li>
+                                <li>All Types</li>
+                                <li>Buy/Sell</li>
+                                <li>Price</li>
+                                <li>Amount</li>
+                                <li>Executed</li>
+                                <li>Unexecuted</li>
+                            </ul>
+                            <span class="no-data">
+                                                                                    <i class="icon ion-md-document"></i>
+                                                                                    No data
+                                                                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="market-news">
-          <h2 class="heading">Market News</h2>
-          <ul>
-            <li>
-              <a class="twitter-timeline" href="https://twitter.com/BitstenToken" data-tweet-limit="3" data-width="399" ></a>
-              <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </li>
-            
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <div class="market-history market-order">
-          <ul class="nav nav-pills" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="pill" href="#open-orders" role="tab" aria-selected="true">Open
-                Orders</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#stop-orders" role="tab" aria-selected="false">Closed
-                Orders</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#order-history" role="tab" aria-selected="false">Order
-                history</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="pill" href="#trade-history" role="tab" aria-selected="false">Balance</a>
-            </li>
-          </ul>
-          <style>
-            .market-order-item {
-                
-                padding: 0px;
-            }
-          </style>
-          <div class="tab-content">
-            <div class="tab-pane fade show active" id="open-orders" role="tabpanel">
-              <div class='col-12'>
-                <table class="table">
-                  <thead>
-                    <tr class="d-flex justify-content-between market-order-item">
-                      <th>Id</th>
-                      <th>Time</th>
-                      <th class='text-center'>Buy/Sell</th>
-                      <th>Price</th>
-                      <th>Amount</th>
-                      <th>Filled</th>
-                      <th class='text-center'>Cancel All</th>
-                    </tr>
-                  </thead>
-                  <tbody id="openorder" >
-                   
-                    <tr> 
-                  </tbody>
-                </table>
-            
-             </div>
-             <div class='col-12' id='openorder'>
-              
-            </div>
-            </div>
-            <div class="tab-pane fade" id="stop-orders" role="tabpanel">
-              <ul class="d-flex justify-content-between market-order-item">
-                <li>Time</li>
-                <li>All pairs</li>
-                <li>All Types</li>
-                <li>Buy/Sell</li>
-                <li>Price</li>
-                <li>Amount</li>
-                <li>Executed</li>
-                <li>Unexecuted</li>
-              </ul>
-              <span class="no-data">
-                <i class="icon ion-md-document"></i>
-                No data
-              </span>
-            </div>
-            <div class="tab-pane fade" id="order-history" role="tabpanel">
-              <ul class="d-flex justify-content-between market-order-item">
-                <li>Time</li>
-                <li>All pairs</li>
-                <li>All Types</li>
-                <li>Buy/Sell</li>
-                <li>Price</li>
-                <li>Amount</li>
-                <li>Executed</li>
-                <li>Unexecuted</li>
-              </ul>
-              <span class="no-data">
-                <i class="icon ion-md-document"></i>
-                No data
-              </span>
-            </div>
-            <div class="tab-pane fade" id="trade-history" role="tabpanel">
-              <ul class="d-flex justify-content-between market-order-item">
-                <li>Time</li>
-                <li>All pairs</li>
-                <li>All Types</li>
-                <li>Buy/Sell</li>
-                <li>Price</li>
-                <li>Amount</li>
-                <li>Executed</li>
-                <li>Unexecuted</li>
-              </ul>
-              <span class="no-data">
-                <i class="icon ion-md-document"></i>
-                No data
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <script src="assets/js/amcharts-core.min.js"></script>
-  <script src="assets/js/amcharts.min.js"></script>
-  <script src="assets/js/jquery.mCustomScrollbar.js"></script>
-  <script src="assets/js/custom.js"></script>
-  <script>
-    /*
-    $('tbody, .market-news ul').mCustomScrollbar({
-      theme: 'minimal',
-    });
-    */
-  </script>
-</body>
 
-</html>
+    <div id='order-modal' class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="res-order" class="error text-info"></p>
+                </div>
+                <div class="modal-footer">
 
-<script>
-  var SOCKET_URL = 'exchange';
-</script>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="assets/js/amcharts-core.min.js"></script>
+    <script src="assets/js/amcharts.min.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $('tbody, .market-news ul').mCustomScrollbar({
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              theme: 'minimal',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
+    </script>
+    </body>
+
+    </html>
+
+    <script>
+        var SOCKET_URL = 'exchange';
+    </script>

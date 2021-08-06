@@ -2,85 +2,81 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bitsten Login</title>
-  <link rel="shortcut icon" href='https://f1.bitsten.com/assets/images/icon_bitsten.png' />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bitsten Login</title>
+    <link rel="shortcut icon" href='https://f1.bitsten.com/assets/images/icon_bitsten.png' />
 </head>
 
 <body>
-  
-  <% include ../partials/css -%>
 
-  <div class="vh-100 d-flex justify-content-center">
-     
-   <div class="form-access my-auto">
-     
+    <% include ../partials/css -%>
 
-      <div class='p-3 pt-5 pb-5   shadow' style='width:350px;max-width:98%'>
+        <div class="vh-100 d-flex justify-content-center">
 
-        <div class ="col-12 text-center p-3 mb-4">
-          <a href="/"><img src='https://f1.bitsten.com/assets/images/logo_bitsten_terang.png' width="150px"/></a>
-          </div>
-      
-        <div class="form-group">
-          <input type="email"  autocomplete="off" 
-          readonly  
-       onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   autocomplete="off" id="email"  class="form-control" placeholder="Email Address">
+            <div class="form-access my-auto">
+
+
+                <div class='p-3 pt-5 pb-5   shadow' style='width:350px;max-width:98%'>
+
+                    <div class="col-12 text-center p-3 mb-4">
+                        <a href="/"><img src='https://f1.bitsten.com/assets/images/logo_bitsten_terang.png' width="150px" /></a>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');" autocomplete="off" id="email" class="form-control" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');" autocomplete="off" id="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="text-right">
+                        <a href="resetpassword">Forgot Password?</a>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="form-checkbox">
+                        <label class="custom-control-label" for="form-checkbox">Remember me</label>
+                    </div>
+                    <button class="btn btn-primary" onClick="login()">Sign In</button>
+
+                </div>
+
+
+                <h2>Don't have an account? <a href="register">Sign up here</a></h2>
+            </div>
         </div>
-        <div class="form-group">
-          <input type="password"  autocomplete="off" 
-          readonly  
-       onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   autocomplete="off" id="password" class="form-control" placeholder="Password">
-        </div>
-        <div class="text-right">
-          <a href="resetpassword">Forgot Password?</a>
-        </div>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="form-checkbox">
-          <label class="custom-control-label" for="form-checkbox">Remember me</label>
-        </div>
-        <button   class="btn btn-primary" onClick="login()">Sign In</button>
-      
-      </div>
-
-       
-      <h2>Don't have an account? <a href="register">Sign up here</a></h2>
-    </div>
-  </div>
 
 
-  <div id='login-modal' class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Warning !</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div id='login-modal' class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Warning !</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-        <div class="modal-body">
-          <p id="login_error" class="error text-danger"></p>
-        </div>
-        <div class="modal-footer">
-          
-          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                    </div>
+                    <div class="modal-body">
+                        <p id="login_error" class="error text-danger"></p>
+                    </div>
+                    <div class="modal-footer">
 
-  <script>
-    var SOCKET_URL = 'login';
-  </script>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <script src="assets/js/jquery-3.4.1.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
- 
-  <script src="assets/js/transactions.js"></script>
-  <script src="assets/js/custom.js"></script>
+        <script>
+            var SOCKET_URL = 'login';
+        </script>
+
+        <script src="assets/js/jquery-3.4.1.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <script src="assets/js/transactions.js"></script>
+        <script src="assets/js/custom.js"></script>
 </body>
 
 </html>

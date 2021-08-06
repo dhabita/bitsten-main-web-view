@@ -1,58 +1,56 @@
 var urlp = "https://api3.bitsten.com/public";
 
 
-function assets(e){
+function assets(e) {
     $.ajaxSetup({
-        headers:{
-         //  'Authorization': 'Bearer ' + getCookie("token")
+        headers: {
+            //  'Authorization': 'Bearer ' + getCookie("token")
         }
-     });
-
-
- 
-
-    $.get( urlp+"/assets?limit=1000")
-    .done(function( data ) {
-       // console.log(  data );
-        if(data.status) {
-            e(data.data)
-            // var m =document.querySelectorAll('.balance_'+coin);
-            // for(var i=0;i<m.length;i++) m[i].innerHTML= number_format(data.data[coin].amount);
-        }
-       
     });
+
+
+
+
+    $.get(urlp + "/assets?limit=1000")
+        .done(function(data) {
+            // console.log(  data );
+            if (data.status) {
+                e(data.data)
+                    // var m =document.querySelectorAll('.balance_'+coin);
+                    // for(var i=0;i<m.length;i++) m[i].innerHTML= number_format(data.data[coin].amount);
+            }
+
+        });
 }
-if(SOCKET_URL=="wallet"){
+if (SOCKET_URL == "wallet") {
 
-    if(getCookie("token")=="") location.href = "login";  
+    if (getCookie("token") == "") location.href = "login";
 
-    assets(function(d){
-         d.forEach(e => {
+    assets(function(d) {
+        d.forEach(e => {
             var da = '\
-                    <a href="#'+e.code.toUpperCase()+'" onCLick="select_coin(\''+e.code+'\')" class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
+                    <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
                           aria-selected="true">\
                         <div class="d-flex">\
-                        <img src="https://f1.bitsten.com/assets/images/logo/'+e.code+'.png"  style="width:45px !important ; height:45px !important" > \
+                        <img src="https://f1.bitsten.com/assets/images/logo/' + e.code + '.png"  style="width:45px !important ; height:45px !important" > \
                         <div>\
-                            <h5>'+e.code.toUpperCase()+'</h4>\
-                            <p>'+e.name+'</p>\
+                            <h5>' + e.code.toUpperCase() + '</h4>\
+                            <p>' + e.name + '</p>\
                         </div>\
                         </div>\
                         <div>\
-                        <h6 class="balance_'+e.code+'"></h5>\
-                        <p   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_'+e.code+'_hold ">  </span> </p>\
+                        <h6 class="balance_' + e.code + '"></h5>\
+                        <p   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_' + e.code + '_hold ">  </span> </p>\
                         </div>\
                     </a> \
                         ';
 
             $("#list_assets").append(da);
-            loader($(".balance_"+e.code),15);
-            loader($(".balance_"+e.code+"_hold"),13);
+            loader($(".balance_" + e.code), 15);
+            loader($(".balance_" + e.code + "_hold"), 13);
             balance(e.code);
             $("#load-assets").hide();
-         });
+        });
     });
-  
-}
 
- 
+}
