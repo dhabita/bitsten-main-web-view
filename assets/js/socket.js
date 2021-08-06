@@ -419,11 +419,11 @@
 <td class=" text-right  ">' + number_format(e.bid) + '</td>\
 <td class=" text-right ' + col + '">' + number_format(change, 2) + '%</td>\
 <td class=" text-right hide-xs">' + number_format(e.high) + '</td>\
-<td class="text-right  hide-xs ">' + number_format(e.low) + '</td>\
+<td class=" text-right  hide-xs ">' + number_format(e.low) + '</td>\
 <td class=" text-right hide-xs " >' + number_format(e.volume) + '</td>';
 
          var tddatam = '\
-<td   class="col-5 pl-4"><i class="icon ion-md-star"></i> <img src="https://f1.bitsten.com/assets/images/logo/' + coin + '.png"  width="20px"  > ' + e.market_show.toUpperCase() + '</td>\
+<td   class="col-5 pl-4"><i class="icon ion-md-star"></i> <img src="https://f1.bitsten.com/assets/images/logo/' + coin + '.png"  width="20px"  > ' + coin.toUpperCase() + '</td>\
 <td   class="col-4 text-right">' + number_format(e.bid) + '</td>\
 <td   class="col-3 text-center ' + col + '">' + number_format(change, 2) + '%</td>';
 
