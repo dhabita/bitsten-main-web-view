@@ -110,6 +110,10 @@ app.get('/markets', function(req, res) {
     });
 });
 
+app.get('/exchange/:market', function(req, res) {
+    var data = {};
+    res.redirect('/exchange#' + req.params.market);
+});
 app.get('/exchange', function(req, res) {
     var data = {};
     res.render('pages/exchange', {
