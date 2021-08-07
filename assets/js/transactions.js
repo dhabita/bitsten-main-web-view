@@ -158,6 +158,134 @@ function CheckPassword(inputtxt) {
 }
 
 
+function get_code_reset() {
+    $.ajaxSetup({
+        headers: {
+            //  'Authorization': "auth username and password"
+        }
+    });
+
+
+    var email = $("#email").length ? $("#email").val() : "";
+    var password = $("#password").length ? $("#password").val() : "";
+    var c_password = $("#c_password").length ? $("#c_password").val() : "";
+
+    var data = {
+        email: email,
+        password: password,
+        c_password: c_password
+
+    };
+
+
+    if (!validateEmail(email)) {
+        $("#login_error").html("Invalid Email Format");
+        $('#login-modal').modal('show');
+        return;
+    }
+    if (!CheckPassword(password)) {
+        $("#login_error").html("Password between 6 to 30 characters which contain at least one numeric digit, one uppercase and one lowercase letter");
+        $('#login-modal').modal('show');
+        return;
+    }
+
+    if (password != c_password) {
+        $("#login_error").html("Infalid Re-type password");
+        $('#login-modal').modal('show');
+        return;
+    }
+
+
+
+
+
+    let d = {};
+    d.data = JSON.stringify(data);
+
+    $.post(url_p + "/email/request", d)
+        .done(function(data) {
+            // console.log(data);
+            //alert( "Data Loaded: " + data );
+            if (data.status) {
+                console.log("email sent");
+                $("#login_success").html(data.message);
+                $('#login-modal-s').modal('show');
+
+            } else {
+                $("#login_error").html(data.message);
+                $('#login-modal').modal('show');
+            }
+        });
+}
+
+
+function resetpassword() {
+    $.ajaxSetup({
+        headers: {
+            //  'Authorization': "auth username and password"
+        }
+    });
+
+
+    var email = $("#email").length ? $("#email").val() : "";
+    var password = $("#password").length ? $("#password").val() : "";
+    var c_password = $("#c_password").length ? $("#c_password").val() : "";
+    var email_code = $("#email_code").length ? $("#email_code").val() : "";
+
+    var data = {
+        email: email,
+        password: password,
+        c_password: c_password,
+        email_code: email_code
+
+    };
+
+
+    if (!validateEmail(email)) {
+        $("#login_error").html("Invalid Email Format");
+        $('#login-modal').modal('show');
+        return;
+    }
+    if (!CheckPassword(password)) {
+        $("#login_error").html("Password between 6 to 30 characters which contain at least one numeric digit, one uppercase and one lowercase letter");
+        $('#login-modal').modal('show');
+        return;
+    }
+
+    if (password != c_password) {
+        $("#login_error").html("Infalid Re-type password");
+        $('#login-modal').modal('show');
+        return;
+    }
+    if (email_code.length != 6) {
+        $("#login_error").html("Invalid Email Code");
+        $('#login-modal').modal('show');
+        return;
+    }
+
+
+
+
+
+
+    $.post(url_p + "/resetpassword", data)
+        .done(function(data) {
+            // console.log(data);
+            //alert( "Data Loaded: " + data );
+            if (data.status) {
+                console.log("email sent");
+                $("#login_success").html(data.message);
+                $('#login-modal-s').modal('show');
+
+            } else {
+                $("#login_error").html(data.message);
+                $('#login-modal').modal('show');
+            }
+        });
+}
+
+
+
 function get_code_register() {
     $.ajaxSetup({
         headers: {
@@ -227,7 +355,6 @@ function get_code_register() {
             }
         });
 }
-
 
 function register() {
     $.ajaxSetup({
