@@ -39,6 +39,40 @@ function balance(coin) {
 
 function wallet_result(coin, data) {
 
+    if (data.condition == 1) {
+        $('#deposit-online').show();
+        $('#deposit-offline').hide();
+    }
+    if (data.condition == 2) {
+        $('#deposit-online').hide();
+        $('#deposit-offline').show();
+    }
+    if (data.condition == 3) {
+        $('#deposit-online').show();
+        $('#deposit-offline').hide();
+    }
+    if (data.condition == 4) {
+        $('#deposit-online').hide();
+        $('#deposit-offline').show();
+    }
+    if (data.condition == 5) {
+        $('#deposit-online').hide();
+        $('#deposit-offline').show();
+    }
+    let e = "etherscan.io";
+    if (data.network == 2) e = "tronscan.io/#";
+    if (data.network == 3) e = "bscscan.com";
+    if (data.code == "btc") e = "www.blockchain.com/btc";
+    if (data.code == "ltc") e = "btc.com/ltc";
+    if (data.code == "doge") e = "https://dogechain.info";
+
+    let ex = "<a target='_blank' href='https://" + e + "/address/" + data.addr + "'>https://" + e + "</a>";
+    $("#exploler").html(ex);
+
+
+
+    var m = document.querySelectorAll('.offline-message');
+    for (var i = 0; i < m.length; i++) $(m[i]).html(data.message);
 
     var m = document.querySelectorAll('.coin_nama');
     for (var i = 0; i < m.length; i++) $(m[i]).html(data.name);
@@ -66,6 +100,12 @@ function wallet_result(coin, data) {
     for (var i = 0; i < m.length; i++) $(m[i]).html(data.confirm);
     var m = document.querySelectorAll('.wallet_' + coin);
     for (var i = 0; i < m.length; i++) $(m[i]).val(data.addr);
+
+    if (data.condition == 2 || data.condition > 3) {
+
+        $("#input-dp").hide();
+    } else $("#input-dp").show();
+
     create_qr(data.addr);
 }
 

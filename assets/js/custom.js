@@ -1039,7 +1039,7 @@ function create_qr(a) {
 
 function loader(location, height) {
     location.html(
-        '<center><span class="loading loading03" style="font-size:' + height + 'px">\
+        '<span class="loading loading03" style="font-size:' + height + 'px">\
     <span>L</span>\
     <span>o</span>\
     <span>a</span>\
@@ -1047,6 +1047,6 @@ function loader(location, height) {
     <span>i</span>\
     <span>n</span>\
     <span>g</span>\
-  </span> </center>'
+  </span>'
     );
 }

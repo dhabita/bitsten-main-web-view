@@ -1,217 +1,234 @@
- 
- 
 <% layout('../layouts/app') -%>
-  <style>
-    .nav-pills .nav-link.active, .nav-pills  .nav-link {
-    width: 100%;
-    }
-  </style>
-  <div class="settings mtb15">
-    <div class="container-fluid">
-      <div class="row">
-        
-        <div class="col-md-12 ">
-          <div class="tab-content" id="v-pills-tabContent">
-            
-            <div class="tab-pane fade show active" id="settings-wallet" role="tabpanel"
-              aria-labelledby="settings-wallet-tab">
-              <div class="wallet">
-                <div class="row">
+    <style>
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link {
+            width: 100%;
+        }
+    </style>
+    <div class="settings mtb15">
+        <div class="container-fluid">
+            <div class="row">
 
-                  <div class="col-md-12 col-lg-4">
-                    
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <button type="button" class="btn btn-outline-secondary">Action</button>
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="col-md-12 ">
+                    <div class="tab-content" id="v-pills-tabContent">
+
+                        <div class="tab-pane fade show active" id="settings-wallet" role="tabpanel" aria-labelledby="settings-wallet-tab">
+                            <div class="wallet">
+                                <div class="row">
+
+                                    <div class="col-md-12 col-lg-4">
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <button type="button" class="btn btn-outline-secondary">Action</button>
+                                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">Hide Zero Blance</a>
-                          <a class="dropdown-item" href="#">Hide Disable Deposit</a>
-                          <a class="dropdown-item" href="#">Show All</a>
-                        
-                        </div>
-                      </div>
-                      <input type="text" class="form-control text-center" aria-label="" placeholder="Search Coin / Token">
-                    </div>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Hide Zero Blance</a>
+                                                    <a class="dropdown-item" href="#">Hide Disable Deposit</a>
+                                                    <a class="dropdown-item" href="#">Show All</a>
 
-                    <div id="list_assets" class="nav    nav-pills" role="tablist" aria-orientation="vertical" style='height: 600px; overflow-x:auto'>
-                     
-                      <div id = 'load-assets' class='text-center col-12'>
-                        <div   class='text-center col-12  pb-5'  style="padding-top:150px" ><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important;height: 100px !important;"></div>
-                      </div>
-                      
-                     
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-lg-8">
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="coinBTC" role="tabpanel">
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control text-center" aria-label="" placeholder="Search Coin / Token">
+                                        </div>
 
-                        <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
-                          <label class="btn btn-success active" onClick="$('.card').hide();$('#deposit').show()">
+                                        <div id="list_assets" class="nav    nav-pills" role="tablist" aria-orientation="vertical" style='height: 600px; overflow-x:auto'>
+
+                                            <div id='load-assets' class='text-center col-12'>
+                                                <div class='text-center col-12  pb-5' style="padding-top:150px"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important;height: 100px !important;"></div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-8">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="coinBTC" role="tabpanel">
+
+                                                <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
+                                                    <label class="btn btn-success active" onClick="$('.card').hide();$('#deposit').show()">
                             <input type="radio" name="options" id="option1" autocomplete="off" checked > Deposit
                           </label>
-                          <label class="btn btn-warning" onClick="$('.card').hide();$('#withdraw').show()">
+                                                    <label class="btn btn-warning" onClick="$('.card').hide();$('#withdraw').show()">
                             <input type="radio" name="options" id="option2" autocomplete="off" onClick="$('.card').hide();$('#withdraw').show()"> Withdraw
                           </label>
-                          <label class="btn btn-info" onClick="$('.card').hide();$('#history').show(); transaction($('.coin_name').first().text().toLowerCase());">
+                                                    <label class="btn btn-info" onClick="$('.card').hide();$('#history').show(); transaction($('.coin_name').first().text().toLowerCase());">
                             <input type="radio" name="options" id="option3" autocomplete="off" > History
                           </label>
-                        </div>
-                       
-                           
-                        <div class="card" id="deposit">
-                          <div class="card-body">
-                            <h5 class="card-title">Wallet Deposit Address for <span class='coin_nama text-info loader_12'>---</span> ( <span class='coin_name text-info loader_12'>---</span> )</h5>
-                            <div class="row wallet-address">
-                              <div class="col-12">
+                                                </div>
 
-                                  <script>
-                                      function copy() {
-                                  /* Get the text field */
-                                  var copyText = document.getElementById("w_addr");
-                                  /* Select the text field */
-                                  copyText.select();
-                                  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-                                
-                                  /* Copy the text inside the text field */
-                                  document.execCommand("copy");
-                                
-                                  /* Alert the copied text */
-                                  alert("Address Copied : " + copyText.value);
-                              }
-                                </script>
-                                
-                                  <div class="input-group" style='padding-top:0px !important'>
-                                    <input type="text" id='w_addr' class="form-control text-center deposit_address loader_12" value="---">
-                                    <div class="input-group-prepend">
-                                      <button class="btn btn-primary" onClick='copy()'>COPY</button>
-                                    </div>
-                                  </div>
-                              </div>
-                                
-                                  <div class="col-md-8">
-                                  <ul>
-                                  
-                                  <li><h4>Important !</h4></li>
-                                  <li class='coin_network ' style='display:none'></li>
-                                  <li>Send only <span class='coin_nama text-info loader_12'>--------</span> ( <span class='coin_name text-info loader_12'>---</span> ) to this deposit address.</li>
-                                  <li>Sending any other currency to this address may result in the loss of your deposit.</li>
-                                  <!--This Token is Binance Smart Chain ( BEP20 ).-->
-                                  <li>For self destruction token will be reduced 2 * BURN value.</li>
-        
-                                  <li>Minimum deposit is <span class='min_dp text-info loader_12'></span> <span class='coin_name text-info loader_12'>---</span> deposits below that value will not be added.</li>
-                                  <li>Coins will be deposited immediately after <span class='min_conf text-info loader_12'>20</span> network confirmation</li>
-                                  <li class='contract_address text-info' style='display:none'></li>
-                                </ul>
-                                </p>
-                                
-                              </div>
-                              <div class="col-md-4 text-center" style=''>
-                                <div class="" id = "qrcode" style='margin:10px auto;width:170px'>
-                              
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                                                <style>
+                                                    .settings .wallet .tab-content button {
+                                                        padding: 5px 20px;
+                                                        margin-right: 5px;
+                                                        margin-bottom: 5px;
+                                                    }
+                                                    
+                                                    .settings .wallet-address input {
+                                                        padding: 5px 15px;
+                                                        font-size: 14px;
+                                                    }
+                                                </style>
 
-                           
-                        <div class="card" id="withdraw" style='display: none;'>
-                          <div class="card-body">
-                            <h5 class="card-title">Withdraw</h5>
-                            <div class="row ">
-                              <div class="col-12">
-                                <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all
-                                  of your
-                                  funds at once if you deposit more than your daily withdrawal limit.</p>
+                                                <div class="card" id="deposit">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center">Wallet Deposit Address for <span class='coin_nama text-info loader_12'>---</span> ( <span class='coin_name text-info loader_12'>---</span> )</h5>
+                                                        <div class="row wallet-address">
+                                                            <div class="col-12">
 
-                                  <div class="row">
-                                    <div class="col-12 col-md-7 col-lg-6">
-                                  <div class="form-access my-auto">
-                                    <form>
-                                      
-                                      
-                                      <div class="form-group">
-                                        <input type="text"       autocomplete="off" 
-                                 readonly  
-                              onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   class="form-control" placeholder="Wallet address">
-                                      </div>
-                                     
-                                      <div class="form-group">
-                                        <input type="number" class="form-control"  autocomplete="off" 
-                                        readonly  
-                                     onfocus="this.removeAttribute('readonly');" placeholder="Amount">
-                                      </div>
-                                      
-                                     
-                                      <div class="form-group">
-                                      <div class="input-group mb-2">
-                                                         
-                                        <input class=" form-control "        autocomplete="off" 
-                                 readonly  
-                              onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');"   type="text" id="code"  placeholder="Email Code" >
-                                         <div class="input-group-append">
-                                          <span class="input-group-text input-success" style="cursor:pointer" onclick="copy()">Get Code</span>     
-                                          </div>
-                                     </div>
-                                     </div>
-                              
-                                      <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="form-checkbox">
-                                        <label class="custom-control-label" for="form-checkbox">I agree to the <a href="#!">Terms &
+                                                                <script>
+                                                                    function copy() {
+                                                                        /* Get the text field */
+                                                                        var copyText = document.getElementById("w_addr");
+                                                                        /* Select the text field */
+                                                                        copyText.select();
+                                                                        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+                                                                        /* Copy the text inside the text field */
+                                                                        document.execCommand("copy");
+
+                                                                        /* Alert the copied text */
+                                                                        alert("Address Copied : " + copyText.value);
+                                                                    }
+                                                                </script>
+
+                                                                <div id='input-dp' class="input-group" style='padding-top:0px !important'>
+                                                                    <input type="text" id='w_addr' class="form-control text-center deposit_address loader_12" value="---">
+                                                                    <div class="input-group-prepend">
+                                                                        <button class="btn btn-primary" onClick='copy()'>COPY</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 text-center"> <small>Explorer</small> <small id='exploler'></small></div>
+
+                                                            </div>
+                                                            <div class="col-12 mt-3">
+                                                                <div class="row">
+                                                                    <div class="col-md-8">
+                                                                        <ul id="deposit-offline" style='display:none'>
+                                                                            <li>
+                                                                                <h4>Deposit Offline !</h4>
+                                                                            </li>
+                                                                            <li>Reason / Note :</li>
+                                                                            <li class="offline-message text-warning">
+
+                                                                            </li>
+                                                                        </ul>
+                                                                        <ul id="deposit-online">
+
+                                                                            <li>
+                                                                                <h4>Important !</h4>
+                                                                            </li>
+                                                                            <li class='coin_network ' style='display:none'></li>
+                                                                            <li>Send only <span class='coin_nama text-info loader_12'>--------</span> ( <span class='coin_name text-info loader_12'>---</span> ) to this deposit address.</li>
+                                                                            <li>Sending any other currency to this address may result in the loss of your deposit.</li>
+                                                                            <!--This Token is Binance Smart Chain ( BEP20 ).-->
+                                                                            <li>For self destruction token will be reduced 2 * BURN value.</li>
+
+                                                                            <li>Minimum deposit is <span class='min_dp text-info loader_12'></span> <span class='coin_name text-info loader_12'>---</span> deposits below that value will not be added.</li>
+                                                                            <li>Coins will be deposited immediately after <span class='min_conf text-info loader_12'>20</span> network confirmation</li>
+                                                                            <li class='contract_address text-info' style='display:none'></li>
+                                                                        </ul>
+                                                                        </p>
+
+                                                                    </div>
+                                                                    <div class="col-md-4 pt-3 text-center" style=''>
+                                                                        <div class="" id="qrcode" style='margin:10px auto;width:170px'>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="card" id="withdraw" style='display: none;'>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Withdraw</h5>
+                                                        <div class="row ">
+                                                            <div class="col-12">
+                                                                <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all of your funds at once if you deposit more than your daily withdrawal limit.</p>
+
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-7 col-lg-6">
+                                                                        <div class="form-access my-auto">
+                                                                            <form>
+
+
+                                                                                <div class="form-group">
+                                                                                    <input type="text" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');" class="form-control" placeholder="Wallet address">
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <input type="number" class="form-control" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" placeholder="Amount">
+                                                                                </div>
+
+
+                                                                                <div class="form-group">
+                                                                                    <div class="input-group mb-2">
+
+                                                                                        <input class=" form-control " autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');" type="text" id="code" placeholder="Email Code">
+                                                                                        <div class="input-group-append">
+                                                                                            <span class="input-group-text input-success" style="cursor:pointer" onclick="copy()">Get Code</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="custom-control custom-checkbox">
+                                                                                    <input type="checkbox" class="custom-control-input" id="form-checkbox">
+                                                                                    <label class="custom-control-label" for="form-checkbox">I agree to the <a href="#!">Terms &
                                             Conditions</a></label>
-                                      </div>
-                                      <button type="submit" class="btn btn-warning">Withdraw</button>
-                                    </form> 
-                                  </div>
-                              </div>
+                                                                                </div>
+                                                                                <button type="submit" class="btn btn-warning">Withdraw</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card  " id="history" style='display:none'>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Latest Deposit and Withdraw history <b class='coin_name loader_12'></b> in last 30 Days</h5>
+                                                        <div class="wallet-history">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Id</th>
+                                                                        <th>Date</th>
+                                                                        <th>Confirm</th>
+                                                                        <th>Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="transaction">
+
+                                                                    <tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                              
-                            </div>
-                          </div>
                         </div>
 
-                        <div class="card  " id="history" style='display:none'>
-                          <div class="card-body">
-                            <h5 class="card-title">Latest Deposit and Withdraw history <b class='coin_name loader_12'></b> in last 30 Days</h5>
-                            <div class="wallet-history">
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th>Id</th>
-                                    <th>Date</th>
-                                    <th>Confirm</th>
-                                    <th>Amount</th>
-                                  </tr>
-                                </thead>
-                                <tbody id="transaction">
-                                 
-                                  <tr> 
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                   
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            
-          </div>
         </div>
-      </div>
     </div>
-  </div>
- 
 
-  <script>
-    var SOCKET_URL = 'wallet';
-  </script>
-  
+
+    <script>
+        var SOCKET_URL = 'wallet';
+    </script>
