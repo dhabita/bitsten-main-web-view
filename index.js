@@ -156,6 +156,12 @@ app.get('/reg/:id', function(req, res) {
 });
 
 
+app.get('/bst', function(req, res) {
+    var data = {};
+    res.render('pages/bst', {
+        'data': data
+    });
+});
 
 
 app.listen(port, () => console.info(`App listen on port ${port}`));
