@@ -99,14 +99,14 @@ app.get('/api/v1/public/getticker/:all', function(req, res) {
 app.get('/', function(req, res) {
     var data = {};
     res.render('pages/landing', {
-        'data': data
+        title: "Bitsten Exchange"
     });
 });
 
 app.get('/markets', function(req, res) {
     var data = {};
     res.render('pages/markets', {
-        'data': data
+        title: "All Market Bitsten Exchange"
     });
 });
 
@@ -117,28 +117,28 @@ app.get('/exchange/:market', function(req, res) {
 app.get('/exchange', function(req, res) {
     var data = {};
     res.render('pages/exchange', {
-        'data': data
+        title: "Trading page Bitsten Exchange"
     });
 });
 
 app.get('/login', function(req, res) {
     var data = {};
     res.render('pages/login', {
-        'data': data
+        title: "Login Bitsten Exchange"
     });
 });
 
 app.get('/register', function(req, res) {
     var data = {};
     res.render('pages/register', {
-        'data': data
+        title: "Register Bitsten Exchange"
     });
 });
 
 app.get('/resetpassword', function(req, res) {
     var data = {};
     res.render('pages/resetpassword', {
-        'data': data
+        title: "Reset password Bitsten Exchange"
     });
 });
 
@@ -146,7 +146,7 @@ app.get('/resetpassword', function(req, res) {
 app.get('/wallet', function(req, res) {
     var data = {};
     res.render('pages/wallet', {
-        'data': data
+        title: "Wallet Bitsten Exchange"
     });
 });
 
@@ -159,7 +159,7 @@ app.get('/reg/:id', function(req, res) {
 app.get('/bst', function(req, res) {
     var data = {};
     res.render('pages/bst', {
-        'data': data
+        title: "Bitsten Token ( BST )"
     });
 });
 
