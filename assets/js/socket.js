@@ -484,6 +484,8 @@
 
  function gethash() {
      var h = window.location.hash;
+     if (h == "" || h == "#") window.location.hash = "bst_usdt";
+     h = "#bst_usdt";
      if (hash == h) return;
      hash = h;
      //update data

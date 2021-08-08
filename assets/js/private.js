@@ -227,11 +227,10 @@ function openorder_result(market, data) {
         let color = " text-success ";
         if (e.tx == "sell") color = " text-danger ";
         $("#openorder").append(
-            '<tr id = "' +
+            '<tr title="Order opened at ' + d + '" id = "' +
             e.tx + 'openorder_' +
             e.id + '" class="d-flex justify-content-between market-order-item">\
                 <td>' + e.id + '</td>\
-                <td>' + d + '</td>\
                 <td class="text-center ' + color + '">' + e.tx.toUpperCase() + '</td>\
                 <td>' + number_format(e.price) + '</td>\
                 <td>' + number_format(e.total) + '</td>\

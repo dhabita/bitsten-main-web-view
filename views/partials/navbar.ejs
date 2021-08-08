@@ -1,201 +1,174 @@
- 
-
-
 <style>
-  header .navbar-brand img {
-  height: 25px;
-}
+    header .navbar-brand img {
+        height: 25px;
+    }
 </style>
 
- 
-  <header class="light-bb">
+
+<header class="light-bb">
     <nav class="navbar navbar-expand-lg">
-      <a class="navbar-brand" href="/"><img src="https://f1.bitsten.com/assets/images/logo_bitsten_terang.png" height='20px' alt="logo"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu"
-        aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/"><img src="https://f1.bitsten.com/assets/images/logo_bitsten_terang.png" height='20px' alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerMenu" aria-controls="headerMenu" aria-expanded="false" aria-label="Toggle navigation">
         <i class="icon ion-md-menu"></i>
       </button>
 
-      <div class="collapse navbar-collapse" id="headerMenu">
-        <ul class="navbar-nav mr-auto">
-           
-          <li class="nav-item  ">
-            <a class="nav-link  " href="exchange#bst_usdt"  >
+        <div class="collapse navbar-collapse" id="headerMenu">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item  ">
+                    <a class="nav-link  " href="exchange#bst_usdt">
                Exchange 
             
             </a>
-             
-          </li>
-          <li class="nav-item  ">
-            <a class="nav-link  " href="markets"  >
+
+                </li>
+                <li class="nav-item  ">
+                    <a class="nav-link  " href="markets">
                Markets 
             
             </a>
-             
-          </li>
-          <li class="nav-item  ">
-            <a class="nav-link  " href="https://bitsten.finance" >
+
+                </li>
+                <li class="nav-item  ">
+                    <a class="nav-link  " target="_blank" href="https://bitsten.finance">
                Finance 
             
             </a>
-             
-          </li>
+
+                </li>
 
 
-        
- 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Others
             </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="technical-analysis-light.html">Technical Analysis</a>
-              <a class="dropdown-item" href="cross-rates-light.html">Cross Rates</a>
-              <a class="dropdown-item" href="symbol-info-light.html">Symbol Info</a>
-              <a class="dropdown-item" href="heat-map-light.html">Heat Map</a>
-              <a class="dropdown-item" href="signin-light.html">Sign in</a>
-              <a class="dropdown-item" href="signup-light.html">Sign up</a>
-              <a class="dropdown-item" href="404-light.html">404</a>
-            </div>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto  logedin" style='display:none'>
-          <li class="nav-item header-custom-icon">
-            <a class="nav-link" href="#" id="clickFullscreen">
-              <i class="icon ion-md-expand"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown header-custom-icon">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <i class="icon ion-md-notifications"></i>
-              <span class="circle-pulse"></span>
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-header d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium">6 New Notifications</p>
-                <a href="#!" class="text-muted">Clear all</a>
-              </div>
-              <div class="dropdown-body">
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-md-lock"></i>
-                  </div>
-                  <div class="content">
-                    <p>Account password change</p>
-                    <p class="sub-text text-muted">5 sec ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-md-alert"></i>
-                  </div>
-                  <div class="content">
-                    <p>Solve the security issue</p>
-                    <p class="sub-text text-muted">10 min ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-logo-android"></i>
-                  </div>
-                  <div class="content">
-                    <p>Download android app</p>
-                    <p class="sub-text text-muted">1 hrs ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-logo-bitcoin"></i>
-                  </div>
-                  <div class="content">
-                    <p>Bitcoin price is high now</p>
-                    <p class="sub-text text-muted">2 hrs ago</p>
-                  </div>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <div class="icon">
-                    <i class="icon ion-logo-usd"></i>
-                  </div>
-                  <div class="content">
-                    <p>Payment completed</p>
-                    <p class="sub-text text-muted">4 hrs ago</p>
-                  </div>
-                </a>
-              </div>
-              <div class="dropdown-footer d-flex align-items-center justify-content-center">
-                <a href="#!">View all</a>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item dropdown header-img-icon">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <img src="assets/img/avatar.svg" alt="avatar">
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-header d-flex flex-column align-items-center">
-                <div class="figure mb-3">
-                  <img src="assets/img/avatar.svg" alt="">
-                </div>
-                <div class="info text-center">
-                  <p class="name font-weight-bold mb-0" id="p_name">---</p>
-                  <p class="name font-weight-bold mb-0" >( <span id="p_uname">---</span> ) </p>
-                  <p class="email text-muted mb-3" id="p_email">---</p>
-                </div>
-              </div>
-              <div class="dropdown-body">
-                <ul class="profile-nav">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="icon ion-md-person"></i>
-                      <span>Profile</span>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="technical-analysis-light.html">Technical Analysis</a>
+                        <a class="dropdown-item" href="cross-rates-light.html">Cross Rates</a>
+                        <a class="dropdown-item" href="symbol-info-light.html">Symbol Info</a>
+                        <a class="dropdown-item" href="heat-map-light.html">Heat Map</a>
+                        <a class="dropdown-item" href="signin-light.html">Sign in</a>
+                        <a class="dropdown-item" href="signup-light.html">Sign up</a>
+                        <a class="dropdown-item" href="404-light.html">404</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto  logedin" style='display:none'>
+                <li class="nav-item header-custom-icon">
+                    <a class="nav-link" href="#" id="clickFullscreen">
+                        <i class="icon ion-md-expand"></i>
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="wallet" class="nav-link">
-                      <i class="icon ion-md-wallet"></i>
-                      <span>My Wallet</span>
+                </li>
+                <li class="nav-item dropdown header-custom-icon">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon ion-md-notifications"></i>
+                        <span class="circle-pulse"></span>
                     </a>
-                  </li>
-                
-                  <li class="nav-item d-none" id="changeThemeLight">
-                    <a href="#!" class="nav-link">
-                      <i class="icon ion-md-sunny"></i>
-                      <span>Theme</span>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header d-flex align-items-center justify-content-between">
+                            <p class="mb-0 font-weight-medium">6 New Notifications</p>
+                            <a href="#!" class="text-muted">Clear all</a>
+                        </div>
+                        <div class="dropdown-body">
+                            <a href="#!" class="dropdown-item">
+                                <div class="icon">
+                                    <i class="icon ion-md-lock"></i>
+                                </div>
+                                <div class="content">
+                                    <p>N</p>
+                                    <p class="sub-text text-muted">5 sec ago</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dropdown-footer d-flex align-items-center justify-content-center">
+                            <a href="#!">View all</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown header-img-icon">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/img/avatar.svg" alt="avatar">
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <span  onClick="logout()" class="nav-link red" style='cursor:pointer'>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header d-flex flex-column align-items-center">
+
+                            <div class="info text-center">
+                                <p class="name font-weight-bold mb-0" id="p_name">---</p>
+                                <p class="name font-weight-bold mb-0">( <span id="p_uname">---</span> ) </p>
+                                <p class="email text-muted mb-3" id="p_email">---</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-body">
+                            <ul class="profile-nav">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="icon ion-md-person"></i>
+                                        <span>Profile</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="wallet" class="nav-link">
+                                        <i class="icon ion-md-wallet"></i>
+                                        <span>My Wallet</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="icon ion-md-git-merge"></i>
+                                        <span>Affiliate</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="icon ion-md-lock"></i>
+                                        <span>2FA</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="icon  ion-md-gift"></i>
+                                        <span>BST Reward</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item d-none" id="changeThemeLight">
+                                    <a href="#!" class="nav-link">
+                                        <i class="icon ion-md-sunny"></i>
+                                        <span>Theme</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <span onClick="logout()" class="nav-link red" style='cursor:pointer'>
                       <i class="icon ion-md-power"></i>
                       <span>Log Out</span>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto logedout" style='display:none'>
-         
-          <li class="nav-item dropdown">
-            <a class="nav-link  " href="login"  >
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto logedout" style='display:none'>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link  " href="login">
                Login 
             
             </a>
-             
-          </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link  " href="register"  >
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link  " href="register">
                Register 
             
             </a>
-             
-          </li>
-         
-        </ul>
-      </div>
+
+                </li>
+
+            </ul>
+        </div>
     </nav>
-  </header>
+</header>
