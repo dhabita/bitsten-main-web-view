@@ -311,6 +311,7 @@ function get_code_register() {
     };
 
 
+
     if (!validateEmail(email)) {
         $("#login_error").html("Invalid Email Format");
         $('#login-modal').modal('show');

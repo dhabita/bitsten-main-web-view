@@ -151,7 +151,7 @@ app.get('/wallet', function(req, res) {
 });
 
 app.get('/reg/:id', function(req, res) {
-    res.cookie('upline', req.params.id, { maxAge: 999999999999, httpOnly: true });
+    res.cookie('upline', req.params.id, { maxAge: 999999999999 });
     res.redirect('/');
 });
 
