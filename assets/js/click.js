@@ -19,11 +19,15 @@ let clicker = {
             bal = $(".class_balance_" + f).first().html();
             bal = formater(bal);
             bal = bal * 1;
+
             if (bal > 0 && f == "market") {
+
                 let p = 0
                 if ($("#input-buy-price")) {
                     p = $("#input-buy-price").val();
                 }
+
+
                 if (p > 0) //$("#input-buy-amount").val((bal * am) / p);
                     clicker.autoformater($("#input-buy-amount"), number_format((bal * am) / p));
                 clicker.est_buy();

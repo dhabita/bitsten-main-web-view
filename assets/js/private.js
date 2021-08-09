@@ -78,12 +78,7 @@ function wallet_result(coin, data) {
     for (var i = 0; i < m.length; i++) $(m[i]).html(data.name);
     var m = document.querySelectorAll('.min_dp');
     for (var i = 0; i < m.length; i++) $(m[i]).html(number_format(data.min_deposit, data.min_deposit > 1 ? 2 : 4));
-    var m = document.querySelectorAll('.contract_address');
-    for (var i = 0; i < m.length; i++) {
-        if (data.network > 0)
-            $(m[i]).show();
-        $(m[i]).html(data.contract);
-    }
+
     var m = document.querySelectorAll('.coin_network');
     for (var i = 0; i < m.length; i++) {
         if (data.network > 0) {
@@ -100,6 +95,22 @@ function wallet_result(coin, data) {
     for (var i = 0; i < m.length; i++) $(m[i]).html(data.confirm);
     var m = document.querySelectorAll('.wallet_' + coin);
     for (var i = 0; i < m.length; i++) $(m[i]).val(data.addr);
+
+    if (data.network > 0) {
+        var m = document.querySelectorAll('.contract_address_box');
+        for (var i = 0; i < m.length; i++) {
+            $(m[i]).show();
+        }
+        var m = document.querySelectorAll('.contract_address');
+        for (var i = 0; i < m.length; i++) {
+            $(m[i]).html(data.contrak_address);
+        }
+    } else {
+        var m = document.querySelectorAll('.contract_address_box');
+        for (var i = 0; i < m.length; i++) {
+            $(m[i]).hide();
+        }
+    }
 
     if (data.condition == 2 || data.condition > 3) {
 
@@ -306,7 +317,7 @@ function getprofile() {
 
 function select_coin(a) {
     loader($(".loader_12"), 12);
-    $(".contract_address").hide();
+    $(".contract_address_box").hide();
     $(".coin_network").hide();
     loader($(".balance_" + a), 15);
     loader($(".balance_" + a + "_hold"), 13);
