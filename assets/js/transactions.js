@@ -1,4 +1,5 @@
 var url_p = "https://api5.bitsten.com/transaction";
+//url_p = "http://localhost/transaction";
 
 
 function login() {

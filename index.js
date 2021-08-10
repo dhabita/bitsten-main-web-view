@@ -38,10 +38,8 @@ app.use(limiter);
 //   })
 // );
 
-// const cors = require('cors');
-// app.use(cors({
-//     origin: ['https://f1.bitsten.com/']
-// }));
+const cors = require('cors');
+app.use(cors());
 
 
 app.use(express.static(__dirname + "/"));
