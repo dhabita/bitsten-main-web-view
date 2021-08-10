@@ -38,22 +38,19 @@ app.use(limiter);
 //   })
 // );
 
-const cors = require('cors');
-app.use(cors());
-
 
 app.use(express.static(__dirname + "/"));
 
-//set view engine
-// app.use(expressLayouts);
+
+
+
+
+
 app.engine('ejs', require('ejs-locals'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.get('/',function(req,res){
-//  res.sendFile(path.join(__dirname+'/html/index.html'));
-//    // res.send("aaaa");
-// });
+
 
 function api_get(url, res) {
     axios.get(url)
@@ -158,6 +155,14 @@ app.get('/bst', function(req, res) {
     var data = {};
     res.render('pages/bst', {
         title: "Bitsten Token ( BST )"
+    });
+});
+
+
+app.get('/convert', function(req, res) {
+    var data = {};
+    res.render('pages/convert', {
+        title: "Convert Assets Bitsten Exchange"
     });
 });
 

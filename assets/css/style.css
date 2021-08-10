@@ -2758,3 +2758,7 @@ h6 {
 .form-control {
     font-size: 12px;
 }
+
+.dropdown-menu {
+    animation-name: none;
+}
