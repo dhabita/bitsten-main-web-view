@@ -15,7 +15,7 @@
             <div class="col-12  col-md-6 mt-5 pb-3 ">
                 <span class="float-left">From</span> <span class="float-right">Available : 0 USDT </span>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Please enter amount" style='height: 50px;' aria-label="Text input with dropdown button">
+                    <input type="text" id="input_coin_1" class="form-control" placeholder="Please enter amount" style='height: 50px;' aria-label="Text input with dropdown button">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span id="main1"><img src='https://f1.bitsten.com/assets/images/logo/usdt.png' width='25px'> USDT </span></button>
                         <div class="dropdown-menu" id="lp1">
@@ -34,7 +34,7 @@
             <div class="col-12 col-md-6 mt-2 pb-5 ">
                 <span class="left">To</span>
                 <div class="input-group">
-                    <input type="text" readonly class="form-control" placeholder="Receive" style='height: 50px;' aria-label="Text input with dropdown button">
+                    <input id="input_coin_2" type="text" readonly class="form-control" placeholder="Receive" style='height: 50px;' aria-label="Text input with dropdown button">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span id="main2"><img src='https://f1.bitsten.com/assets/images/logo/busd.png' width='25px'> BUSD </span></button>
                         <div class="dropdown-menu" id="lp2">
@@ -46,7 +46,9 @@
         </div>
         <div class='row d-flex justify-content-center  '>
             <div class="col-6 col-md-4 text-center ">
-                <button id='button_convert' class='btn col-12 btn-warning btn-sm rounded-0 p-2 pr-3 pl-3'>Enter Amount</button>
+                <button id='button_convert_1' class='bc btn col-12 btn-warning btn-sm rounded-0 p-2 pr-3 pl-3 ' disabled>Enter Amount</button>
+                <button id='button_convert_2' style="display:none" class='bc btn col-12 btn-warning btn-sm rounded-0 p-2 pr-3 pl-3 ' onCLick="rate_now()">Get current rate</button>
+                <button id='button_convert_3' style="display:none" class='bc btn col-12 btn-success btn-sm rounded-0 p-2 pr-3 pl-3 ' onCLick="convert()">Covert <span id='c1'></span> to <span id='c2'><span></button>
             </div>
 
 
@@ -54,4 +56,37 @@
 
         <script>
             var SOCKET_URL = 'swap';
+            var btn_status = 0;
+            $("#input_coin_1").keyup(function() {
+                var x = $(this).val();
+                if (x > 0) {
+                    btn_status = 1;
+                    $(".bc").hide();
+                    $("#button_convert_2").show();
+                    $("#input_coin_2").val("");
+                } else {
+                    btn_status = 0;
+                    $(".bc").hide();
+                    $("#button_convert_1").show();
+                    $("#input_coin_2").val("");
+
+                    console.log(x);
+                }
+            })
+
+            function rate_now() {
+                var rate = 1;
+                var c1a = $("#input_coin_1").val() * 1;
+
+                $("#input_coin_2").val(c1a * rate);
+                $(".bc").hide();
+                $("#button_convert_3").show();
+
+                btn_status = 2;
+
+            }
+
+            function convert() {
+                alert("this feature cooming soon");
+            }
         </script>

@@ -5,6 +5,7 @@ var listpair = {};
 var arraycoin = [];
 let swap = {
     main1: function(c) {
+        $("#c1").html(c.toUpperCase());
         $("#lp2").html("");
         let f = 0;
         listpair.forEach(ee => {
@@ -21,6 +22,7 @@ let swap = {
         $("#main1").html(`<img src='https://f1.bitsten.com/assets/images/logo/${c}.png' width='25px'>  <span id="P1">${c.toUpperCase()}</span>`);
     },
     main2: function(c) {
+        $("#c2").html(c.toUpperCase());
         $("#main2").html(`<img src='https://f1.bitsten.com/assets/images/logo/${c}.png' width='25px'>  <span id="P1">${c.toUpperCase()}</span>`);
     },
     swap: function() {
