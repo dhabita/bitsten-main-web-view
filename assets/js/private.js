@@ -65,6 +65,7 @@ function wallet_result(coin, data) {
     if (data.code == "btc") e = "www.blockchain.com/btc";
     if (data.code == "ltc") e = "btc.com/ltc";
     if (data.code == "doge") e = "https://dogechain.info";
+    if (data.code == "pyrk") e = "explorer.pyrk.org";
 
     let ex = "<a target='_blank' href='https://" + e + "/address/" + data.addr + "'>https://" + e + "</a>";
     $("#exploler").html(ex);
@@ -308,6 +309,7 @@ function getprofile() {
                 $('#p_name').html(data.data.real_name);
                 $('#p_uname').html(data.data.username);
                 $('#p_email').html(data.data.email);
+                $('#p_id').html("U-" + data.data.id);
             }
             if (data.status == false) {
 
