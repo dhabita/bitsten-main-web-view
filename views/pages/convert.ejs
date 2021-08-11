@@ -17,11 +17,8 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Please enter amount" style='height: 50px;' aria-label="Text input with dropdown button">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src='https://f1.bitsten.com/assets/images/logo/usdt.png' width='25px'> USDT</button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#"><img src='https://f1.bitsten.com/assets/images/logo/usdt.png' width='25px'> USDT</a>
-                            <a class="dropdown-item" href="#"><img src='https://f1.bitsten.com/assets/images/logo/bnb.png' width='25px'> BNB</a>
-                            <a class="dropdown-item" href="#"><img src='https://f1.bitsten.com/assets/images/logo/bst.png' width='25px'> BST</a>
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span id="main1"><img src='https://f1.bitsten.com/assets/images/logo/usdt.png' width='25px'> USDT </span></button>
+                        <div class="dropdown-menu" id="lp1">
 
                         </div>
                     </div>
@@ -39,11 +36,8 @@
                 <div class="input-group">
                     <input type="text" readonly class="form-control" placeholder="Receive" style='height: 50px;' aria-label="Text input with dropdown button">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src='https://f1.bitsten.com/assets/images/logo/bnb.png' width='25px'> BNB</button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#"><img src='https://f1.bitsten.com/assets/images/logo/usdt.png' width='25px'> USDT</a>
-                            <a class="dropdown-item" href="#"><img src='https://f1.bitsten.com/assets/images/logo/bnb.png' width='25px'> BNB</a>
-                            <a class="dropdown-item" href="#"><img src='https://f1.bitsten.com/assets/images/logo/bst.png' width='25px'> BST</a>
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span id="main2"><img src='https://f1.bitsten.com/assets/images/logo/busd.png' width='25px'> BUSD </span></button>
+                        <div class="dropdown-menu" id="lp2">
 
                         </div>
                     </div>
@@ -57,3 +51,7 @@
 
 
         </div>
+
+        <script>
+            var SOCKET_URL = 'swap';
+        </script>

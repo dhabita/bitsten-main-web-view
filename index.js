@@ -165,6 +165,12 @@ app.get('/convert', function(req, res) {
         title: "Convert Assets Bitsten Exchange"
     });
 });
+app.get('/finance', function(req, res) {
+    var data = {};
+    res.render('pages/finance', {
+        title: "Decentralize Bitsten Finance"
+    });
+});
 
 
 app.listen(port, () => console.info(`App listen on port ${port}`));
