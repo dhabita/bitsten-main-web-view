@@ -96,6 +96,63 @@ async function openr(a) {
 }
 
 
+async function convert() {
+    $.ajaxSetup({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie("token")
+        }
+    });
+
+
+    var coin1 = $("#P1") ? $("#P1").html() : "";
+    var coin2 = $("#P2") ? $("#P2").html() : "";
+    var amount = $("#input_coin_1") ? $("#input_coin_1").val() : 0;
+
+
+    $(".bc").hide();
+    $("#button_convert_1").show();
+    $("#input_coin_2").val("");
+
+
+
+    let er = "";
+
+
+    var data = {
+        amount: amount,
+        coin1: coin1.toLowerCase(),
+        coin2: coin2.toLowerCase()
+    };
+
+    if (er != "") {
+        $("#login_error").html(er);
+        $('#login-modal').modal('show');
+        return;
+    }
+
+
+
+    await $.post(url_p + "/auth/convert", data)
+        .done(function(data) {
+            console.log(data);
+            //alert( "Data Loaded: " + data );
+            if (data.status) {
+                balance(coin1.toLowerCase());
+                $("#login_error").html(data.message);
+                $("#login_error").addClass("text-success");
+                $('#login-modal').modal('show');
+
+            } else {
+                if (data.message == "Invalid Login Token") data.message += " / Login required !";
+                $("#login_error").html(data.message);
+                $('#login-modal').modal('show');
+            }
+        });
+
+
+}
+
+
 
 async function closeorder(a, id) {
     $.ajaxSetup({

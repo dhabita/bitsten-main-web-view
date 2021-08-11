@@ -18,6 +18,7 @@ function balance(coin) {
         .done(function(data) {
             // console.log(  data );
             if (data.status) {
+                if ($("#bal-a")) $("#bal-a").html(number_format(data.data[coin].amount));
                 var m = document.querySelectorAll('.balance_' + coin);
                 for (var i = 0; i < m.length; i++) m[i].innerHTML = number_format(data.data[coin].amount);
                 var m = document.querySelectorAll('.balance_' + coin + "_hold");
