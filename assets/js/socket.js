@@ -176,6 +176,12 @@
 
 
  function orderbook(d) {
+     let ma = has.split("_")[1];
+     //console.log(ma);
+
+     var divider = 100;
+     if (ma == "idrt") divider = 100000;
+     if (ma == "bst") divider = 500;
      if (!d.data) return;
      var lp = last_price[d.triger[1]];
 
@@ -191,7 +197,10 @@
 
              p = number_format(p, 0, 1);
 
-             var bgg = (f.p * f.a) / 100;
+
+
+
+             var bgg = (f.p * f.a) / divider;
              bgg = Math.floor(bgg);
              bgg = Math.max(bgg, 1);
              bgg = Math.min(bgg, 7);
@@ -241,7 +250,7 @@
              if (lp > 1000000) p = f.p;
 
              p = number_format(p, 0, 1);
-             var bgg = (f.p * f.a) / 100;
+             var bgg = (f.p * f.a) / divider;
              bgg = Math.floor(bgg);
              bgg = Math.max(bgg, 1);
              bgg = Math.min(bgg, 7);

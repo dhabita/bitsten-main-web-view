@@ -13,7 +13,7 @@ function balance(coin) {
         }
     });
 
-    console.log("getbalance");
+    // console.log("getbalance");
     $.get(url + "/balance/" + coin)
         .done(function(data) {
             // console.log(  data );
@@ -320,7 +320,7 @@ function openorder(market) {
 
 
             if (data.status) {
-                console.log(data);
+                // console.log(data);
                 // $("#transaction").html("");
                 // var m =document.querySelectorAll('.wallet_'+coin);
                 // for(var i=0;i<m.length;i++)  $(m[i]).val(data.data.addr);
