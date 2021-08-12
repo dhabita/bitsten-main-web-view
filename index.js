@@ -171,6 +171,12 @@ app.get('/finance', function(req, res) {
         title: "Decentralize Bitsten Finance"
     });
 });
+app.get('/cryptobot', function(req, res) {
+    var data = {};
+    res.render('pages/cryptobot', {
+        title: "Auto trading use Bitsten Cryptobot"
+    });
+});
 
 
 app.listen(port, () => console.info(`App listen on port ${port}`));

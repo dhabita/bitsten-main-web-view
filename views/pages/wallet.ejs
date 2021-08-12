@@ -1,7 +1,7 @@
 <% layout('../layouts/app') -%>
     <style>
-        .nav-pills .nav-link.active,
-        .nav-pills .nav-link {
+        .nav-pills .nav-link,
+        .nav-pills .nav-link.active {
             width: 100%;
         }
     </style>
@@ -22,8 +22,8 @@
                                             <div class="input-group-prepend">
                                                 <button type="button" class="btn btn-outline-secondary" style="padding:0px 10px">Action</button>
                                                 <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" style="padding:0px 10px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="#">Hide Zero Blance</a>
                                                     <a class="dropdown-item" href="#">Hide Disable Deposit</a>
@@ -31,15 +31,14 @@
 
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control text-center" aria-label="" placeholder="Search Coin / Token">
-                                        </div>
+                                            <input type="text" class="form-control text-center" aria-label="" placeholder="Search Coin / Token"></div>
 
                                         <div id="list_assets" class="nav    nav-pills" role="tablist" aria-orientation="vertical" style='height: 600px; overflow-x:auto'>
 
                                             <div id='load-assets' class='text-center col-12'>
-                                                <div class='text-center col-12  pb-5' style="padding-top:150px"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important;height: 100px !important;"></div>
+                                                <div class='text-center col-12  pb-5' style="padding-top:150px">
+                                                    <img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important;height: 100px !important;"></div>
                                             </div>
-
 
                                         </div>
                                     </div>
@@ -49,14 +48,27 @@
 
                                                 <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
                                                     <label class="btn btn-success active" onClick="$('.card').hide();$('#deposit').show()">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked > Deposit
-                          </label>
+                                                                <input
+                                                                    type="radio"
+                                                                    name="options"
+                                                                    id="option1"
+                                                                    autocomplete="off"
+                                                                    checked="checked">
+                                                                    Deposit
+                                                                </label>
                                                     <label class="btn btn-warning" onClick="$('.card').hide();$('#withdraw').show()">
-                            <input type="radio" name="options" id="option2" autocomplete="off" onClick="$('.card').hide();$('#withdraw').show()"> Withdraw
-                          </label>
+                                                                    <input
+                                                                        type="radio"
+                                                                        name="options"
+                                                                        id="option2"
+                                                                        autocomplete="off"
+                                                                        onClick="$('.card').hide();$('#withdraw').show()">
+                                                                        Withdraw
+                                                                    </label>
                                                     <label class="btn btn-info" onClick="$('.card').hide();$('#history').show(); transaction($('.coin_name').first().text().toLowerCase());">
-                            <input type="radio" name="options" id="option3" autocomplete="off" > History
-                          </label>
+                                                                        <input type="radio" name="options" id="option3" autocomplete="off">
+                                                                            History
+                                                                        </label>
                                                 </div>
 
                                                 <style>
@@ -74,7 +86,19 @@
 
                                                 <div class="card" id="deposit">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center">Wallet Deposit Address for <span class='coin_nama text-info loader_12'>---</span> ( <span class='coin_name text-info loader_12'>---</span> )</h5>
+                                                        <h5 class="card-title text-center">Wallet Deposit Address for
+                                                            <span class='coin_nama text-info loader_12'>---</span> (
+                                                            <span class='coin_name text-info loader_12'>---</span> )
+                                                        </h5>
+
+                                                        <div class="form-group d-flex justify-content-center">
+                                                            <button type="submit" class="btn network network0 btn-sm rounded-0 btn-outline-dark coin_name" disbled>BTC</button>
+                                                            <button type="submit" class="btn network network3 btn-sm rounded-0 btn-outline-dark " disabled>BEP20</button>
+                                                            <button type="submit" class="btn network network1 btn-sm rounded-0 btn-outline-dark  " disabled>ERC20</button>
+                                                            <button type="submit" class="btn network network2 btn-sm rounded-0 btn-outline-dark  " disabled>TRC20</button>
+
+                                                        </div>
+
                                                         <div class="row wallet-address">
                                                             <div class="col-12">
 
@@ -100,7 +124,10 @@
                                                                         <button class="btn btn-primary" onClick='copy()'>COPY</button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 text-center"> <small>Explorer</small> <small id='exploler'></small></div>
+                                                                <div class="col-12 text-center">
+                                                                    <small>Explorer</small>
+                                                                    <small id='exploler'></small>
+                                                                </div>
 
                                                             </div>
                                                             <div class="col-12 mt-3">
@@ -111,9 +138,7 @@
                                                                                 <h4>Deposit Offline !</h4>
                                                                             </li>
                                                                             <li>Reason / Note :</li>
-                                                                            <li class="offline-message text-warning">
-
-                                                                            </li>
+                                                                            <li class="offline-message text-warning"></li>
                                                                         </ul>
                                                                         <ul id="deposit-online">
 
@@ -121,113 +146,183 @@
                                                                                 <h4>Important !</h4>
                                                                             </li>
                                                                             <li class='coin_network ' style='display:none'></li>
-                                                                            <li>Send only <span class='coin_nama text-info loader_12'>--------</span> ( <span class='coin_name text-info loader_12'>---</span> ) to this deposit address.</li>
-                                                                            <li>Sending any other currency to this address may result in the loss of your deposit.</li>
+                                                                            <li>Send only
+                                                                                <span class='coin_nama text-info loader_12'>--------</span> (
+                                                                                <span class='coin_name text-info loader_12'>---</span> ) to this deposit address.</li>
+                                                                            <li>Sending any other currency to this address may result in the loss of your deposit.
+                                                                            </li>
                                                                             <!--This Token is Binance Smart Chain ( BEP20 ).-->
                                                                             <li>For self destruction token will be reduced 2 * BURN value.</li>
 
-                                                                            <li>Minimum deposit is <span class='min_dp text-info loader_12'></span> <span class='coin_name text-info loader_12'>---</span> deposits below that value will not be added.</li>
-                                                                            <li>Coins will be deposited immediately after <span class='min_conf text-info loader_12'>20</span> network confirmation</li>
-                                                                            <li class='contract_address_box ' style='display:none'> <span class='coin_name text-info loader_12'>---</span> Contract address : <span class="contract_address text-info"></span></li>
+                                                                            <li>Minimum deposit is
+                                                                                <span class='min_dp text-info loader_12'></span>
+                                                                                <span class='coin_name text-info loader_12'>---</span> deposits below that value will not be added.</li>
+                                                                            <li>Coins will be deposited immediately after
+                                                                                <span class='min_conf text-info loader_12'>20</span> network confirmation</li>
+                                                                            <li class='contract_address_box ' style='display:none'>
+                                                                                <span class='coin_name text-info loader_12'>---</span> Contract address :
+                                                                                <span class="contract_address text-info"></span>
+                                                                            </li>
                                                                         </ul>
                                                                         </p>
 
                                                                     </div>
-                                                                    <div class="col-md-4 pt-3 text-center" style=''>
-                                                                        <div class="" id="qrcode" style='margin:10px auto;width:170px'>
-
-                                                                        </div>
+                                                                    <div class="col-md-4 pt-3 text-center">
+                                                                        <div class="" id="qrcode" style='margin:10px auto;width:170px'></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                                 <div class="card" id="withdraw" style='display: none;'>
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Withdraw</h5>
+                                                    <div class="card-body text-center">
+                                                        <h5 class="card-title">Withdraw <span class='coin_nama text-info loader_12'> </span> ( <span class='coin_name text-info loader_12'> </span> )</h5>
                                                         <div class="row ">
                                                             <div class="col-12">
-                                                                <p>Deposits to this address are unlimited. Note that you may not be able to withdraw all of your funds at once if you deposit more than your daily withdrawal limit.</p>
+                                                                <p>
+                                                                    Make sure you insert valid withdrawal data
+                                                                </p>
+                                                                <div class="row d-flex justify-content-center  ">
 
-                                                                <div class="row">
-                                                                    <div class="col-12 col-md-7 col-lg-6">
-                                                                        <div class="form-access my-auto">
-                                                                            <form>
+                                                                    <div class="col-12  col-md-8 col-lg-8">
+
+                                                                        <div class="form-group d-flex justify-content-center">
+                                                                            <button type="submit" class="btn network network0 btn-sm rounded-0 btn-outline-dark coin_name" disbled>BTC</button>
+                                                                            <button type="submit" class="btn network network3 btn-sm rounded-0 btn-outline-dark " disabled>BEP20</button>
+                                                                            <button type="submit" class="btn network network1 btn-sm rounded-0 btn-outline-dark  " disabled>ERC20</button>
+                                                                            <button type="submit" class="btn network network2 btn-sm rounded-0 btn-outline-dark  " disabled>TRC20</button>
+
+                                                                        </div>
 
 
-                                                                                <div class="form-group">
-                                                                                    <input type="text" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');" class="form-control" placeholder="Wallet address">
+                                                                        <div class="input-group input-group-sm mb-3">
+                                                                            <select class="custom-select" id="inputGroupSelect02">
+                                                                              <option selected>Choose...</option>
+                                                                              <option value="1">Onuuuuuuuuuuuuuuuuuuuuuuuggfgxfhcxgcgkvgvcghcgcghcghe</option>
+                                                                               
+                                                                            </select>
+                                                                            <div class="input-group-append">
+                                                                                <label class="input-group-text btn-outline-warning btn" onClick="$('#laddr').show()" for="inputGroupSelect02">Option</label>
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <div class="form-group">
+                                                                            <input type="number" class="form-control" placeholder="Amount"></div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="input-group mb-2">
+
+                                                                                <input class=" form-control " type="text" id="code" placeholder="Email Code">
+                                                                                <div class="input-group-append  ">
+                                                                                    <span class="input-group-text border bg-warning" style="cursor:pointer">Get Code</span>
                                                                                 </div>
+                                                                            </div>
+                                                                        </div>
 
-                                                                                <div class="form-group">
-                                                                                    <input type="number" class="form-control" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" placeholder="Amount">
-                                                                                </div>
-
-
-                                                                                <div class="form-group">
-                                                                                    <div class="input-group mb-2">
-
-                                                                                        <input class=" form-control " autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" onfocusout="this.addAttribute('readonly');" type="text" id="code" placeholder="Email Code">
-                                                                                        <div class="input-group-append">
-                                                                                            <span class="input-group-text input-success" style="cursor:pointer" onclick="copy()">Get Code</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="custom-control custom-checkbox">
-                                                                                    <input type="checkbox" class="custom-control-input" id="form-checkbox">
-                                                                                    <label class="custom-control-label" for="form-checkbox">I agree to the <a href="#!">Terms &
-                                            Conditions</a></label>
-                                                                                </div>
-                                                                                <button type="submit" class="btn btn-warning">Withdraw</button>
-                                                                            </form>
+                                                                        <div class="form-group d-flex justify-content-center">
+                                                                            <button type="submit" class="btn btn-sm rounded-0 btn-warning float-right">Withdraw</button>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
-
                                                         </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="card  " id="history" style='display:none'>
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Latest Deposit and Withdraw history <b class='coin_name loader_12'></b> in last 30 Days</h5>
-                                                        <div class="wallet-history">
-                                                            <table class="table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Id</th>
-                                                                        <th>Date</th>
-                                                                        <th>Confirm</th>
-                                                                        <th>Amount</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="transaction">
-
-                                                                    <tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            <div class="card  " id="history" style='display:none'>
+                                                <div class="card-body text-center">
+                                                    <h5 class="card-title">Latest Deposit and Withdraw history
+                                                        <b class='coin_name loader_12'></b> in last 30 Days</h5>
+                                                    <div class="wallet-history">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Id</th>
+                                                                    <th>Date</th>
+                                                                    <th>Confirm</th>
+                                                                    <th>Amount</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="transaction">
+
+                                                                <tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div id="laddr" class="jalign-items-center " style="display:none;position: fixed; top:0;left:0;right:0;left:0 ;bottom:0;background: rgba(0,0,0,0.8);z-index: 1000;">
+        <div class="card-body text-center bg-white align-self-center" style='margin:50px  auto;max-width: 700px;max-height: 500px;'>
+            <h5 class="card-title">Add address withdrawal for <span class='coin_nama text-info loader_12'> </span> ( <span class='coin_name text-info loader_12'> </span> )</h5>
+            <div class="row  ">
+                <div class="col-12">
+                    <p>
+                        Make sure you insert valid address
+                    </p>
+                    <div class="row d-flex justify-content-center  ">
+
+                        <div class="col-12  col-md-8 col-lg-8 ">
+
+                            <div class="form-group d-flex justify-content-center">
+                                <button type="submit" class="btn network network0 btn-sm rounded-0 btn-outline-dark coin_name" disbled>BTC</button>
+                                <button type="submit" class="btn network network3 btn-sm rounded-0 btn-outline-dark " disabled>BEP20</button>
+                                <button type="submit" class="btn network network1 btn-sm rounded-0 btn-outline-dark  " disabled>ERC20</button>
+                                <button type="submit" class="btn network network2 btn-sm rounded-0 btn-outline-dark  " disabled>TRC20</button>
+
+                            </div>
+
+
+
+
+
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Add new address"></div>
+
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+
+                                    <input class=" form-control " type="text" id="code" placeholder="Email Code">
+                                    <div class="input-group-append  ">
+                                        <span class="input-group-text border bg-warning" style="cursor:pointer">Get Code</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex justify-content-center">
+                                <button type="submit" class="btn btn-sm rounded-0 btn-success  mr-2">Add address</button>
+                                <button type="submit" class="btn btn-sm rounded-0 btn-warning " onclick="$('#laddr').hide()">Close</button>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
 
     <script>
         var SOCKET_URL = 'wallet';

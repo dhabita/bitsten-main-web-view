@@ -400,7 +400,7 @@
 
          var cc = document.querySelectorAll('.change-' + e.market_show);
          //console.log(price);
-         for (var i = 0; i < cc.length; i++) cc[i].innerHTML = (change > 0 ? "+" : "-") + number_format(change, 2);
+         for (var i = 0; i < cc.length; i++) cc[i].innerHTML = (change > 0 ? "+" : "") + number_format(change, 2);
 
          if (change < 0) {
              $('.color_change-' + e.market_show).addClass("red");

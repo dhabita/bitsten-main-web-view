@@ -68,6 +68,29 @@ function wallet_result(coin, data) {
     if (data.code == "doge") e = "https://dogechain.info";
     if (data.code == "pyrk") e = "explorer.pyrk.org";
 
+
+
+    var m = document.querySelectorAll('.network');
+    for (var i = 0; i < m.length; i++) {
+        $(m[i]).show();
+        $(m[i]).removeAttr("disabled");
+        $(m[i]).attr("disabled");
+        $(m[i]).removeClass("btn-success");
+    }
+
+
+    if (data.network > 0) {
+        var m = document.querySelectorAll('.network0');
+        for (var i = 0; i < m.length; i++) $(m[i]).hide();
+    }
+
+    var m = document.querySelectorAll('.network' + data.network);
+    for (var i = 0; i < m.length; i++) {
+        $(m[i]).addClass("btn-success");
+        $(m[i]).removeAttr("disabled");
+    }
+
+
     let ex = "<a target='_blank' href='https://" + e + "/address/" + data.addr + "'>https://" + e + "</a>";
     $("#exploler").html(ex);
 
@@ -313,7 +336,7 @@ function getprofile() {
                 $('#p_id').html("U-" + data.data.id);
             }
             if (data.status == false) {
-
+                logout();
             }
         });
 }

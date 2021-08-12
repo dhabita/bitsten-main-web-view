@@ -98,17 +98,27 @@ if (SOCKET_URL == "wallet") {
             let clasdp = " text-danger ";
             if (e.kondition == 1) clasdp = " text-success ";
             if (e.kondition == 3) clasdp = " text-success ";
+
+            let dpt = " title = 'Deposit Offline' ";
+            if (e.kondition == 1) dpt = " title = 'Deposit Online' ";
+            if (e.kondition == 3) dpt = " title = 'Deposit Online' ";
+
             let claswd = " text-danger ";
             if (e.kondition == 1) claswd = " text-success ";
             if (e.kondition == 2) claswd = " text-success ";
+
+            let wdt = " title = 'Withdraw Offline' ";
+            if (e.kondition == 1) wdt = " title = 'Withdraw Online' ";
+            if (e.kondition == 3) wdt = " title = 'Withdraw Online' ";
+
             var da = '\
                     <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
                           aria-selected="true">\
                        \
                         <div class="d-flex">\
                          <div  class="p-0 pr-2" style="font-size:15px">\
-                         <i class="bi bi-arrow-up-circle-fill ' + clasdp + '"><br></i>\
-                         <i class="bi bi-arrow-down-circle-fill  ' + claswd + '"></i>\
+                         <i class="bi bi-arrow-up-circle-fill ' + clasdp + '" ' + dpt + '><br></i>\
+                         <i class="bi bi-arrow-down-circle-fill  ' + claswd + '" ' + wdt + '></i>\
                         </div>\
                         <img src="https://f1.bitsten.com/assets/images/logo/' + e.code + '.png"  style="width:45px !important ; height:45px !important" > \
                         <div>\
