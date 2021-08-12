@@ -60,6 +60,27 @@ function wallet_result(coin, data) {
         $('#deposit-online').hide();
         $('#deposit-offline').show();
     }
+    if (data.condition == 1) {
+        $('#withdraw-online').show();
+        $('#withdraw-offline').hide();
+    }
+    if (data.condition == 2) {
+        $('#withdraw-online').show();
+        $('#withdraw-offline').hide();
+    }
+    if (data.condition == 3) {
+        $('#withdraw-online').hide();
+        $('#withdraw-offline').show();
+    }
+    if (data.condition == 4) {
+        $('#withdraw-online').hide();
+        $('#withdraw-offline').show();
+    }
+    if (data.condition == 5) {
+        $('#withdraw-online').hide();
+        $('#withdraw-offline').show();
+    }
+
     let e = "etherscan.io";
     if (data.network == 2) e = "tronscan.io/#";
     if (data.network == 3) e = "bscscan.com";
