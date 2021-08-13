@@ -427,13 +427,7 @@
      var label = $("#label_addr") ? $("#label_addr").val() : "";
      var email_code = $("#email_code") ? $("#email_code").val() : "";
 
-     var data = {
-         coin: coin,
-         addr: addr,
-         tag: tag,
-         label: label,
-         email_code: email_code
-     };
+
 
 
 
@@ -470,6 +464,14 @@
 
      $("#msg_add_addr").html("Process....");
 
+     tag = tag.toString();
+     var data = {
+         coin: coin,
+         addr: addr,
+         tag: tag,
+         label: label,
+         email_code: email_code
+     };
 
      let d = data;
 
