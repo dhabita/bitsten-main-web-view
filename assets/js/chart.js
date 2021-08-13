@@ -4,6 +4,7 @@ if (SOCKET_URL == 'exchange') {
     var chart = LightweightCharts.createChart("main-chart", {
         width: ww,
         height: 400,
+        autoScale: true,
         rightPriceScale: {
             scaleMargins: {
                 top: 0.3,
@@ -108,7 +109,12 @@ if (SOCKET_URL == 'exchange') {
             });
         }
 
-
+        chart.timeScale().resetTimeScale();
+        chart.timeScale().setVisibleLogicalRange({
+            from: 0,
+            to: 1000,
+        });
+        chart.timeScale().fitContent();
 
     }
 
