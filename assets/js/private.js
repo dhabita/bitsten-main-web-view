@@ -395,11 +395,56 @@ function select_coin(a) {
     balance(a);
     wallet(a);
     transaction(a);
+    wd_addr(a);
 
 
 
 }
+
+
+
+
+let mem_wd_addr = {};
+
+function wd_addr_result(coin) {
+    $("#list_wd_addr").html("");
+    mem_wd_addr[coin].forEach(function(e) {
+        $("#list_wd_addr").append(`<option value="${e.id}">${e.addr} - ${e.label} </option>`);
+    })
+
+}
+
+function wd_addr(a) {
+    if (mem_wd_addr.hasOwnProperty(a)) {} else mem_wd_addr[a] = [];
+
+    wd_addr_result(a);
+
+    $.ajaxSetup({
+        headers: {
+            'Authorization': 'Bearer ' + getCookie("token")
+        }
+    });
+
+
+
+
+    $.get(url + "/listwdaddress/" + a)
+        .done(function(data) {
+            if (data.status) {
+                mem_wd_addr[a] = data.data;
+                wd_addr_result(a);
+
+            }
+            if (data.status == false) {
+                mem_wd_addr[a] = [];
+            }
+        });
+}
+
+
+
 if (SOCKET_URL == 'wallet') {
     loader($(".loader_12"), 12);
     select_coin("wbst");
 }
+//

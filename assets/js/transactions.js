@@ -355,12 +355,7 @@
      var tag = $("#tag_addr") ? $("#tag_addr").val() * 1 : "";
      var label = $("#label_addr") ? $("#label_addr").val() : "";
 
-     var data = {
-         coin: coin,
-         addr: addr,
-         tag: tag,
-         label: label
-     };
+
 
 
 
@@ -392,7 +387,14 @@
 
 
      $("#msg_add_addr").html("Process....");
+     tag = tag.toString();
 
+     var data = {
+         coin: coin,
+         addr: addr,
+         tag: tag,
+         label: label
+     };
 
      let d = {};
      d.data = JSON.stringify(data);

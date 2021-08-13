@@ -207,13 +207,13 @@
 
 
                                                                         <div class="input-group input-group-sm mb-3">
-                                                                            <select class="custom-select" id="inputGroupSelect02">
+                                                                            <select class="custom-select" id="list_wd_addr">
                                                                               <option selected>Choose...</option>
-                                                                              <option value="1">Onuuuuuuuuuuuuuuuuuuuuuuuggfgxfhcxgcgkvgvcghcgcghcghe</option>
+                                                                             
                                                                                
                                                                             </select>
                                                                             <div class="input-group-append">
-                                                                                <label class="input-group-text btn-outline-warning btn" onClick="$('#laddr').show()" for="inputGroupSelect02">Option</label>
+                                                                                <label class="input-group-text btn-outline-warning btn" onClick="$('#laddr').show()" for="list_wd_addr">Option</label>
                                                                             </div>
                                                                         </div>
 
@@ -325,7 +325,7 @@
 
                             <div class="form-group d-flex justify-content-center">
                                 <button type="submit" class="btn btn-sm rounded-0 btn-success  mr-2" onclick="add_addr()">Add address</button>
-                                <button type="submit" class="btn btn-sm rounded-0 btn-warning " onclick="$('#laddr').hide()">Close</button>
+                                <button type="submit" class="btn btn-sm rounded-0 btn-warning " onclick="$('#laddr').hide();wd_addr($('.coin_name').first().text().toLowerCase())">Close</button>
                             </div>
 
                         </div>
