@@ -471,8 +471,8 @@
      $("#msg_add_addr").html("Process....");
 
 
-     let d = {};
-     d.data = JSON.stringify(data);
+     let d = data;
+
 
      $.post(url_p + "/auth/addnewaddr", d)
          .done(function(data) {
