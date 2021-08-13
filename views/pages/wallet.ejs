@@ -307,24 +307,29 @@
 
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Add new address"></div>
+                                <input type="text" class="form-control" id="add_addr" placeholder="Add new address"></div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="tag_addr" placeholder="Tag destination / Memo ID"></div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="label_addr" placeholder="Label / Save as"></div>
 
                             <div class="form-group">
                                 <div class="input-group mb-2">
 
                                     <input class=" form-control " type="text" id="code" placeholder="Email Code">
                                     <div class="input-group-append  ">
-                                        <span class="input-group-text border bg-warning" style="cursor:pointer">Get Code</span>
+                                        <span class="input-group-text border bg-warning" onclick="get_code_add_addr()" style="cursor:pointer">Get Code</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group d-flex justify-content-center">
-                                <button type="submit" class="btn btn-sm rounded-0 btn-success  mr-2">Add address</button>
+                                <button type="submit" class="btn btn-sm rounded-0 btn-success  mr-2" onclick="add_addr()">Add address</button>
                                 <button type="submit" class="btn btn-sm rounded-0 btn-warning " onclick="$('#laddr').hide()">Close</button>
                             </div>
 
                         </div>
+                        <div class="col-12 m-3 text-center text-danger" id="msg_add_addr"></div>
 
                     </div>
                 </div>

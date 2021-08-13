@@ -90,6 +90,9 @@ function wallet_result(coin, data) {
     if (data.code == "pyrk") e = "explorer.pyrk.org";
 
 
+    if (data.code == "xrp") $("#tag_addr").show();
+    else $("#tag_addr").hide();
+
 
     var m = document.querySelectorAll('.network');
     for (var i = 0; i < m.length; i++) {
@@ -110,6 +113,12 @@ function wallet_result(coin, data) {
         $(m[i]).addClass("btn-success");
         $(m[i]).removeAttr("disabled");
     }
+
+
+    if ($("#add_addr")) $("#add_addr").val("");
+    if ($("#tag_addr")) $("#tag_addr").val("");
+    if ($("#label_addr")) $("#label_addr").val("");
+    if ($("#msg_add_addr")) $("#msg_add_addr").val("");
 
 
     let ex = "<a target='_blank' href='https://" + e + "/address/" + data.addr + "'>https://" + e + "</a>";
