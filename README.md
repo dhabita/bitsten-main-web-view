@@ -1,2 +1,2 @@
-# bitsten2-view
- website bitsten 2
+# bitsten.com 
+ main website bitsten.com
