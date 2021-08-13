@@ -425,7 +425,7 @@
      var addr = $("#add_addr") ? $("#add_addr").val() : "";
      var tag = $("#tag_addr") ? $("#tag_addr").val() * 1 : "";
      var label = $("#label_addr") ? $("#label_addr").val() : "";
-     var email_code = $("#email_code").length ? $("#email_code").val() : "";
+     var email_code = $("#email_code") ? $("#email_code").val() : "";
 
      var data = {
          coin: coin,
@@ -437,7 +437,7 @@
 
 
 
-     if (coin.length < 6) {
+     if (email_code.length < 6) {
          $("#msg_add_addr").html("Required Email code");
 
          return;
