@@ -1,4 +1,6 @@
 var url = "https://api4.bitsten.com/private";
+var url_t = "https://api5.bitsten.com/transaction";
+
 
 let coin_memory = {};
 let transaction_memory = {};
@@ -396,11 +398,25 @@ function select_coin(a) {
     wallet(a);
     transaction(a);
     wd_addr(a);
+    generateaddress(a);
 
 
 
 }
 
+
+function generateaddress(a) {
+
+    $.get(url_t + "/auth/generateaddress/" + a)
+        .done(function(data) {
+            if (data.status) {
+                console.log(data.addr);
+            }
+            if (data.status == false) {
+
+            }
+        });
+}
 
 
 
