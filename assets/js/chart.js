@@ -118,5 +118,5 @@ if (SOCKET_URL == 'exchange') {
 
     }
 
-    setInterval(chart_update, 1000);
+    setInterval(chart_update, 500);
 }
