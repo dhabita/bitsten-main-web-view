@@ -112,7 +112,7 @@ if (SOCKET_URL == "wallet") {
             if (e.kondition == 3) wdt = " title = 'Withdraw Online' ";
 
             var da = '\
-                    <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
+                    <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="assets_all assets_' + e.code + ' nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
                           aria-selected="true">\
                        \
                         <div class="d-flex">\

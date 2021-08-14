@@ -227,6 +227,8 @@ function transaction_result(coin, data) {
         if (e.tx == "wd") {
             if (e.statuse == 3) st = "complete";
             else
+            if (e.statuse == 5) st = "canceled";
+            else
             if (e.statuse == 1) st = "on Process";
         }
 
@@ -245,7 +247,7 @@ function transaction_result(coin, data) {
 }
 
 function transaction(coin) {
-    loader($("#transaction"), 15);
+    loader($("#tx-loader"), 15, "col-12 text-center");
 
     var size = transaction_memory[coin].length;
     if (size > 0) transaction_result(coin, transaction_memory[coin]);
@@ -265,6 +267,7 @@ function transaction(coin) {
 
             if (data.status) {
                 $("#transaction").html("");
+                $("#tx-loader").html("");
                 // var m =document.querySelectorAll('.wallet_'+coin);
                 // for(var i=0;i<m.length;i++)  $(m[i]).val(data.data.addr);
                 // coin_memory[coin] = data.data;
@@ -366,6 +369,7 @@ function getprofile() {
                 $('#p_uname').html(data.data.username);
                 $('#p_email').html(data.data.email);
                 $('#p_id').html("U-" + data.data.id);
+                $("#dtv").html(data.data.id);
             }
             if (data.status == false) {
                 logout();
@@ -399,6 +403,15 @@ function select_coin(a) {
     transaction(a);
     wd_addr(a);
     generateaddress(a);
+
+
+    if (a == "xrp") {
+        $("#dtv").show();
+        $("#destination_tag").show();
+    } else {
+        $("#dtv").hide();
+        $("#destination_tag").hide();
+    }
 
 
 

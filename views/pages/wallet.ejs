@@ -31,7 +31,7 @@
 
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control text-center" aria-label="" placeholder="Search Coin / Token"></div>
+                                            <input type="text" class="form-control text-center" aria-label="" id="searchcoin" placeholder="Search Coin / Token"></div>
 
                                         <div id="list_assets" class="nav    nav-pills" role="tablist" aria-orientation="vertical" style='height: 600px; overflow-x:auto'>
 
@@ -118,12 +118,18 @@
                                                                     }
                                                                 </script>
 
+                                                                <h6 id='destination_tag' class=" text-center  text-info"> Destination tag / Memo : </h6>
+                                                                <h2 id='dtv' class=" pb-2 text-primary text-center"> 0</h2>
+
                                                                 <div id='input-dp' class="input-group" style='padding-top:0px !important'>
                                                                     <input type="text" id='w_addr' class="form-control text-center deposit_address loader_12" value="---">
                                                                     <div class="input-group-prepend">
                                                                         <button class="btn btn-primary" onClick='copy()'>COPY</button>
                                                                     </div>
+
                                                                 </div>
+
+
                                                                 <div class="col-12 text-center">
                                                                     <small>Explorer</small>
                                                                     <small id='exploler'></small>
@@ -249,6 +255,7 @@
                                                 <div class="card-body text-center">
                                                     <h5 class="card-title">Latest Deposit and Withdraw history
                                                         <b class='coin_name loader_12'></b> in last 30 Days</h5>
+                                                    <div id='tx-loader'></div>
                                                     <div class="wallet-history">
                                                         <table class="table">
                                                             <thead>

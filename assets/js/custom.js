@@ -1037,9 +1037,9 @@ function create_qr(a) {
 }
 
 
-function loader(location, height) {
+function loader(location, height, c = "") {
     location.html(
-        '<span class="loading loading03" style="font-size:' + height + 'px">\
+        '<span class="loading loading03 ' + c + ' " style="font-size:' + height + 'px">\
     <span>L</span>\
     <span>o</span>\
     <span>a</span>\
@@ -1050,3 +1050,33 @@ function loader(location, height) {
   </span>'
     );
 }
+
+
+$(document).ready(function() {
+    $("#searchcoin").keyup(function() {
+
+        var m = document.querySelectorAll('.assets_all');
+
+        for (var i = 0; i < m.length; i++) {
+
+
+
+            $(m[i]).hide();
+            $(m[i]).removeClass("d-flex");
+
+            //console.log($(m[i]).html().search($("#searchcoin").val()));
+
+            if ($("#searchcoin").val() == "" || $(m[i]).html().search("_" + $("#searchcoin").val()) > 10) {
+
+                $(m[i]).show();
+                $(m[i]).addClass("d-flex");
+
+
+            }
+        }
+
+
+
+    })
+
+});
