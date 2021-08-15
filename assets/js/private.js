@@ -92,6 +92,8 @@ function wallet_result(coin, data) {
     if (data.code == "pyrk") e = "explorer.pyrk.org";
 
     $("#min_wd").html(number_format(data.minwd));
+    $("#fee_wd").html(number_format(data.feewd));
+    $("#max_wd").html(number_format(data.maxwd1));
 
     if (data.code == "xrp") $("#tag_addr").show();
     else $("#tag_addr").hide();
