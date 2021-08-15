@@ -439,8 +439,13 @@
 
          return;
      }
-     if (amount < 0) {
-         $("#wd_alert").html("Amount must > 0");
+     if (!amount) {
+         $("#wd_alert").html("Amount must >= Minimum WD");
+
+         return;
+     }
+     if (amount * 1 < $("#min_wd").html() * 1) {
+         $("#wd_alert").html("Amount must >= Minimum WD");
 
          return;
      }
@@ -499,8 +504,13 @@
 
          return;
      }
-     if (amount < 0) {
-         $("#wd_alert").html("Amount must > 0");
+     if (!amount) {
+         $("#wd_alert").html("Amount must >= Minimum WD");
+
+         return;
+     }
+     if (amount * 1 < $("#min_wd").html() * 1) {
+         $("#wd_alert").html("Amount must >= Minimum WD");
 
          return;
      }

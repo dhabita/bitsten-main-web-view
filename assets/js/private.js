@@ -91,6 +91,7 @@ function wallet_result(coin, data) {
     if (data.code == "doge") e = "https://dogechain.info";
     if (data.code == "pyrk") e = "explorer.pyrk.org";
 
+    $("#min_wd").html(number_format(data.minwd));
 
     if (data.code == "xrp") $("#tag_addr").show();
     else $("#tag_addr").hide();
