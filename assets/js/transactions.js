@@ -416,6 +416,121 @@
  }
 
 
+
+
+ function get_wd_code() {
+     $.ajaxSetup({
+         headers: {
+             'Authorization': 'Bearer ' + getCookie("token")
+         }
+     });
+
+     var coin = $(".coin_name").first().text().toLowerCase();
+     var addr = $("#list_wd_addr") ? $("#list_wd_addr").val() : "";
+     var amount = $("#wd_amount") ? $("#wd_amount").val() : "";
+
+
+     if (coin.length < 3) {
+         $("#wd_alert").html("Invalid coin Symbol for this address");
+         return;
+     }
+     if (!(addr * 1)) {
+         $("#wd_alert").html("You must select Wallet address");
+
+         return;
+     }
+     if (amount < 0) {
+         $("#wd_alert").html("Amount must > 0");
+
+         return;
+     }
+
+     $("#wd_alert").html("Process.....");
+
+     var data = {
+         coin: coin,
+         addr: addr,
+         amount: (amount * 1).toFixed(8)
+     };
+
+     let d = {};
+     d.data = JSON.stringify(data);
+
+     $.post(url_p + "/auth/email/request", d)
+         .done(function(data) {
+             // console.log(data);
+             //alert( "Data Loaded: " + data );
+             if (data.status) {
+                 console.log("email sent");
+                 $("#wd_alert").html(data.message);
+
+
+             } else {
+                 $("#wd_alert").html(data.message);
+
+             }
+         });
+ }
+
+ function reqwd() {
+     $.ajaxSetup({
+         headers: {
+             'Authorization': 'Bearer ' + getCookie("token")
+         }
+     });
+
+     var coin = $(".coin_name").first().text().toLowerCase();
+     var addr = $("#list_wd_addr") ? $("#list_wd_addr").val() : "";
+     var amount = $("#wd_amount") ? $("#wd_amount").val() : "";
+     var email_code = $("#wd_email_code") ? $("#wd_email_code").val() : "";
+
+     if (email_code.length < 6) {
+         $("#msg_add_addr").html("Required Email code");
+
+         return;
+     }
+
+     if (coin.length < 3) {
+         $("#wd_alert").html("Invalid coin Symbol for this address");
+         return;
+     }
+     if (!(addr * 1)) {
+         $("#wd_alert").html("You must select Wallet address");
+
+         return;
+     }
+     if (amount < 0) {
+         $("#wd_alert").html("Amount must > 0");
+
+         return;
+     }
+
+     $("#wd_alert").html("Process.....");
+
+     var data = {
+         coin: coin,
+         addr: addr,
+         amount: (amount * 1).toFixed(8),
+         email_code: email_code
+     };
+
+
+     $.post(url_p + "/auth/withdraw", data)
+         .done(function(data) {
+             // console.log(data);
+             //alert( "Data Loaded: " + data );
+             if (data.status) {
+                 $("#wd_alert").html(data.message);
+
+
+             } else {
+                 $("#wd_alert").html(data.message);
+
+             }
+         });
+ }
+
+
  function add_addr() {
      $.ajaxSetup({
          headers: {

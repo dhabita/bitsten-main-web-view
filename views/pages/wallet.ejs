@@ -226,21 +226,23 @@
 
 
                                                                         <div class="form-group">
-                                                                            <input type="number" class="form-control" placeholder="Amount"></div>
+                                                                            <input type="number" class="form-control" id="wd_amount" placeholder="Amount"></div>
 
                                                                         <div class="form-group">
                                                                             <div class="input-group mb-2">
 
-                                                                                <input class=" form-control " type="text" id="code" placeholder="Email Code">
+                                                                                <input class=" form-control " type="text" id="wd_email_code" placeholder="Email Code">
                                                                                 <div class="input-group-append  ">
-                                                                                    <span class="input-group-text border bg-warning" style="cursor:pointer">Get Code</span>
+                                                                                    <span class="input-group-text border bg-warning" style="cursor:pointer" onCLick="get_wd_code()">Get Code</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group d-flex justify-content-center">
-                                                                            <button type="submit" class="btn btn-sm rounded-0 btn-warning float-right">Withdraw</button>
+                                                                            <button type="submit" class="btn btn-sm rounded-0 btn-warning float-right" onclick="reqwd()">Withdraw</button>
                                                                         </div>
+
+                                                                        <div class='col-12 text-center text-danger' id="wd_alert"></div>
                                                                     </div>
 
                                                                 </div>
