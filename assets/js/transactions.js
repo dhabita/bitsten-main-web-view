@@ -44,7 +44,8 @@
  async function openr(a) {
      $.ajaxSetup({
          headers: {
-             'Authorization': 'Bearer ' + getCookie("token")
+             'Authorization': 'Bearer ' + getCookie("token"),
+             'Token2fa': getCookie("token2fa")
          }
      });
 
@@ -158,7 +159,8 @@
  async function closeorder(a, id) {
      $.ajaxSetup({
          headers: {
-             'Authorization': 'Bearer ' + getCookie("token")
+             'Authorization': 'Bearer ' + getCookie("token"),
+             'Token2fa': getCookie("token2fa")
          }
      });
 
@@ -481,7 +483,8 @@
  function reqwd() {
      $.ajaxSetup({
          headers: {
-             'Authorization': 'Bearer ' + getCookie("token")
+             'Authorization': 'Bearer ' + getCookie("token"),
+             'Token2fa': getCookie("token2fa")
          }
      });
 
@@ -545,7 +548,8 @@
  function add_addr() {
      $.ajaxSetup({
          headers: {
-             'Authorization': 'Bearer ' + getCookie("token")
+             'Authorization': 'Bearer ' + getCookie("token"),
+             'Token2fa': getCookie("token2fa")
          }
      });
 
