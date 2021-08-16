@@ -1,6 +1,12 @@
  var url_p = "https://api5.bitsten.com/transaction";
  //url_p = "http://localhost/transaction";
 
+ function error_handle(a) {
+     if (a == "Invalid 2FA Token") {
+         setCookie("token2fa", "", 1);
+         location.href = "login2fa";
+     }
+ }
 
  function login() {
      $.ajaxSetup({
@@ -88,6 +94,7 @@
                  $('#order-modal').modal('show');
 
              } else {
+                 error_handle(data.message);
                  $("#res-order").html(data.message);
                  $('#order-modal').modal('show');
              }
@@ -145,6 +152,7 @@
                  $('#login-modal').modal('show');
 
              } else {
+                 error_handle(data.message);
                  if (data.message == "Invalid Login Token") data.message += " / Login required !";
                  $("#login_error").html(data.message);
                  $('#login-modal').modal('show');
@@ -190,6 +198,7 @@
                  if ($("#sellopenorder_" + data.data)) $("#sellopenorder_" + data.data).remove();
 
              } else {
+                 error_handle(data.message);
                  //  $("#res-order").html(data.message);
                  // $('#order-modal').modal('show');
              }
@@ -538,6 +547,7 @@
 
 
              } else {
+                 error_handle(data.message);
                  $("#wd_alert").html(data.message);
 
              }
@@ -618,6 +628,7 @@
 
 
              } else {
+                 error_handle(data.message);
                  $("#msg_add_addr").html(data.message);
 
              }
