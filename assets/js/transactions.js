@@ -25,6 +25,7 @@
              if (data.status) {
                  console.log("success Login");
                  setCookie("token", data.data.token, 1);
+                 setCookie("token2fa", "", 1);
                  location.href = "markets"
              } else {
                  $("#login_error").html(data.message);
@@ -757,6 +758,36 @@
                  $("#login_success").html(data.message);
                  $('#login-modal-s').modal('show');
 
+             } else {
+                 $("#login_error").html(data.message);
+                 $('#login-modal').modal('show');
+             }
+         });
+ }
+
+
+
+ function login2fa() {
+     $.ajaxSetup({
+         headers: {
+             'Authorization': 'Bearer ' + getCookie("token")
+         }
+     });
+
+
+     var password = $("#code2fa").length ? $("#code2fa").val() : "";
+
+     var data = {
+         code: password
+     };
+
+     $.post(url_p + "/auth/2fa/login", data)
+         .done(function(data) {
+
+             if (data.status) {
+                 console.log("success Login");
+                 setCookie("token2fa", data.data.token, 1);
+                 location.href = "markets"
              } else {
                  $("#login_error").html(data.message);
                  $('#login-modal').modal('show');

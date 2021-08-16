@@ -1011,7 +1011,9 @@ function logout() {
     $(".logedin").hide();
     $(".logedout").show();
     eraseCookie("token");
+    eraseCookie("token2fa");
     if (SOCKET_URL == "wallet") location.href = "login";
+    if (SOCKET_URL == "login2fa") location.href = "login";
 }
 
 //get token

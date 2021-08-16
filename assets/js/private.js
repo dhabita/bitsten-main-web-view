@@ -373,6 +373,10 @@ function getprofile() {
                 $('#p_email').html(data.data.email);
                 $('#p_id').html("U-" + data.data.id);
                 $("#dtv").html(data.data.id);
+
+                if (data.data.twofa)
+                    if (getCookie("token2fa") == "")
+                        location.href = "login2fa";
             }
             if (data.status == false) {
                 logout();

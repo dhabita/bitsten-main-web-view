@@ -123,6 +123,13 @@ app.get('/login', function(req, res) {
     });
 });
 
+app.get('/login2fa', function(req, res) {
+    var data = {};
+    res.render('pages/login2fa', {
+        title: "Login 2FA Bitsten Exchange"
+    });
+});
+
 app.get('/register', function(req, res) {
     var data = {};
     res.render('pages/register', {
