@@ -809,3 +809,29 @@
              }
          });
  }
+
+
+ function create2fa() {
+     $.ajaxSetup({
+         headers: {
+             'Authorization': 'Bearer ' + getCookie("token")
+         }
+     });
+
+
+
+     var data = {};
+
+     $.post(url_p + "/auth/2fa/create", data)
+         .done(function(data) {
+             if (data.status) {
+                 $('#2factive').show();
+                 let d = "otpauth://totp/" + $("#p_uname").html() + "?secret=" + data.data.privatekey + "&issuer=bitsten.com";
+                 console.log(d);
+                 create_qr(d);
+                 $("#backup_code").html(data.data.privatekey);
+             } else {
+                 if (data.data == "Your Google 2FA already active") $('#isactive').show();
+             }
+         });
+ }

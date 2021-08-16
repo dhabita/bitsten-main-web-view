@@ -178,6 +178,12 @@ app.get('/finance', function(req, res) {
         title: "Decentralize Bitsten Finance"
     });
 });
+app.get('/set2fa', function(req, res) {
+    var data = {};
+    res.render('pages/set2fa', {
+        title: "Setting 2FA Bitsten Finance"
+    });
+});
 app.get('/cryptobot', function(req, res) {
     var data = {};
     res.render('pages/cryptobot', {

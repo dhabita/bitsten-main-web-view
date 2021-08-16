@@ -1,0 +1,70 @@
+<% layout('../layouts/app') -%>
+
+
+    <div class='col-12' style='min-height:700px'>
+        <div class='row'>
+            <div class="col-12 mt-5 pb-5 border-bottom">
+                <h2 class='text-center'>Setup google 2FA</h2>
+                <h5 class='text-center'>
+                    Your account more scure with 2FA
+                </h5>
+            </div>
+        </div>
+
+        <div class='row d-flex justify-content-center pt-3 '>
+            <div class="col-12  col-md-4 mt-5 pb-3 text-center ">
+                <div id="2factive" style='display: none;'>
+                    <div class='d-flex justify-content-center'>
+                        <div style='width:170px' id="qrcode" class='mb-2'></div>
+                    </div>
+                    <b class="text-danger">Save this backup code , if you lost backup code , you will lost all assets.</b>
+                    <div id="backup_code" class='mt-2'></div>
+
+                    <div class="form-group mt-3">
+                        <div class="input-group mb-2">
+
+                            <input class=" form-control " autocomplete="off" type="text" id="code2fa" placeholder="Confirm Code">
+                            <div class="input-group-append">
+                                <span class="input-group-text text-center  bg-success input-success" style="cursor:pointer" onclick="login2fa()">Activate 2FA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="isactive" style='display: none;'>
+                    <h3 class="text-info">Your 2fa already active</h3>
+                    <button class='btn btn-sm rounded-0 btn-warning pr-2 pl-2'>Disable 2FA</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <div id='login-modal' class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Warning !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                </div>
+                <div class="modal-body">
+                    <p id="login_error" class="error text-danger"></p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var SOCKET_URL = 'set2fa';
+    </script>

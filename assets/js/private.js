@@ -377,6 +377,8 @@ function getprofile() {
                 if (data.data.twofa)
                     if (getCookie("token2fa") == "")
                         location.href = "login2fa";
+
+                if (SOCKET_URL == "set2fa") create2fa();
             }
             if (data.status == false) {
                 logout();
