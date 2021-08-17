@@ -108,7 +108,8 @@
  async function convert() {
      $.ajaxSetup({
          headers: {
-             'Authorization': 'Bearer ' + getCookie("token")
+             'Authorization': 'Bearer ' + getCookie("token"),
+             'Token2fa': getCookie("token2fa")
          }
      });
 
