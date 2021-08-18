@@ -182,6 +182,8 @@
      var divider = 100;
      if (ma == "idrt") divider = 100000;
      if (ma == "bst") divider = 500;
+     if (ma == "mbusd") divider = 5000000;
+     if (ma == "wbst") divider = 500;
      if (!d.data) return;
      var lp = last_price[d.triger[1]];
 
