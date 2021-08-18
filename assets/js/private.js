@@ -291,6 +291,7 @@ function transaction(coin) {
 
 function openorder_result(market, data) {
     $("#openorder").html("");
+
     data = data.sort(function(a, b) {
 
         return b.price - a.price;
@@ -318,7 +319,7 @@ function openorder_result(market, data) {
 
 
 function openorder(market) {
-    loader($("#openorder"), 12);
+    loader($("#openorderl"), 12);
 
     // var size =  transaction_memory[coin].length;
     // if(size>0) transaction_result(coin,transaction_memory[coin]);
@@ -351,6 +352,7 @@ function openorder(market) {
                 // var m =document.querySelectorAll('.wallet_'+coin);
                 // for(var i=0;i<m.length;i++) $(m[i]).val("---");
                 // create_qr("-");
+                $("#openorderl").html("");
             }
         });
 }

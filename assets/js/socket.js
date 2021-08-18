@@ -365,6 +365,8 @@
  }
 
  //fill all markets
+ var rate_to_usd = {};
+
  function all_market(d) {
 
      d.data.forEach(e => {
@@ -378,6 +380,9 @@
          var coin = e.market_show.split("_")[0];
          var market = e.market_show.split("_")[1];
 
+         if (market == "usdt") rate_to_usd[coin] = e.bid;
+         if (market == "idrt" && coin == "usdt") rate_to_usd['idrt'] = 1 / e.bid;
+         var m1 = market;
          var dnone = "display:none";
 
          if (e.volume < 500 && market == "usdt") market = "alt";
@@ -388,8 +393,10 @@
          if (h == e.market_show) {
              volume_this_pair = e.volume;
              var price = document.querySelectorAll('.last_price_usd');
-             if (market == "usdt")
+             if (m1 == "usdt")
                  for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid);
+             if (m1 == "idrt")
+                 for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid * rate_to_usd['idrt']);
 
              var price = document.querySelectorAll('.last_price');
              for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid);
