@@ -382,6 +382,8 @@
 
          if (market == "usdt") rate_to_usd[coin] = e.bid;
          if (market == "idrt" && coin == "usdt") rate_to_usd['idrt'] = 1 / e.bid;
+         //if (market == "usdt" && coin == "bst") rate_to_usd['idrt'] = 1 / e.bid;
+
          var m1 = market;
          var dnone = "display:none";
 
@@ -394,8 +396,7 @@
          if (e.volume < 500000 && market == "wbst") market = "alt";
          else
          if (e.volume < 500000 && market == "bst") market = "alt";
-         else
-             dnone = "";
+
 
          var h = window.location.hash.replace("#", "");
          if (h == e.market_show) {
@@ -405,6 +406,8 @@
                  for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid);
              if (m1 == "idrt")
                  for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid * rate_to_usd['idrt']);
+             if (m1 == "wbst")
+                 for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid * rate_to_usd['bst']);
 
              var price = document.querySelectorAll('.last_price');
              for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid);
@@ -473,7 +476,7 @@
 
 
      $("#load-markets").hide();
-
+     show((getCookie("market") != "") ? getCookie("market") : "usdt");
  }
 
  function show(a) {
