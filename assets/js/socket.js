@@ -387,7 +387,15 @@
 
          if (e.volume < 500 && market == "usdt") market = "alt";
          else
-         if (market == 'usdt') dnone = "";
+         if (e.volume < 5000000 && market == "idrt") market = "alt";
+         else
+         if (e.volume < 50000000 && market == "mbusd") market = "alt";
+         else
+         if (e.volume < 500000 && market == "wbst") market = "alt";
+         else
+         if (e.volume < 500000 && market == "bst") market = "alt";
+         else
+             dnone = "";
 
          var h = window.location.hash.replace("#", "");
          if (h == e.market_show) {
