@@ -473,6 +473,9 @@
 
      $(".all-coin").hide();
      $("." + a).show();
+     $(".ht").removeClass("bg-white");
+     $(".ht-" + a).addClass(" bg-white ");
+     setCookie("market", a, 100);
  }
 
 
@@ -571,3 +574,5 @@
      //  soket.close();
      if ((date_now - last_time_connect) / 1000 > 20) connecting();
  }, 10000)
+
+ show((getCookie("market") != "") ? getCookie("market") : "usdt");

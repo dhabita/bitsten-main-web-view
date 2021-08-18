@@ -1,88 +1,94 @@
 <% layout('../layouts/app') -%>
-  
-
-  <div class="markets ptb70">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="markets-container">
-            <div class="markets-content">
-              <h2>BTC Index</h2>
-              <p class='price-btc_usdt'>0</p>
-              <span class="change-btc_usdt green color_change-btc_usdt"> + 0%</span>
-            </div>
-            <div class="markets-chart">
-              <div id="marketsChartBtcLight"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="markets-container">
-            <div class="markets-content">
-              <h2>ETH Index</h2>
-              <p class='price-eth_usdt'>0</p>
-              <span class="change-eth_usdt green color_change-eth_usdt"> - 0%</span>
-            </div>
-            <div class="markets-chart">
-              <div id="marketsChartEthLight"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="markets-container">
-            <div class="markets-content">
-              <h2>LTC Index</h2>
-              <p class='price-ltc_usdt'>0</p>
-              <span class="change-ltc_usdt green color_change-ltc_usdt"> + 0%</span>
-            </div>
-            <div class="markets-chart">
-              <div id="marketsChartLtcLight"></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="">
-            <ul class="nav nav-pills" id="pills-tab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#STAR"  onclick = 'show("start")'  role="tab" aria-selected="true"><i
-                    class="icon ion-md-star"></i> <span class='hide-xs'> Favorites </span></a>
-              </li>
-             
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#BST" onclick = 'show("bst")' role="tab" aria-selected="true">BST</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#USDT" onclick = 'show("usdt")'  role="tab" aria-selected="false">USDT</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#IDRT" onclick = 'show("idrt")'  role="tab" aria-selected="true">IDRT</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#ALT" onclick = 'show("alt")'  role="tab" aria-selected="true">ALT</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane fade show active"  role="tabpanel">
-                <table class="table" id='all_markets_table'>
-                  <thead>
-                    <tr>
-                      <th>Pairs</th>
-                      <th class=" hide-xs ">Coin</th>
-                      <th class=" text-right   ">Last Price</th>
-                      <th class=" text-right   ">Change (24H)</th>
-                      <th class=" text-right hide-xs  ">High (24H)</th>
-                      <th class=" text-right hide-xs ">Low (24h)</th>
-                      <th class=" text-right  hide-xs">Volume (24h)</th>
-                    </tr>
-                  </thead>
-                  <tbody id='all_market'>
 
 
-                    <tr id = 'load-markets' class=' '>
-                    <td style='height: 300px !important; padding-top: 100px;' class='text-center   ' colspan="7"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
-                    </tr>
+    <div class="markets ptb70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="markets-container">
+                        <div class="markets-content">
+                            <h2>BTC Index</h2>
+                            <p class='price-btc_usdt'>0</p>
+                            <span class="change-btc_usdt green color_change-btc_usdt"> + 0%</span>
+                        </div>
+                        <div class="markets-chart">
+                            <div id="marketsChartBtcLight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="markets-container">
+                        <div class="markets-content">
+                            <h2>ETH Index</h2>
+                            <p class='price-eth_usdt'>0</p>
+                            <span class="change-eth_usdt green color_change-eth_usdt"> - 0%</span>
+                        </div>
+                        <div class="markets-chart">
+                            <div id="marketsChartEthLight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="markets-container">
+                        <div class="markets-content">
+                            <h2>LTC Index</h2>
+                            <p class='price-ltc_usdt'>0</p>
+                            <span class="change-ltc_usdt green color_change-ltc_usdt"> + 0%</span>
+                        </div>
+                        <div class="markets-chart">
+                            <div id="marketsChartLtcLight"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-12  text-center mt-2 border-top" style='background: #eee;padding-top:1px !important'>
+                        <div class="row">
 
-                    <!--
+                            <div class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#STAR" onclick='show("start")' role="tab" aria-selected="true"><i
+                    class="icon ion-md-star"></i> </a>
+                            </div>
+
+                            <div class="nav-item ht ht-bst">
+                                <a class="nav-link" data-toggle="pill" href="#BST" onclick='show("bst")' role="tab" aria-selected="true">BST</a>
+                            </div>
+                            <div class="nav-item ht ht-wbst">
+                                <a class="nav-link" data-toggle="pill" href="#WBST" onclick='show("wbst")' role="tab" aria-selected="true">WBST</a>
+                            </div>
+                            <div class="nav-item ht ht-usdt">
+                                <a class="nav-link" data-toggle="pill" href="#USDT" onclick='show("usdt")' role="tab" aria-selected="false">USDT</a>
+                            </div>
+                            <div class="nav-item ht ht-idrt">
+                                <a class="nav-link" data-toggle="pill" href="#IDRT" onclick='show("idrt")' role="tab" aria-selected="true">IDRT</a>
+                            </div>
+                            <div class="nav-item ht ht-alt">
+                                <a class="nav-link" data-toggle="pill" href="#ALT" onclick='show("alt")' role="tab" aria-selected="true">ALT</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" role="tabpanel">
+                            <table class="table" id='all_markets_table'>
+                                <thead>
+                                    <tr>
+                                        <th>Pairs</th>
+                                        <th class=" hide-xs ">Coin</th>
+                                        <th class=" text-right   ">Last Price</th>
+                                        <th class=" text-right   ">Change (24H)</th>
+                                        <th class=" text-right hide-xs  ">High (24H)</th>
+                                        <th class=" text-right hide-xs ">Low (24h)</th>
+                                        <th class=" text-right  hide-xs">Volume (24h)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='all_market'>
+
+
+                                    <tr id='load-markets' class=' '>
+                                        <td style='height: 300px !important; padding-top: 100px;' class='text-center   ' colspan="7"><img src="http://f1.bitsten.com/assets/images/loading.gif" style="width:150px !important"></td>
+                                    </tr>
+
+                                    <!--
                     <tr data-href="exchange-light.html">
                       <td><i class="icon ion-md-star"></i> ETH/BTC</td>
                       <td><img src="assets/img/icon/1.png" alt="eth"> ETH</td>
@@ -102,26 +108,26 @@
                       <td>431,684,298.45</td>
                     </tr> 
                     -->
-                  </tbody>
-                </table>
-              </div> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center d-none">
+                        <a href="#" class="load-more btn">Load More <i class="icon ion-md-arrow-down"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="text-center d-none">
-              <a href="#" class="load-more btn">Load More <i class="icon ion-md-arrow-down"></i></a>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-
-  
-</body>
-
-</html>
+    </div>
 
 
+    </body>
 
-<script>
-  var SOCKET_URL = 'market';
-</script>
+    </html>
+
+
+
+    <script>
+        var SOCKET_URL = 'market';
+    </script>
