@@ -384,6 +384,7 @@
 
          if (market == "usdt") rate_to_usd[coin] = e.bid;
          if (market == "idrt" && coin == "usdt") rate_to_usd['idrt'] = 1 / e.bid;
+         rate_to_usd['mbusd'] = 1 / 1000000;
          //if (market == "usdt" && coin == "bst") rate_to_usd['idrt'] = 1 / e.bid;
 
          var m1 = market;
@@ -410,6 +411,8 @@
                  for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid * rate_to_usd['idrt']);
              if (m1 == "wbst")
                  for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid * rate_to_usd['bst']);
+             if (m1 == "mbusd")
+                 for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid * rate_to_usd['mbusd']);
 
              var price = document.querySelectorAll('.last_price');
              for (var i = 0; i < price.length; i++) price[i].innerHTML = number_format(e.bid);
