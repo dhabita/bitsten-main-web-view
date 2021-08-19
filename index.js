@@ -191,5 +191,24 @@ app.get('/cryptobot', function(req, res) {
     });
 });
 
+app.get('/affiliate', function(req, res) {
+    var data = {};
+    res.render('pages/affiliate', {
+        title: "Affiliate Bitsten Exchange"
+    });
+});
+app.get('/airdrop', function(req, res) {
+    var data = {};
+    res.render('pages/airdrop', {
+        title: "Free new crypto assets  Bitsten Users"
+    });
+});
+app.get('/faucet', function(req, res) {
+    var data = {};
+    res.render('pages/faucet', {
+        title: "Free small amount of crypto"
+    });
+});
+
 
 app.listen(port, () => console.info(`App listen on port ${port}`));
