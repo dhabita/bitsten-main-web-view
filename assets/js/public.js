@@ -112,7 +112,7 @@ if (SOCKET_URL == "wallet") {
             if (e.kondition == 3) wdt = " title = 'Withdraw Online' ";
 
             var da = '\
-                    <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="assets_all assets_' + e.code + ' nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
+                    <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="border-bottom assets_all assets_' + e.code + ' col-12 nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
                           aria-selected="true">\
                        \
                         <div class="d-flex">\
@@ -120,15 +120,15 @@ if (SOCKET_URL == "wallet") {
                          <i class="bi bi-arrow-up-circle-fill ' + clasdp + '" ' + dpt + '><br></i>\
                          <i class="bi bi-arrow-down-circle-fill  ' + claswd + '" ' + wdt + '></i>\
                         </div>\
-                        <img src="https://f1.bitsten.com/assets/images/logo/' + e.code + '.png"  style="width:45px !important ; height:45px !important" > \
                         <div>\
-                            <h5>' + e.code.toUpperCase() + '</h4>\
-                            <p>' + e.name + '</p>\
+                        <h5>  <img class=" mr-2" src="https://f1.bitsten.com/assets/images/logo/' + e.code + '.png"  style="width:25px !important ; height:25px !important" > \
+                         ' + e.code.toUpperCase() + '</h4>\
+                         <span>' + e.name + '</span>\
                         </div>\
                         </div>\
-                        <div>\
+                        <div class="text-right">\
                         <h6 class="balance_' + e.code + '"></h5>\
-                        <p   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_' + e.code + '_hold ">  </span> </p>\
+                        <span   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_' + e.code + '_hold ">  </span> </span>\
                         </div>\
                     </a> \
                         ';
