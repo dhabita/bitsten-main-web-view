@@ -375,6 +375,7 @@ function getprofile() {
                 $('#p_email').html(data.data.email);
                 $('#p_id').html("U-" + data.data.id);
                 $("#dtv").html(data.data.id);
+                if ($('#my_id')) $('#my_id').val("https://bitsten.com/reg/" + data.data.id);
 
                 if (data.data.twofa)
                     if (getCookie("token2fa") == "")

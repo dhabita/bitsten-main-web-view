@@ -1,7 +1,5 @@
 <% layout('../layouts/app') -%>
 
-
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
     <!-- Vendor CSS Files -->
@@ -33,7 +31,28 @@
                             <div class="icon"><i class="fa fa-shopping-bag"></i></div>
                             <h4 class="title"><a href="">25% Commission</a></h4>
                             <p class="description">25% from referral transaction fee, will be given to Uppline.</p>
+                            <div class='logedin text-center mt-3 ' style="display:none">
+                                Your link <br>
+                                <input onclick="copy()" class='text-info p-2 col-12 text-center font-weight-bold ' id='my_id' value="" readonly></input>
+                            </div>
                         </div>
+
+                        <script>
+                            function copy() {
+                                /* Get the text field */
+                                var copyText = document.getElementById("my_id");
+                                /* Select the text field */
+                                copyText.select();
+                                copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+                                /* Copy the text inside the text field */
+                                document.execCommand("copy");
+
+                                /* Alert the copied text */
+                                alert("Link Copied : " + copyText.value);
+                            }
+                        </script>
+
 
 
                     </div>
@@ -46,23 +65,23 @@
 
 
         <!-- ======= Services Section ======= -->
-        <section id="services">
+        <section id="services" class=' pt-3 pb-2'>
             <div class="container" data-aos="fade-up">
                 <div class="section-header">
                     <h3 class="section-title">Top Leader</h3>
-                    <p class="section-description">Last 20 Best Bitsten Leader</p>
+                    <p class="section-description pb-2">Last 20 Best Bitsten Leader</p>
                 </div>
 
                 <div class="row  " style='margin-bottom:50px'>
                     <div class='col-12' id='bst'>
                         <div class='row mt-2 mb-2 pb-2 border-bottom'>
-                            <div class="col-md-2  pt-1 font-weight-bold text info">
+                            <div class="col-md-2  pt-1 font-weight-bold text-info">
                                 Username
                             </div>
-                            <div class="col-md-8 text-center  font-weight-bold">
+                            <div class="col-md-8 text-center  text-info font-weight-bold">
                                 Referral
                             </div>
-                            <div class="col-md-2  pt-1 font-weight-bold text info">
+                            <div class="col-md-2  pt-1 font-weight-bold text-info">
                                 30 Days reward
                             </div>
                         </div>
@@ -92,6 +111,35 @@
                     </div>
 
                 </div>
+
+            </div>
+        </section>
+        <!-- End Services Section -->
+
+        <!-- ======= Services Section ======= -->
+        <section id="services" class='pt-3 logedin'>
+            <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                    <h3 class="section-title">Your referral</h3>
+                    <p class="section-description pb-2">Last 100 your referral from (<b class="text-info " id='myreftotal'></b>)</p>
+                </div>
+
+                <div class="row  " style='margin-bottom:50px'>
+                    <div class='col-12' id='myref'>
+                        <div class='row mt-2 mb-2 pb-2 border-bottom'>
+                            <div class="col-md-4 text-center pt-1 font-weight-bold text-info">
+                                Date
+                            </div>
+                            <div class="col-md-4 text-center text-info font-weight-bold">
+                                Username
+                            </div>
+                            <div class="col-md-4  text-center pt-1 font-weight-bold text-info">
+                                30 Days reward
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </section>
@@ -219,7 +267,7 @@
                 .done(function(d) {
                     // console.log(  data );
                     if (d.status) {
-                        console.log(d.data);
+                        //.log(d.data);
                         let fw = d.data.total[0].t * 0.01;
 
                         let r = {};
@@ -228,7 +276,7 @@
                             r[i] = e.t;
                         });
 
-                        console.log(r);
+                        //console.log(r);
                         d.data.total.forEach(e => {
                             let i = "r-" + e.id;
                             let bg = "bg-success";
@@ -253,6 +301,97 @@
                             </div>
                         </div>`);
                         })
+                    }
+
+                });
+        })
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie("token")
+                }
+            });
+            $.get("https://api4.bitsten.com/private/referral")
+                .done(function(d) {
+                    // console.log(  data );
+                    if (d.status) {
+                        //.log(d.data);
+                        $('#myreftotal').html(d.data.total);
+                        if (d.data.list.length > 0) {
+
+
+
+                            d.data.list.forEach(e => {
+                                let ti = new Date(e.created_on * 1000);
+                                ti = ti.toString().substring(0, 15);
+                                $("#myref").append(`
+                    <div class='row mt-2 text-center'>
+                        <div class="col-md-4 text-center pt-1 font-weight-bold  ">
+                            ${ti}
+                        </div>
+                        <div class="col-md-4 text-center pt-1 font-weight-bold  ">
+                            ${e.username}
+                        </div>
+                       
+                        <div class="col-md-4  text-center pt-1 font-weight-bold  ">
+                           0 BST
+                        </div>
+                    </div>`);
+
+                            })
+
+
+
+                        }
+                        /*
+
+
+                         <div class="col-md-8">
+                            <div class="progress font-weight-bold " style="height: 30px;">
+                                <div class="progress-bar ${bg}" role="progressbar" style="width: ${(e.t/fw)}%;" aria-valuenow="${(e.t/fw)} Referral" aria-valuemin="0" aria-valuemax="100">${(e.t).toFixed(0)}  </div>
+                            </div>
+                        
+                        </div>
+
+
+                        let fw = d.data.total[0].t * 0.01;
+
+                        let r = {};
+                        d.data.reward.forEach(e => {
+                            let i = "r-" + e.userid;
+                            r[i] = e.t;
+                        });
+
+                        console.log(r);
+                        d.data.total.forEach(e => {
+                            let i = "r-" + e.id;
+                            let bg = "bg-success";
+                            if ((e.t / fw) < 75) bg = "bg-primary";
+                            if ((e.t / fw) < 50) bg = "bg-warning";
+                            if ((e.t / fw) < 25) bg = "bg-danger";
+
+
+                            $("#bst").append(`
+                    <div class='row mt-2'>
+                        <div class="col-md-2  pt-1 font-weight-bold text info">
+                            ${e.username}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="progress font-weight-bold " style="height: 30px;">
+                                <div class="progress-bar ${bg}" role="progressbar" style="width: ${(e.t/fw)}%;" aria-valuenow="${(e.t/fw)} Referral" aria-valuemin="0" aria-valuemax="100">${(e.t).toFixed(0)}  </div>
+                            </div>
+                        
+                        </div>
+                        <div class="col-md-2  pt-1 font-weight-bold text info">
+                            ${r[i]*1>0?r[i]*1:0} BST
+                        </div>
+                    </div>`);
+                    
+                        })*/
                     }
 
                 });
