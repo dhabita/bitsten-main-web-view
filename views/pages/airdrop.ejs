@@ -21,68 +21,35 @@
     <main id="main">
 
         <!-- ======= About Section ======= -->
-        <section id="about">
-            <div class="container" data-aos="fade-up">
-                <div class="row about-container">
-
-                    <div class="col-lg-6 content order-lg-1 order-2">
-                        <h2 class="title">About Bitsten Token ( BST )</h2>
-                        <p>
-                            Bitsten Token ( BST ) is a utility token that is used on the Bitsten exchange platform, BST token holders get the following benefits. </p>
-
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                            <div class="icon"><i class="fa fa-shopping-bag"></i></div>
-                            <h4 class="title"><a href="">Reward for HOLD</a></h4>
-                            <p class="description">50% from bitsten exchange user transaction fee, will be given to BST token holders.</p>
-                        </div>
-
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                            <div class="icon"><i class="fa fa-photo"></i></div>
-                            <h4 class="title"><a href="">Listing New Project</a></h4>
-                            <p class="description">Each project will be listed on Bitsten , it will require 60,000 BST ( 0.5% of total supply ) to pay the listing fee.</p>
-                        </div>
-
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                            <div class="icon"><i class="fa fa-bar-chart"></i></div>
-                            <h4 class="title"><a href="">Farming at bitsten.finance</a></h4>
-                            <p class="description">Every new project is listed on Bitsten Exchange, 50,000 BST will be added to the reward farming pool.</p>
-                        </div>
-                        <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-                            <div class="icon"><i class="fa fa-shopping-bag"></i></div>
-                            <h4 class="title"><a href="">Trading Fee discount</a></h4>
-                            <p class="description">By having 10,000 BST on the Bitsten Exchange platform, all your trading transactions will automatically get a 25% discount.</p>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6 mt-5 background order-lg-2 order-1" data-aos="fade-left" data-aos-delay="100"></div>
-                </div>
-
-            </div>
-        </section>
-        <!-- End About Section -->
-
-
-
-        <!-- ======= Services Section ======= -->
         <section id="services">
-            <div class="container" data-aos="fade-up">
+
+
+            <div class="container pb-3" data-aos="fade-up">
                 <div class="section-header">
-                    <h3 class="section-title">BST Hero</h3>
-                    <p class="section-description">Last 50 Best Bitsten Token holder on Bitsten Exchange Platform</p>
+                    <h3 class="section-title">New token airdrop</h3>
+                    <p class="section-description">All is free for bitsten users</p>
                 </div>
 
-                <div class="row  " style='margin-bottom:50px'>
-                    <div class='col-12' id='bst'>
-                        <div class='row mt-2 mb-2 pb-2 border-bottom'>
-                            <div class="col-md-2  pt-1 font-weight-bold text info">
-                                Username
+                <div class="row pb-3 " style='margin-bottom:50px;min-height: 300px;'>
+                    <div class='col-12 mb-3' id='bst'>
+                        <div class='row mt-2 mb-2 pb-2 text-center border-bottom'>
+                            <div class="col-md-1    font-weight-bold text-info">
+                                No
                             </div>
-                            <div class="col-md-8 text-center  font-weight-bold">
-                                BST balance
+                            <div class="col-md-1   font-weight-bold text-info">
+                                Reward
                             </div>
-                            <div class="col-md-2  pt-1 font-weight-bold text info">
-                                30 Days reward
+                            <div class="col-md-3   font-weight-bold text-info">
+                                Name
+                            </div>
+                            <div class="col-md-3    font-weight-bold text-info">
+                                Total / Claim / Minute
+                            </div>
+                            <div class="col-md-2    font-weight-bold text-info">
+                                Available
+                            </div>
+                            <div class="col-md-2   font-weight-bold text-info">
+                                Claim
                             </div>
                         </div>
                     </div>
@@ -206,6 +173,30 @@
 
 
     </main>
+
+
+
+    <div id='login-modal' class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Information !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                </div>
+                <div class="modal-body">
+                    <p id="login_error" class="error text-info"></p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- End #main -->
 
 
@@ -228,39 +219,56 @@
     <script src="assets/js/main.js"></script>
 
     <script>
+        let ket = {};
+
+        function claim(id) {
+            $("#login_error").html("COMING SOON");
+            $('#login-modal').modal('show');
+        }
+
+        function mod(id) {
+            $("#login_error").html(ket[id + "t"]);
+            $('#login-modal').modal('show');
+        }
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     //  'Authorization': 'Bearer ' + getCookie("token")
                 }
             });
-            $.get("https://api3.bitsten.com/public/data/bstholder")
+            $.get("https://api3.bitsten.com/public/data/faucet")
                 .done(function(d) {
                     // console.log(  data );
                     if (d.status) {
-                        console.log(d.data);
-                        let fw = d.data[0].amount * 0.01;
+                        let a = 0;
                         d.data.forEach(e => {
-
-                            let bg = "bg-success";
-                            if ((e.amount / fw) < 75) bg = "bg-primary";
-                            if ((e.amount / fw) < 50) bg = "bg-warning";
-                            if ((e.amount / fw) < 25) bg = "bg-danger";
-
+                            let i = e.id + "t";
+                            ket[i] = e.ket;
+                            a++;
 
                             $("#bst").append(`
-                        <div class='row mt-2'>
-                            <div class="col-md-2  pt-1 font-weight-bold text info">
-                                ${e.username}
+                        <div class='row mt-1 text-center   p-2 text-primary'>
+                            <div class="col-md-1 font-weight-bold ">
+                                ${a}
                             </div>
-                            <div class="col-md-8">
-                                <div class="progress font-weight-bold " style="height: 30px;">
-                                    <div class="progress-bar ${bg}" role="progressbar" style="width: ${(10+(e.amount/fw)*0.9)}%;" aria-valuenow="${(10+(e.amount/fw)*0.9)}" aria-valuemin="0" aria-valuemax="100">${(e.amount*1).toFixed(0)} BST </div>
-                                </div>
-                            
+                            <div class="col-md-1">
+                                ${e.coin.toUpperCase()}
                             </div>
-                            <div class="col-md-2  pt-1 font-weight-bold text info">
-                                ${e.reward} BST
+
+
+                            <div class="col-md-3">
+                                ${e.judul}
+                            </div>
+<div class="col-md-3">
+                                ${number_format(e.max_claim)} ${e.coin.toUpperCase()} / ${number_format(e.per_claim)} ${e.coin.toUpperCase()} / ${number_format(e.menit,0)}
+                            </div>
+                            <div class="col-md-2">
+                                ${number_format(e.max_claim - e.claimed)} ${e.coin.toUpperCase()}
+                            </div>
+
+                            <div class="col-md-2  ">
+                                <button class='btn btn-sm btn-warning rounded-0' onCLick='mod(${e.id})'>DETAIL</button>
+                                <button class='btn btn-sm btn-success rounded-0' onCLick='claim(${e.id})'>CLAIM</button>
                             </div>
                         </div>`);
                         })

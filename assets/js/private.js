@@ -290,7 +290,7 @@ function transaction(coin) {
 
 
 function openorder_result(market, data) {
-    $("#openorder").html("");
+    $("#openorderl").html("");
 
     data = data.sort(function(a, b) {
 
@@ -353,6 +353,8 @@ function openorder(market) {
                 // for(var i=0;i<m.length;i++) $(m[i]).val("---");
                 // create_qr("-");
                 $("#openorderl").html("");
+
+
             }
         });
 }
