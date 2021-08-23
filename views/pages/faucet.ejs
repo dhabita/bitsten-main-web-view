@@ -27,7 +27,17 @@
             <div class="container pb-3" data-aos="fade-up">
                 <div class="section-header">
                     <h3 class="section-title">Faucet List</h3>
-                    <p class="section-description">All active faucet is free for all bitsten users</p>
+                    <p class="text-center">
+                        All active faucet is free for all bitsten users<br>
+                        <b class='blink_me'>100% bonus / Claim with Hold 1000 BST at your account</b><br>
+                        <b class='blink_me'>100% bonus from every referral claim </b>
+                    </p>
+                    <script>
+                        (function blink() {
+                            $('.blink_me').fadeOut(0).fadeIn(2000, blink);
+                        })();
+                    </script>
+
                 </div>
 
                 <div class="row pb-3 " style='margin-bottom:50px;min-height: 300px;'>
@@ -187,6 +197,11 @@
                 </div>
                 <div class="modal-body">
                     <p id="login_error" class="error text-info"></p>
+                    <p>
+                        Invite your friends to claim this faucet and get 100% bonus from they claimed.<br> <br> Your invitation Link :
+
+                        <br> https://bitsten.com/faucet/<span id='faucet_id'>id</span>/<span id='faucet_userid'>userid</span>
+                    </p>
                 </div>
                 <div class="modal-footer">
 
@@ -222,11 +237,35 @@
         let ket = {};
 
         function claim(id) {
-            $("#login_error").html("COMING SOON");
-            $('#login-modal').modal('show');
+            $.ajaxSetup({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie("token")
+                }
+            });
+
+
+
+            var data = {
+                id: id,
+                upline: getCookie("faucet_" + id)
+            };
+
+            $.post("https://api5.bitsten.com/transaction/auth/faucet/claim", data)
+                .done(function(data) {
+                    if (data.status) {
+                        $("#login_error").html(data.message);
+                        $('#login-modal').modal('show');
+                    } else {
+                        $("#login_error").html(data.message);
+                        $('#login-modal').modal('show');
+                    }
+                });
         }
 
         function mod(id) {
+
+            $("#faucet_userid").html($("#p_id").html().replace("U-", ""));
+            $("#faucet_id").html(id);
             $("#login_error").html(ket[id + "t"]);
             $('#login-modal').modal('show');
         }

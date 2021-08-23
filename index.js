@@ -157,6 +157,10 @@ app.get('/reg/:id', function(req, res) {
     res.redirect('/');
 });
 
+app.get('/faucet/:id/:ref', function(req, res) {
+    res.cookie('faucet_' + req.params.id, req.params.ref, { maxAge: 999999999999 });
+    res.redirect('/faucet');
+});
 
 app.get('/bst', function(req, res) {
     var data = {};
