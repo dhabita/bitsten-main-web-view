@@ -205,7 +205,7 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
                 </div>
             </div>
         </div>
@@ -252,7 +252,9 @@
 
             $.post("https://api5.bitsten.com/transaction/auth/faucet/claim", data)
                 .done(function(data) {
+                    let nt = new Date();
                     if (data.status) {
+                        setCookie("faucet_last_" + id, nt - data.data.last * 1000, 1000000);
                         $("#login_error").html(data.message);
                         $('#login-modal').modal('show');
                     } else {
