@@ -64,7 +64,79 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="row">
+                    <div class="col-12 mb-3 pb-3">
+                        <h5>FREQUENTLY ASKED QUESTIONS </h5>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading  mb-3" role="tab" id="heading0">
+                                    <h6 class="panel-title">
+                                        <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+What is crypto faucet?
+                                        </a>
+                                    </h6>
+                                </div>
+                                <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+                                    <div class="panel-body px-3 mb-4">
+                                        <p> This is free small amount of crypto available for claim every minute. </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading   mb-3" role="tab" id="heading1">
+                                    <h6 class="panel-title">
+                                        <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                              How much can earn from this?
+                            </a>
+                                    </h6>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+                                    <div class="panel-body px-3 mb-4">
+                                        <p>Average of faucet is give reward ~0.1 cent every minute , if you want to get more reward invite your friend to claim it , and you will get 100% from referral claimed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading   mb-3" role="tab" id="heading2">
+                                    <h6 class="panel-title">
+                                        <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                              When I can claim it?
+                            </a>
+                                    </h6>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse" role="tabpane2" aria-labelledby="heading2">
+                                    <div class="panel-body px-3 mb-4">
+                                        <p>You can claim every minute.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading   mb-3" role="tab" id="heading3">
+                                    <h6 class="panel-title">
+                                        <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                              How to get 100% more?
+                            </a>
+                                    </h6>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse" role="tabpane3" aria-labelledby="heading3">
+                                    <div class="panel-body px-3 mb-4">
+                                        <p>Hold 1,000 BST at your accoun and every claim you get 100% bonus.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row d-none">
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in">
                         <div class="box">
                             <div class="icon"><a href=""><i class="fa fa-desktop"></i></a></div>
@@ -197,6 +269,27 @@
                 </div>
                 <div class="modal-body">
                     <p id="login_error" class="error text-info"></p>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id='login-modal-detail' class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Information !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+                </div>
+                <div class="modal-body">
+                    <p id="login_error-detail" class="error text-info"></p>
                     <p>
                         Invite your friends to claim this faucet and get 100% bonus from they claimed.<br> <br> Your invitation Link :
 
@@ -210,6 +303,8 @@
             </div>
         </div>
     </div>
+
+
 
 
     <!-- End #main -->
@@ -235,6 +330,7 @@
 
     <script>
         let ket = {};
+        let ld = {};
 
         function claim(id) {
             $.ajaxSetup({
@@ -255,7 +351,7 @@
                     let nt = new Date();
                     if (data.status) {
                         setCookie("faucet_last_" + id, nt - data.data.last * 1000, 1000000);
-                        $("#login_error").html(data.message);
+                        $("#login_error").html("success claim " + number_format(ld[id + "t"].per_claim) + " " + ld[id + "t"].coin.toUpperCase() + "<br>You can claim again after " + ld[id + "t"].menit + " Minutes");
                         $('#login-modal').modal('show');
                     } else {
                         $("#login_error").html(data.message);
@@ -268,8 +364,8 @@
 
             $("#faucet_userid").html($("#p_id").html().replace("U-", ""));
             $("#faucet_id").html(id);
-            $("#login_error").html(ket[id + "t"]);
-            $('#login-modal').modal('show');
+            $("#login_error-detail").html(ket[id + "t"]);
+            $('#login-modal-detail').modal('show');
         }
         $(document).ready(function() {
             $.ajaxSetup({
@@ -283,7 +379,9 @@
                     if (d.status) {
                         let a = 0;
                         d.data.forEach(e => {
+
                             let i = e.id + "t";
+                            ld[i] = e;
                             ket[i] = e.ket;
                             a++;
 
