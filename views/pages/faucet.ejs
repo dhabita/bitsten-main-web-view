@@ -267,13 +267,14 @@ What is crypto faucet?
         <span aria-hidden="true">&times;</span>
       </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <p id="login_error" class="error text-info"></p>
+                    <p id='btn-claim'></p>
 
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
+                    <button type="button" class="btn btn-primary btn-sm rounded-0" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
                 </div>
             </div>
         </div>
@@ -284,7 +285,7 @@ What is crypto faucet?
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Information !</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
                 </div>
@@ -298,7 +299,7 @@ What is crypto faucet?
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
+                    <button type="button" class="btn btn-primary btn-sm rounded-0" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
                 </div>
             </div>
         </div>
@@ -333,31 +334,50 @@ What is crypto faucet?
         let ld = {};
 
         function claim(id) {
-            $.ajaxSetup({
-                headers: {
-                    'Authorization': 'Bearer ' + getCookie("token")
-                }
+            $('#login-modal').modal('show');
+            $("#btn-claim").html('<button type="button" class="btn btn-primary btn-sm rounded-0" onclick="claim_this(' + id + ')">Claim</button>');
+        }
+
+        function claim_this(id) {
+
+
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
+                    action: 'submit'
+                }).then(function(token) {
+                    console.log(token);
+                    $.ajaxSetup({
+                        headers: {
+                            'Authorization': 'Bearer ' + getCookie("token")
+                        }
+                    });
+
+
+
+                    var data = {
+                        id: id,
+                        upline: getCookie("faucet_" + id),
+                        gtoken: token
+                    };
+
+                    $.post("https://api5.bitsten.com/transaction/auth/faucet/claim", data)
+                        .done(function(data) {
+                            let nt = new Date();
+                            if (data.status) {
+                                setCookie("faucet_last_" + id, nt - data.data.last * 1000, 1000000);
+                                $("#login_error").html("success claim " + number_format(ld[id + "t"].per_claim) + " " + ld[id + "t"].coin.toUpperCase() + "<br>You can claim again after " + ld[id + "t"].menit + " Minutes");
+
+                            } else {
+                                $("#login_error").html(data.message);
+
+                            }
+                        });
+                });
             });
 
 
 
-            var data = {
-                id: id,
-                upline: getCookie("faucet_" + id)
-            };
 
-            $.post("https://api5.bitsten.com/transaction/auth/faucet/claim", data)
-                .done(function(data) {
-                    let nt = new Date();
-                    if (data.status) {
-                        setCookie("faucet_last_" + id, nt - data.data.last * 1000, 1000000);
-                        $("#login_error").html("success claim " + number_format(ld[id + "t"].per_claim) + " " + ld[id + "t"].coin.toUpperCase() + "<br>You can claim again after " + ld[id + "t"].menit + " Minutes");
-                        $('#login-modal').modal('show');
-                    } else {
-                        $("#login_error").html(data.message);
-                        $('#login-modal').modal('show');
-                    }
-                });
         }
 
         function mod(id) {
