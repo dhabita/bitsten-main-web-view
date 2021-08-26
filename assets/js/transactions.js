@@ -9,35 +9,42 @@
  }
 
  function login() {
-     $.ajaxSetup({
-         headers: {
-             //  'Authorization': "auth username and password"
-         }
-     });
+     grecaptcha.ready(function() {
+         grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
+             action: 'submit'
+         }).then(async function(token) {
+             $.ajaxSetup({
+                 headers: {
+                     //  'Authorization': "auth username and password"
+                 }
+             });
 
 
-     var email = $("#email").length ? $("#email").val() : "";
-     var password = $("#password").length ? $("#password").val() : "";
+             var email = $("#email").length ? $("#email").val() : "";
+             var password = $("#password").length ? $("#password").val() : "";
 
-     var data = {
-         email: email,
-         password: password
-     };
+             var data = {
+                 email: email,
+                 password: password,
+                 gtoken: token
+             };
 
-     $.post(url_p + "/login", data)
-         .done(function(data) {
-             console.log(data);
-             //alert( "Data Loaded: " + data );
-             if (data.status) {
-                 console.log("success Login");
-                 setCookie("token", data.data.token, 1);
-                 setCookie("token2fa", "", 1);
-                 location.href = "markets"
-             } else {
-                 $("#login_error").html(data.message);
-                 $('#login-modal').modal('show');
-             }
-         });
+             $.post(url_p + "/login", data)
+                 .done(function(data) {
+                     console.log(data);
+                     //alert( "Data Loaded: " + data );
+                     if (data.status) {
+                         console.log("success Login");
+                         setCookie("token", data.data.token, 1);
+                         setCookie("token2fa", "", 1);
+                         location.href = "markets"
+                     } else {
+                         $("#login_error").html(data.message);
+                         $('#login-modal').modal('show');
+                     }
+                 });
+         })
+     })
  }
 
  function update_market(market) {
@@ -48,118 +55,132 @@
      balance(c);
  }
  async function openr(a) {
-     $.ajaxSetup({
-         headers: {
-             'Authorization': 'Bearer ' + getCookie("token"),
-             'Token2fa': getCookie("token2fa")
-         }
-     });
+     grecaptcha.ready(function() {
+         grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
+             action: 'submit'
+         }).then(async function(token) {
+             $.ajaxSetup({
+                 headers: {
+                     'Authorization': 'Bearer ' + getCookie("token"),
+                     'Token2fa': getCookie("token2fa")
+                 }
+             });
 
 
-     var bos = "buy";
-     if (a == 1) bos = "sell";
-     var price = $("#input-" + bos + "-price") ? $("#input-" + bos + "-price").val() : 0;
-     var amount = $("#input-" + bos + "-amount") ? $("#input-" + bos + "-amount").val() : 0;
-     var market = $(".coin-name").first().html() + "_" + $(".market-name").first().html();
-     let er = "";
+             var bos = "buy";
+             if (a == 1) bos = "sell";
+             var price = $("#input-" + bos + "-price") ? $("#input-" + bos + "-price").val() : 0;
+             var amount = $("#input-" + bos + "-amount") ? $("#input-" + bos + "-amount").val() : 0;
+             var market = $(".coin-name").first().html() + "_" + $(".market-name").first().html();
+             let er = "";
 
 
-     var data = {
-         type: a,
-         price: price,
-         amount: amount,
-         market: market
-     };
-     if (er != "") {
-         $("#res-order").html(er);
-         $('#order-modal').modal('show');
-         return;
-     }
-
-     $(".to0").html("0");
-     $(".to0i").val("0");
-
-
-
-
-
-
-     await $.post(url_p + "/auth/openorder", data)
-         .done(function(data) {
-             console.log(data);
-             //alert( "Data Loaded: " + data );
-             if (data.status) {
-
-                 $("#res-order").html(data.message);
+             var data = {
+                 type: a,
+                 price: price,
+                 amount: amount,
+                 market: market,
+                 gtoken: token
+             };
+             if (er != "") {
+                 $("#res-order").html(er);
                  $('#order-modal').modal('show');
-
-             } else {
-                 error_handle(data.message);
-                 $("#res-order").html(data.message);
-                 $('#order-modal').modal('show');
+                 return;
              }
-         });
+
+             $(".to0").html("0");
+             $(".to0i").val("0");
+
+
+
+
+
+
+             await $.post(url_p + "/auth/openorder", data)
+                 .done(function(data) {
+                     console.log(data);
+                     //alert( "Data Loaded: " + data );
+                     if (data.status) {
+
+                         $("#res-order").html(data.message);
+                         $('#order-modal').modal('show');
+
+                     } else {
+                         error_handle(data.message);
+                         $("#res-order").html(data.message);
+                         $('#order-modal').modal('show');
+                     }
+                 });
+             update_market(market);
+         })
+     })
      console.log("up");
-     update_market(market);
+
 
  }
 
 
  async function convert() {
-     $.ajaxSetup({
-         headers: {
-             'Authorization': 'Bearer ' + getCookie("token"),
-             'Token2fa': getCookie("token2fa")
-         }
-     });
+     grecaptcha.ready(function() {
+         grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
+             action: 'submit'
+         }).then(async function(token) {
+             $.ajaxSetup({
+                 headers: {
+                     'Authorization': 'Bearer ' + getCookie("token"),
+                     'Token2fa': getCookie("token2fa")
+                 }
+             });
 
 
-     var coin1 = $("#P1") ? $("#P1").html() : "";
-     var coin2 = $("#P2") ? $("#P2").html() : "";
-     var amount = $("#input_coin_1") ? $("#input_coin_1").val() : 0;
+             var coin1 = $("#P1") ? $("#P1").html() : "";
+             var coin2 = $("#P2") ? $("#P2").html() : "";
+             var amount = $("#input_coin_1") ? $("#input_coin_1").val() : 0;
 
 
-     $(".bc").hide();
-     $("#button_convert_1").show();
-     $("#input_coin_2").val("");
-
-
-
-     let er = "";
-
-
-     var data = {
-         amount: amount,
-         coin1: coin1.toLowerCase(),
-         coin2: coin2.toLowerCase()
-     };
-
-     if (er != "") {
-         $("#login_error").html(er);
-         $('#login-modal').modal('show');
-         return;
-     }
+             $(".bc").hide();
+             $("#button_convert_1").show();
+             $("#input_coin_2").val("");
 
 
 
-     await $.post(url_p + "/auth/convert", data)
-         .done(function(data) {
-             console.log(data);
-             //alert( "Data Loaded: " + data );
-             if (data.status) {
-                 balance(coin1.toLowerCase());
-                 $("#login_error").html(data.message);
-                 $("#login_error").addClass("text-success");
+             let er = "";
+
+
+             var data = {
+                 amount: amount,
+                 coin1: coin1.toLowerCase(),
+                 coin2: coin2.toLowerCase(),
+                 gtoken: token
+             };
+
+             if (er != "") {
+                 $("#login_error").html(er);
                  $('#login-modal').modal('show');
-
-             } else {
-                 error_handle(data.message);
-                 if (data.message == "Invalid Login Token") data.message += " / Login required !";
-                 $("#login_error").html(data.message);
-                 $('#login-modal').modal('show');
+                 return;
              }
-         });
 
+
+
+             await $.post(url_p + "/auth/convert", data)
+                 .done(function(data) {
+                     console.log(data);
+                     //alert( "Data Loaded: " + data );
+                     if (data.status) {
+                         balance(coin1.toLowerCase());
+                         $("#login_error").html(data.message);
+                         $("#login_error").addClass("text-success");
+                         $('#login-modal').modal('show');
+
+                     } else {
+                         error_handle(data.message);
+                         if (data.message == "Invalid Login Token") data.message += " / Login required !";
+                         $("#login_error").html(data.message);
+                         $('#login-modal').modal('show');
+                     }
+                 });
+         })
+     })
 
  }
 
@@ -491,68 +512,75 @@
  }
 
  function reqwd() {
-     $.ajaxSetup({
-         headers: {
-             'Authorization': 'Bearer ' + getCookie("token"),
-             'Token2fa': getCookie("token2fa")
-         }
-     });
+     grecaptcha.ready(function() {
+         grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
+             action: 'submit'
+         }).then(async function(token) {
+             $.ajaxSetup({
+                 headers: {
+                     'Authorization': 'Bearer ' + getCookie("token"),
+                     'Token2fa': getCookie("token2fa")
+                 }
+             });
 
-     var coin = $(".coin_name").first().text().toLowerCase();
-     var addr = $("#list_wd_addr") ? $("#list_wd_addr").val() : "";
-     var amount = $("#wd_amount") ? $("#wd_amount").val() : "";
-     var email_code = $("#wd_email_code") ? $("#wd_email_code").val() : "";
+             var coin = $(".coin_name").first().text().toLowerCase();
+             var addr = $("#list_wd_addr") ? $("#list_wd_addr").val() : "";
+             var amount = $("#wd_amount") ? $("#wd_amount").val() : "";
+             var email_code = $("#wd_email_code") ? $("#wd_email_code").val() : "";
 
-     if (email_code.length < 6) {
-         $("#msg_add_addr").html("Required Email code");
+             if (email_code.length < 6) {
+                 $("#msg_add_addr").html("Required Email code");
 
-         return;
-     }
-
-     if (coin.length < 3) {
-         $("#wd_alert").html("Invalid coin Symbol for this address");
-         return;
-     }
-     if (!(addr * 1)) {
-         $("#wd_alert").html("You must select Wallet address");
-
-         return;
-     }
-     if (!amount) {
-         $("#wd_alert").html("Amount must >= Minimum WD");
-
-         return;
-     }
-     if (amount * 1 < $("#min_wd").html() * 1) {
-         $("#wd_alert").html("Amount must >= Minimum WD");
-
-         return;
-     }
-
-     $("#wd_alert").html("Process.....");
-
-     var data = {
-         coin: coin,
-         addr: addr,
-         amount: (amount * 1).toFixed(8),
-         email_code: email_code
-     };
-
-
-     $.post(url_p + "/auth/withdraw", data)
-         .done(function(data) {
-             // console.log(data);
-             //alert( "Data Loaded: " + data );
-             if (data.status) {
-                 $("#wd_alert").html(data.message);
-
-
-             } else {
-                 error_handle(data.message);
-                 $("#wd_alert").html(data.message);
-
+                 return;
              }
-         });
+
+             if (coin.length < 3) {
+                 $("#wd_alert").html("Invalid coin Symbol for this address");
+                 return;
+             }
+             if (!(addr * 1)) {
+                 $("#wd_alert").html("You must select Wallet address");
+
+                 return;
+             }
+             if (!amount) {
+                 $("#wd_alert").html("Amount must >= Minimum WD");
+
+                 return;
+             }
+             if (amount * 1 < $("#min_wd").html() * 1) {
+                 $("#wd_alert").html("Amount must >= Minimum WD");
+
+                 return;
+             }
+
+             $("#wd_alert").html("Process.....");
+
+             var data = {
+                 coin: coin,
+                 addr: addr,
+                 amount: (amount * 1).toFixed(8),
+                 email_code: email_code,
+                 gtoken: token
+             };
+
+
+             $.post(url_p + "/auth/withdraw", data)
+                 .done(function(data) {
+                     // console.log(data);
+                     //alert( "Data Loaded: " + data );
+                     if (data.status) {
+                         $("#wd_alert").html(data.message);
+
+
+                     } else {
+                         error_handle(data.message);
+                         $("#wd_alert").html(data.message);
+
+                     }
+                 });
+         })
+     })
  }
 
 
@@ -709,76 +737,83 @@
  }
 
  function register() {
-     $.ajaxSetup({
-         headers: {
-             //  'Authorization': "auth username and password"
-         }
-     });
+     grecaptcha.ready(function() {
+         grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
+             action: 'submit'
+         }).then(async function(token) {
+             $.ajaxSetup({
+                 headers: {
+                     //  'Authorization': "auth username and password"
+                 }
+             });
 
 
-     var email = $("#email").length ? $("#email").val() : "";
-     var password = $("#password").length ? $("#password").val() : "";
-     var c_password = $("#c_password").length ? $("#c_password").val() : "";
-     var upline = 0;
-     var up = getCookie("upline");
-     if (up * 1 > 0) upline = up;
-     var tos = $("#tos:checked ").val() == "on" ? true : false;
-     var email_code = $("#email_code").length ? $("#email_code").val() : "";
+             var email = $("#email").length ? $("#email").val() : "";
+             var password = $("#password").length ? $("#password").val() : "";
+             var c_password = $("#c_password").length ? $("#c_password").val() : "";
+             var upline = 0;
+             var up = getCookie("upline");
+             if (up * 1 > 0) upline = up;
+             var tos = $("#tos:checked ").val() == "on" ? true : false;
+             var email_code = $("#email_code").length ? $("#email_code").val() : "";
 
-     var d = {
-         email: email,
-         password: password,
-         c_password: c_password,
-         upline: upline.toString(),
-         tos: tos.toString(),
-         email_code: email_code
-     };
-
-
-     if (!validateEmail(email)) {
-         $("#login_error").html("Invalid Email Format");
-         $('#login-modal').modal('show');
-         return;
-     }
-     if (!CheckPassword(password)) {
-         $("#login_error").html("Password between 6 to 30 characters which contain at least one numeric digit, one uppercase and one lowercase letter");
-         $('#login-modal').modal('show');
-         return;
-     }
-
-     if (password != c_password) {
-         $("#login_error").html("Invalid Re-type password");
-         $('#login-modal').modal('show');
-         return;
-     }
-     if (email_code.length != 6) {
-         $("#login_error").html("Invalid Email Code");
-         $('#login-modal').modal('show');
-         return;
-     }
-     if (!tos) {
-         $("#login_error").html("You must approve Our Terms");
-         $('#login-modal').modal('show');
-         return;
-     }
+             var d = {
+                 email: email,
+                 password: password,
+                 c_password: c_password,
+                 upline: upline.toString(),
+                 tos: tos.toString(),
+                 email_code: email_code,
+                 gtoken: token
+             };
 
 
-
-
-     $.post(url_p + "/register", d)
-         .done(function(data) {
-             // console.log(data);
-             //alert( "Data Loaded: " + data );
-             if (data.status) {
-                 console.log("email sent");
-                 $("#login_success").html(data.message);
-                 $('#login-modal-s').modal('show');
-
-             } else {
-                 $("#login_error").html(data.message);
+             if (!validateEmail(email)) {
+                 $("#login_error").html("Invalid Email Format");
                  $('#login-modal').modal('show');
+                 return;
              }
-         });
+             if (!CheckPassword(password)) {
+                 $("#login_error").html("Password between 6 to 30 characters which contain at least one numeric digit, one uppercase and one lowercase letter");
+                 $('#login-modal').modal('show');
+                 return;
+             }
+
+             if (password != c_password) {
+                 $("#login_error").html("Invalid Re-type password");
+                 $('#login-modal').modal('show');
+                 return;
+             }
+             if (email_code.length != 6) {
+                 $("#login_error").html("Invalid Email Code");
+                 $('#login-modal').modal('show');
+                 return;
+             }
+             if (!tos) {
+                 $("#login_error").html("You must approve Our Terms");
+                 $('#login-modal').modal('show');
+                 return;
+             }
+
+
+
+
+             $.post(url_p + "/register", d)
+                 .done(function(data) {
+                     // console.log(data);
+                     //alert( "Data Loaded: " + data );
+                     if (data.status) {
+                         console.log("email sent");
+                         $("#login_success").html(data.message);
+                         $('#login-modal-s').modal('show');
+
+                     } else {
+                         $("#login_error").html(data.message);
+                         $('#login-modal').modal('show');
+                     }
+                 });
+         })
+     })
  }
 
 

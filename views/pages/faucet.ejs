@@ -345,7 +345,7 @@ What is crypto faucet?
                 grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
                     action: 'submit'
                 }).then(function(token) {
-                    console.log(token);
+
                     $.ajaxSetup({
                         headers: {
                             'Authorization': 'Bearer ' + getCookie("token")
