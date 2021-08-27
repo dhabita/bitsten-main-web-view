@@ -15,7 +15,29 @@
     <link href="assets/vendor/style.css" rel="stylesheet">
 
 
-
+    <style>
+        .community-post {
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 23px 30px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #e0e2e4;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
 
 
     <main id="main">
@@ -44,19 +66,17 @@
                     <div class='col-12 mb-3' id='bst'>
                         <div class='row mt-2 mb-2 pb-2 text-center border-bottom'>
                             <div class="col-md-1    font-weight-bold text-info">
-                                No
+                                Logo
                             </div>
-                            <div class="col-md-1   font-weight-bold text-info">
-                                Reward
-                            </div>
-                            <div class="col-md-3   font-weight-bold text-info">
+
+                            <div class="col-md-4   font-weight-bold text-info">
                                 Name
                             </div>
                             <div class="col-md-3    font-weight-bold text-info">
-                                Total / Claim / Minute
+                                Total | Available
                             </div>
                             <div class="col-md-2    font-weight-bold text-info">
-                                Available
+                                Minute | Perclaim
                             </div>
                             <div class="col-md-2   font-weight-bold text-info">
                                 Claim
@@ -263,9 +283,7 @@ What is crypto faucet?
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Information !</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+
                 </div>
                 <div class="modal-body text-center">
                     <p id="login_error" class="error text-info"></p>
@@ -274,7 +292,7 @@ What is crypto faucet?
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary btn-sm rounded-0" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm  " data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
                 </div>
             </div>
         </div>
@@ -285,9 +303,7 @@ What is crypto faucet?
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Information !</h5>
-                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+
                 </div>
                 <div class="modal-body">
                     <p id="login_error-detail" class="error text-info"></p>
@@ -299,7 +315,7 @@ What is crypto faucet?
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary btn-sm rounded-0" data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm  " data-dismiss="modal" onclick="location.href = 'faucet'">OK</button>
                 </div>
             </div>
         </div>
@@ -334,8 +350,9 @@ What is crypto faucet?
         let ld = {};
 
         function claim(id) {
+            $("#login_error").html('Every claim You will receive ' + (ket[id + "t"].per_claim * 1) + ' ' + ket[id + "t"].coin.toUpperCase());
             $('#login-modal').modal('show');
-            $("#btn-claim").html('<button type="button" class="btn btn-primary btn-sm rounded-0" onclick="claim_this(' + id + ')">Claim</button>');
+            $("#btn-claim").html('<button type="button" class="btn btn-outline-primary btn-sm  " onclick="claim_this(' + id + ')">Claim</button>');
         }
 
         function claim_this(id) {
@@ -368,6 +385,7 @@ What is crypto faucet?
                                 $("#login_error").html("success claim " + number_format(ld[id + "t"].per_claim) + " " + ld[id + "t"].coin.toUpperCase() + "<br>You can claim again after " + ld[id + "t"].menit + " Minutes");
 
                             } else {
+                                $("#login_error").addClass(' text-danger ');
                                 $("#login_error").html(data.message);
 
                             }
@@ -384,7 +402,7 @@ What is crypto faucet?
 
             $("#faucet_userid").html($("#p_id").html().replace("U-", ""));
             $("#faucet_id").html(id);
-            $("#login_error-detail").html(ket[id + "t"]);
+            $("#login_error-detail").html(ket[id + "t"].ket);
             $('#login-modal-detail').modal('show');
         }
         $(document).ready(function() {
@@ -402,32 +420,35 @@ What is crypto faucet?
 
                             let i = e.id + "t";
                             ld[i] = e;
-                            ket[i] = e.ket;
+                            ket[i] = e;
                             a++;
 
                             $("#bst").append(`
-                        <div class='row mt-1 text-center   p-2 text-primary'>
+                        <div class='row mt-1 text-center  community-post  p-2 text-primary'>
                             <div class="col-md-1 font-weight-bold ">
-                                ${a}
+                                <img src='https://f1.bitsten.com/assets/images/logo/${e.coin}.png' style='height:60px !important'></img> 
                             </div>
-                            <div class="col-md-1">
-                                ${e.coin.toUpperCase()}
+                            <div class="col-md-4">
+                                <h4 class='mb-1'>${e.coin.toUpperCase()}</h4>
+                                <h6 class='mb-1'>${e.judul}</h6>
                             </div>
 
 
-                            <div class="col-md-3">
-                                ${e.judul}
-                            </div>
+                           
 <div class="col-md-3">
-                                ${number_format(e.max_claim)} ${e.coin.toUpperCase()} / ${number_format(e.per_claim)} ${e.coin.toUpperCase()} / ${number_format(e.menit,0)}
+    <i class="fas fa-fire-alt"></i>  ${number_format(e.max_claim)}<br>
+    <i class="fas fa-fire"></i>  ${number_format(e.max_claim - e.claimed)}
+                           
+                               
                             </div>
                             <div class="col-md-2">
-                                ${number_format(e.max_claim - e.claimed)} ${e.coin.toUpperCase()}
+                                <i class="far fa-clock"></i>  ${e.menit} Minute <br>
+                                <i class="fas fa-seedling"></i>  ${number_format(e.per_claim).replace(',','')*1}
                             </div>
 
                             <div class="col-md-2  ">
-                                <button class='btn btn-sm btn-warning rounded-0' onCLick='mod(${e.id})'>DETAIL</button>
-                                <button class='btn btn-sm btn-success rounded-0' onCLick='claim(${e.id})'>CLAIM</button>
+                                <button class='btn btn-sm btn-outline-warning  ' onCLick='mod(${e.id})'>DETAIL</button>
+                                <button class='btn btn-sm btn-outline-success  ' onCLick='claim(${e.id})'>CLAIM</button>
                             </div>
                         </div>`);
                         })
