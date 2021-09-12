@@ -111,27 +111,23 @@ if (SOCKET_URL == "wallet") {
             if (e.kondition == 1) wdt = " title = 'Withdraw Online' ";
             if (e.kondition == 3) wdt = " title = 'Withdraw Online' ";
 
-            var da = '\
-                    <a href="#' + e.code.toUpperCase() + '" onCLick="select_coin(\'' + e.code + '\')" class="border-bottom assets_all assets_' + e.code + ' col-12 nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
+            var da = `
+            <div onCLick="select_coin(\'${ e.code }\')" class=" btn border-bottom assets_all assets_${ e.code } col-12 nav-link d-flex justify-content-between align-items-center" data-toggle="pill"\
                           aria-selected="true">\
-                       \
-                        <div class="d-flex">\
-                         <div  class="p-0 pr-2" style="font-size:15px">\
-                         <i class="bi bi-arrow-up-circle-fill ' + clasdp + '" ' + dpt + '><br></i>\
-                         <i class="bi bi-arrow-down-circle-fill  ' + claswd + '" ' + wdt + '></i>\
+                       
+                        <div class='text-left'>\
+                         <img class=" mr-2" src="https://f1.bitsten.com/assets/images/logo/${ e.code }.png"  style="width:20px !important ; height:20px !important" > \
+                         ${ e.code.toUpperCase() } \
+                          
                         </div>\
-                        <div>\
-                        <h5>  <img class=" mr-2" src="https://f1.bitsten.com/assets/images/logo/' + e.code + '.png"  style="width:25px !important ; height:25px !important" > \
-                         ' + e.code.toUpperCase() + '</h4>\
-                         <span>' + e.name + '</span>\
-                        </div>\
-                        </div>\
-                        <div class="text-right">\
-                        <h6 class="balance_' + e.code + '"></h5>\
-                        <span   class="text-right"><i class="icon ion-md-lock"></i> <span class="balance_' + e.code + '_hold ">  </span> </span>\
-                        </div>\
-                    </a> \
-                        ';
+                        <div class="text-right font-weight-bold">
+                         
+                        <span class="balance_${ e.code }">0</span>
+                        </div>
+                        
+                         
+                    </div> \
+                        `;
 
             $("#list_assets").append(da);
             loader($(".balance_" + e.code), 15);
