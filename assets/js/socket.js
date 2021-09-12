@@ -340,6 +340,7 @@
 
      if (!d.data) return;
      d.data.forEach(e => {
+         if (x > 200) return;
          x++;
          // if(x>10) return;
          var dd = new Date(e.t);
