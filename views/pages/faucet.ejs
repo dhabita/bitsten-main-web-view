@@ -10,6 +10,7 @@
     <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <!-- Template Main CSS File -->
     <link href="assets/vendor/style.css" rel="stylesheet">
@@ -287,6 +288,9 @@ What is crypto faucet?
                 </div>
                 <div class="modal-body text-center">
                     <p id="login_error" class="error text-info"></p>
+                    <div class='mb-3 d-flex justify-content-center'>
+                        <div class="g-recaptcha" data-sitekey="6Lep-2IUAAAAAPph1P4BE-DVhIK2zFZrKxJMwv7m"></div>
+                    </div>
                     <p id='btn-claim'></p>
 
                 </div>
@@ -352,46 +356,45 @@ What is crypto faucet?
         function claim(id) {
             $("#login_error").html('Every claim You will receive ' + (ket[id + "t"].per_claim * 1) + ' ' + ket[id + "t"].coin.toUpperCase());
             $('#login-modal').modal('show');
-            $("#btn-claim").html('<button type="button" class="btn btn-outline-primary btn-sm  " onclick="claim_this(' + id + ')">Claim</button>');
+            $("#btn-claim").html(`
+            <button type="button" class="btn btn-outline-primary btn-sm  " onclick="claim_this( ${id} )">Claim</button>`);
         }
 
         function claim_this(id) {
 
 
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6LcrfR0cAAAAABGSuFZ52ws32WUJbUKknD2FkcGO', {
-                    action: 'submit'
-                }).then(function(token) {
 
-                    $.ajaxSetup({
-                        headers: {
-                            'Authorization': 'Bearer ' + getCookie("token")
-                        }
-                    });
-
-
-
-                    var data = {
-                        id: id,
-                        upline: getCookie("faucet_" + id),
-                        gtoken: token
-                    };
-
-                    $.post("https://api5.bitsten.com/transaction/auth/faucet/claim", data)
-                        .done(function(data) {
-                            let nt = new Date();
-                            if (data.status) {
-                                setCookie("faucet_last_" + id, nt - data.data.last * 1000, 1000000);
-                                $("#login_error").html("success claim " + number_format(ld[id + "t"].per_claim) + " " + ld[id + "t"].coin.toUpperCase() + "<br>You can claim again after " + ld[id + "t"].menit + " Minutes");
-
-                            } else {
-                                $("#login_error").addClass(' text-danger ');
-                                $("#login_error").html(data.message);
-
-                            }
-                        });
-                });
+            $.ajaxSetup({
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie("token")
+                }
             });
+
+
+            let re = $("#g-recaptcha-response").val();
+            console.log(re);
+            var data = {
+                id: id,
+                upline: getCookie("faucet_" + id),
+                gtoken: re
+            };
+
+
+
+            $.post("https://api5.bitsten.com/transaction/auth/faucet/claim", data)
+                .done(function(data) {
+                    let nt = new Date();
+                    if (data.status) {
+                        setCookie("faucet_last_" + id, nt - data.data.last * 1000, 1000000);
+                        $("#login_error").html("success claim " + number_format(ld[id + "t"].per_claim) + " " + ld[id + "t"].coin.toUpperCase() + "<br>You can claim again after " + ld[id + "t"].menit + " Minutes");
+
+                    } else {
+                        $("#login_error").addClass(' text-danger ');
+                        $("#login_error").html(data.message);
+
+                    }
+                });
+
 
 
 

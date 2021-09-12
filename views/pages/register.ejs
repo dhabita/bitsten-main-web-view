@@ -16,6 +16,7 @@
 
 <body class="bg-primary">
     <% include ../partials/css -%>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
         <div class="vh-100 d-flex  justify-content-center">
 
@@ -47,11 +48,17 @@
                         </div>
                     </div>
 
+
+                    <div class='mb-3 d-flex justify-content-center'>
+                        <div class="g-recaptcha" data-sitekey="6Lep-2IUAAAAAPph1P4BE-DVhIK2zFZrKxJMwv7m"></div>
+                    </div>
+
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class=" mr-2" id="tos">
                         <label class=" " for="form-checkbox">I agree to the <a href="#!">Terms &
               Conditions</a></label>
                     </div>
+
                     <button type="submit" onClick="register()" class="btn btn-primary">Create Account</button>
 
                 </div>

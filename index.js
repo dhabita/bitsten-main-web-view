@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 var path = require("path");
-const port = 80;
+const port = 7777;
 const expressLayouts = require('express-ejs-layouts');
 var timeout = require('connect-timeout');
 app.use(timeout('5s'));
