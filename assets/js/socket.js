@@ -499,7 +499,7 @@
 
  function goto(a) {
      var u = window.location.href;
-     if (u.indexOf("exchange") != -1) {
+     if (u.indexOf("/exchange") != -1) {
          window.location.hash = a;
      } else
          window.location.href = "exchange#" + a;
